@@ -1,0 +1,42 @@
+/* *{
+    transition: 0.1s ease-in-out;
+} */
+
+.sidenav:focus {
+    transform: translateX(0%) !important;
+}
+
+/* pagination */
+
+.pagination {
+    display: inline-block;
+    padding: 0.2em;
+}
+
+.pagination a {
+    text-decoration: none;
+    color: inherit;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: var(--primary);
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+    color: #212121;
+    border-radius: 5px;
+}
+/* pagination */
+
+
+.suffix{
+    border: 0;
+    background: transparent;
+    opacity: 1 !important;
+}
