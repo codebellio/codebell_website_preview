@@ -86,6 +86,7 @@ function getCustomerOtp() {
   // otp code goes here.
   if (customerPhone.value.length > 3 && customerPhone.value.startsWith("+")) {
     verifyOtpBtn.disabled = false;
+    customerOtp.disabled = false;
     customerPhone.disabled = true;
     getOtpBtn.disabled = true;
 
@@ -109,9 +110,11 @@ function getCustomerOtp() {
         clearInterval(changePhoneNumber));
     }, 1000);
   }
+
   if (customerPhone.value.length <= 3) {
     alert("Please check your phone number again.");
   }
+
   if (!customerPhone.value.startsWith("+")) {
     alert("Please add you country code (example: +91) before your number.");
   }
