@@ -206,13 +206,13 @@
                     <div style="display: flex; width: 100%; margin-top: 3em; flex-wrap: wrap; gap: 2em;">
                         <div style="flex: 1">
                             <label for="first name" style="color: #4a4a4a"> First Name* </label>
-                            <input type="text"
+                            <input id="firstName" type="text"
                                 style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
                                 placeholder="Alex" required>
                         </div>
                         <div style="flex: 1">
                             <label for="last name" style="color: #4a4a4a"> Last Name*</label>
-                            <input type="text"
+                            <input id="lastName" type="text"
                                 style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: 2px solid #2F8AB2;"
                                 placeholder="Joseph" required>
                         </div>
@@ -221,13 +221,13 @@
                     <div style="display: flex; width: 100%; margin-top: 2em; flex-wrap: wrap; gap: 2em;">
                         <div style="flex: 2">
                             <label for="first name" style="color: #4a4a4a"> Address* </label>
-                            <input type="text"
+                            <input id="address" type="text"
                                 style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
                                 placeholder="TGS Residency, MR Layout, Bangalore" required>
                         </div>
                         <div style="flex: 1">
                             <label for="last name" style="color: #4a4a4a">Apt, Suite* </label>
-                            <input type="text"
+                            <input id="apt" type="text"
                                 style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: 2px solid #2F8AB2;"
                                 placeholder="404 B" required>
                         </div>
@@ -235,7 +235,7 @@
                     <div style="display: flex; width: 100%; margin-top: 2em; flex-wrap: wrap; gap: 2em;">
                         <div style="flex: 1">
                             <label for="first name" style="color: #4a4a4a"> City* </label>
-                            <input type="text"
+                            <input id="city" type="text"
                                 style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
                                 placeholder="Bangalore" required>
                         </div>
@@ -254,7 +254,7 @@
                     <div style="display: flex; width: 100%; margin-top: 2em; flex-wrap: wrap; gap: 2em;">
                         <div>
                             <label for="first name" style="color: #4a4a4a"> PIN code* </label>
-                            <input type="text"
+                            <input id="pin" type="text"
                                 style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
                                 placeholder="562241" required>
                         </div>
@@ -289,8 +289,8 @@
                 <!-- Order Summary  -->
                 <form id="orderSummary" style="width: 90%; margin: auto; display: none; gap: 1.5em;">
                     <div style="flex: 1.3; display: flex; flex-direction: column; gap: 1.5em;">
-                        <div class="features-bg">
-                            <div style="flex: 1; display: flex; gap: 1em; margin-bottom: 1.5em;">
+                        <div class="features-bg" style="flex: 1;">
+                            <div style="display: flex; gap: 1em; margin-bottom: 1.5em;">
                                 <input type="radio"
                                     style="width: 3em; height: 1.5em; align-self: flex-start; accent-color: #2F8AB2;"
                                     checked>
@@ -303,8 +303,8 @@
                             </div>
 
                             <a onclick="changeAddress()" class="button w-inline-block"
-                                style="width: max-content; margin: 0 0 0 auto; background-color: transparent; border: 2px solid #161613;">
-                                <div class="text-button" style="color:#161613; ">Change</div>
+                                style="width: max-content; margin: auto 0 0 auto; background-color: transparent; border: 2px solid #161613;">
+                                <div class="text-button" style="color:#161613;">Change</div>
                             </a>
                         </div>
                         <div class="features-bg" style="flex: 1; display: flex; flex-direction: column; gap: 2em;">
@@ -313,7 +313,7 @@
                                 <div class="verificationForm" style="display: flex; gap: 2em;">
                                     <input id="phoneNumber" type="tel"
                                         style="padding: 1em; width: 60%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
-                                        placeholder="+91 xxxxx-xxxxx" required>
+                                        placeholder="xxxxx-xxxxx" required>
 
                                     <button type="button" onclick="getCustomerOtp()" id="getOtpBtn"
                                         style="background-color: #059862; padding: 0em 1em; color: white; border-radius: 0.5em;">Get
@@ -337,25 +337,21 @@
                     </div>
                     <div class="features-bg" style="flex: 1;">
                         <h4>Your order</h4>
-                        <div style="display: flex; align-items: center; gap: 1.5em; margin: 1.5em 0;">
-                            <img src="./assets//img/doormount.svg" alt="Doormount image"
-                                style="width: 40%; height: 40%;">
+                        
+                        <div class="orderContainer">
 
-                            <div>
-                                <h6>Codebell Doormount Unit</h6>
-                                <p>1 unit</p>
-                            </div>
                         </div>
+                        
 
                         <div style="margin-top: 3em">
                             <h4>Price Details</h4>
 
                             <div style="margin: 1em 0;">
                                 <b>
-                                    <p class="subtotal" style="width: 100%;"> Subttotal <span
+                                    <p class="subtotal" style="width: 100%;"> Sub total <span
                                             style="float: right;">₹Nil</span></p>
 
-                                    <p style="width: 100%;">Delivery Charges <span style="float: right;">₹50</span>
+                                    <p class="deliveryCharges" style="width: 100%;">Delivery Charges <span style="float: right;">₹50</span>
                                     </p>
                                 </b>
 
@@ -367,7 +363,7 @@
 
                         <div style="width: 95%; height: 1px; background-color: black; margin: 1.5em 0;"></div>
 
-                        <h6 class="finalAmmount" style="width: 100%;">You Pay <span style="float: right;">₹50</span>
+                        <h6 class="finalAmount" style="width: 100%;">You Pay <span style="float: right;">₹50</span>
                         </h6>
 
                         <a onclick="Checkout()" class="button w-inline-block"

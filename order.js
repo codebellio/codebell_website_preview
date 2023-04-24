@@ -5,7 +5,6 @@ const orderSummaryForm = document.getElementById("orderSummary");
 const customerNameElem = orderSummaryForm.querySelector("#customerName");
 const customerAddressElem = orderSummaryForm.querySelector("#customerAddress");
 
-const orderSummaryElem = document.getElementById("orderSummary");
 const progressElem = document.getElementsByClassName("progress");
 const progressBarElem = document.getElementById("progressBar");
 
@@ -14,18 +13,39 @@ const customerOtp = orderSummaryForm.querySelector("#customerOtp");
 const verifyOtpBtn = orderSummaryForm.querySelector("#verifyOtpBtn");
 const getOtpBtn = orderSummaryForm.querySelector("#getOtpBtn");
 
-let customerObj = {};
+let orderObj = JSON.parse(sessionStorage.getItem("customerData")) ?? {
+  UUID: "",
+  UserID: "",
+  Name: "",
+  Mobile: "",
+  MobileVerified: false,
+  OTP: "",
+  OtpCreatedOn: "",
+  UpdatedBy: "",
+  Address: "",
+  Apt: "",
+  City: "",
+  Country: "",
+  Pin: "",
+  AddressType: "",
+  Subtotal: "",
+  Delivery: "",
+  Total: "",
+  Step: "",
+  Status: "",
+  Items: "",
+};
 
-let sessionStorageData = JSON.parse(sessionStorage.getItem("customerData"));
-sessionStorageData && (shippingDetails(), setOrderSummary());
+// let sessionStorageData = JSON.parse(sessionStorage.getItem("customerData"));
+orderObj && (shippingDetails(), setOrderSummary());
 
 function setCustomerDeatils() {
-  sessionStorageData = JSON.parse(sessionStorage.getItem("customerData"));
+  orderObj = JSON.parse(sessionStorage.getItem("customerData"));
 }
 
 function shippingDetails() {
   shippingDetailsElem.style.display = "none";
-  orderSummaryElem.style.display = "flex";
+  orderSummaryForm.style.display = "flex";
   progressBarElem.style.background =
     "linear-gradient(to right, #2F8AB2 0%, #2F8AB2 50%, #ffffff 50%, #ffffff 100%)";
 
@@ -40,51 +60,58 @@ function setShippingDetails() {
     addressType = `${entry[0]}`;
   }
 
-  customerObj["Name"] = inputs[0].value + " " + inputs[1].value;
-  customerObj["Address"] = inputs[2].value;
-  customerObj["Apt"] = inputs[3].value;
-  customerObj["City"] = inputs[4].value;
-  customerObj["Pin"] = inputs[5].value;
-  customerObj["AddressType"] = addressType;
-  customerObj["Country"] = shippingDetailsSelect.value;
+  orderObj.Name = inputs[0].value + " " + inputs[1].value;
+  orderObj.Address = inputs[2].value;
+  orderObj.Apt = inputs[3].value;
+  orderObj.City = inputs[4].value;
+  orderObj.Pin = inputs[5].value;
+  orderObj.AddressType = addressType;
+  orderObj.Country = shippingDetailsSelect.value;
 
-  sessionStorage.clear("customerData");
-  sessionStorage.setItem("customerData", JSON.stringify(customerObj));
+  sessionStorage.setItem("customerData", JSON.stringify(orderObj));
+
   setCustomerDeatils();
-
   setOrderSummary();
 }
 
 function setOrderSummary() {
-  customerNameElem.innerHTML = sessionStorageData.Name;
-  customerAddressElem.innerHTML = `${sessionStorageData.Apt}, ${sessionStorageData.Address},
-      ${sessionStorageData.City},
-      ${sessionStorageData.Pin}
+  customerNameElem.innerHTML = orderObj.Name;
+  customerAddressElem.innerHTML = `${orderObj.Apt}, ${orderObj.Address},
+      ${orderObj.City},
+      ${orderObj.Pin}
   `;
 }
 
 function Checkout() {
-  orderSummaryElem.style.display = "none";
+  orderSummaryForm.style.display = "none";
 
   progressBarElem.style.background =
     "linear-gradient(to right, #2F8AB2 0%, #2F8AB2 100%)";
   progressElem[2].classList.add("activeProgress");
-
-  // sessionStorage.clear("userData");
 }
 
 function changeAddress() {
   shippingDetailsElem.style.display = "flex";
-  orderSummaryElem.style.display = "none";
+  orderSummaryForm.style.display = "none";
 
   progressBarElem.style.background =
     "linear-gradient(to right, #ffffff 0%, #ffffff 100%)";
   progressElem[1].classList.remove("activeProgress");
+
+  const inputs = shippingDetailInput;
+  const name = orderObj["Name"].split(" ");
+
+  inputs[0].value = name[0];
+  inputs[1].value = name[1];
+  inputs[2].value = orderObj["Address"];
+  inputs[3].value = orderObj["Apt"];
+  inputs[4].value = orderObj["City"];
+  inputs[5].value = orderObj["Pin"];
 }
 
 function getCustomerOtp() {
   // otp code goes here.
-  if (customerPhone.value.length > 3 && customerPhone.value.startsWith("+")) {
+  if (customerPhone.value.length === 10) {
     verifyOtpBtn.disabled = false;
     customerOtp.disabled = false;
     customerPhone.disabled = true;
@@ -93,7 +120,10 @@ function getCustomerOtp() {
     verifyOtpBtn.style.backgroundColor = "#059862";
     getOtpBtn.style.backgroundColor = "#4a4a4a";
 
-    sessionStorageData["Phone"] = customerPhone.value;
+    orderObj.Mobile = customerPhone.value;
+    sessionStorage.setItem("customerData", JSON.stringify(orderObj));
+
+    // console.log(sessionStorageData);
 
     setTimeout(() => {
       customerPhone.disabled = false;
@@ -111,12 +141,8 @@ function getCustomerOtp() {
     }, 1000);
   }
 
-  if (customerPhone.value.length <= 3) {
+  if (customerPhone.value.length < 10) {
     alert("Please check your phone number again.");
-  }
-
-  if (!customerPhone.value.startsWith("+")) {
-    alert("Please add you country code (example: +91) before your number.");
   }
 }
 
@@ -127,4 +153,41 @@ function verifyCustomerOtp() {
   verifyOtpBtn.style.backgroundColor = "#4a4a4a";
 }
 
+orderList = JSON.parse(sessionStorage.getItem("orderList")) ?? [];
+orderObj.Items = sessionStorage.getItem("orderList");
+console.log(orderList);
+console.log(orderObj);
+
+// sessionStorage.clear("orderList")
 // sessionStorage.clear("customerData");
+
+const subtotal = orderList.reduce((accumulator, productDetail) => {
+  return accumulator + parseInt(productDetail.price * productDetail.count);
+}, 0);
+
+orderObj.Subtotal = subtotal;
+
+const subtotalElem = orderSummaryForm.querySelector(".subtotal span");
+subtotalElem.innerHTML = `₹${subtotal}`;
+
+const finalAmount = subtotal + 50
+
+orderObj.Total = finalAmount
+
+const finalAmountElem = orderSummaryForm.querySelector(".finalAmount span");
+finalAmountElem.innerHTML = `₹${finalAmount}`;
+
+const orderContainerElem = orderSummaryForm.querySelector(".orderContainer");
+
+orderList.map((productDetail) => {
+  orderContainerElem.innerHTML += `
+  <div style="display: flex; align-items: center; gap: 1.5em; margin: 2em 0;">
+      <img src="${productDetail.image}" alt="Doormount image" style="width: 40%; height: 40%;">
+  
+      <div>
+          <h6>${productDetail.name}</h6>
+          <p>${productDetail.count} unit</p>
+      </div>
+  </div>
+`;
+});
