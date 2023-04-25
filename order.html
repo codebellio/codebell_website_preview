@@ -62,6 +62,15 @@
             transform: translate(-50%);
         }
 
+        input:invalid {
+            border: none;
+            outline: 2x solid red;
+        }
+
+        .errorMessage {
+            color: rgb(255, 92, 92);
+        }
+
         @media screen and (max-width: 867px) {
             .content {
                 width: 90% !important;
@@ -200,7 +209,7 @@
                 <!-- Shipping details  -->
                 <form id="shippingDetails"
                     style="display: flex; width: 70%; margin: auto; flex-direction: column; background-color: rgba(22, 22, 19, 0.04); border-radius: 1.63em; padding: 5.8em 5em; -webkit-backdrop-filter: blur(40px);backdrop-filter: blur(40px); margin-top: 1.5em;"
-                    onsubmit="return shippingDetails(), setShippingDetails(), false">
+                    onsubmit="return false">
                     <h2>Address</h2>
 
                     <div style="display: flex; width: 100%; margin-top: 3em; flex-wrap: wrap; gap: 2em;">
@@ -208,13 +217,16 @@
                             <label for="first name" style="color: #4a4a4a"> First Name* </label>
                             <input id="firstName" type="text"
                                 style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
-                                placeholder="Alex" required>
+                                placeholder="Alex">
+                            <span class="errorMessage"></span>
                         </div>
                         <div style="flex: 1">
                             <label for="last name" style="color: #4a4a4a"> Last Name*</label>
                             <input id="lastName" type="text"
                                 style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: 2px solid #2F8AB2;"
-                                placeholder="Joseph" required>
+                                placeholder="Joseph">
+                            <span class="errorMessage"></span>
+
                         </div>
                     </div>
 
@@ -223,13 +235,17 @@
                             <label for="first name" style="color: #4a4a4a"> Address* </label>
                             <input id="address" type="text"
                                 style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
-                                placeholder="TGS Residency, MR Layout, Bangalore" required>
+                                placeholder="TGS Residency, MR Layout, Bangalore">
+                            <span class="errorMessage"></span>
+
                         </div>
                         <div style="flex: 1">
                             <label for="last name" style="color: #4a4a4a">Apt, Suite* </label>
                             <input id="apt" type="text"
                                 style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: 2px solid #2F8AB2;"
-                                placeholder="404 B" required>
+                                placeholder="404 B">
+                            <span class="errorMessage"></span>
+
                         </div>
                     </div>
                     <div style="display: flex; width: 100%; margin-top: 2em; flex-wrap: wrap; gap: 2em;">
@@ -237,13 +253,15 @@
                             <label for="first name" style="color: #4a4a4a"> City* </label>
                             <input id="city" type="text"
                                 style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
-                                placeholder="Bangalore" required>
+                                placeholder="Bangalore">
+                            <span class="errorMessage"></span>
+
                         </div>
                         <div style="flex: 1">
                             <label for="last name" style="color: #4a4a4a">Countries* </label>
                             <select type="text"
                                 style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: 2px solid #2F8AB2;"
-                                placeholder="404 B" required>
+                                placeholder="404 B">
                                 <option value="India">
                                     <p>India</p>
                                 </option>
@@ -256,7 +274,9 @@
                             <label for="first name" style="color: #4a4a4a"> PIN code* </label>
                             <input id="pin" type="text"
                                 style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
-                                placeholder="562241" required>
+                                placeholder="562241">
+                            <span class="errorMessage"></span>
+
                         </div>
                     </div>
 
@@ -281,7 +301,8 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="button w-inline-block" style="width: max-content;">
+                    <button onclick="shippingDetails(), setShippingDetails()" type="submit"
+                        class="button w-inline-block" style="width: max-content;">
                         <div class="text-button white" style="padding: 0 1em;">Continue</div>
                     </button>
                 </form>
@@ -313,7 +334,7 @@
                                 <div class="verificationForm" style="display: flex; gap: 2em;">
                                     <input id="phoneNumber" type="tel"
                                         style="padding: 1em; width: 60%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
-                                        placeholder="xxxxx-xxxxx" required>
+                                        placeholder="xxxxx-xxxxx">
 
                                     <button type="button" onclick="getCustomerOtp()" id="getOtpBtn"
                                         style="background-color: #059862; padding: 0em 1em; color: white; border-radius: 0.5em;">Get
@@ -337,11 +358,11 @@
                     </div>
                     <div class="features-bg" style="flex: 1;">
                         <h4>Your order</h4>
-                        
+
                         <div class="orderContainer">
 
                         </div>
-                        
+
 
                         <div style="margin-top: 3em">
                             <h4>Price Details</h4>
@@ -351,7 +372,8 @@
                                     <p class="subtotal" style="width: 100%;"> Sub total <span
                                             style="float: right;">₹Nil</span></p>
 
-                                    <p class="deliveryCharges" style="width: 100%;">Delivery Charges <span style="float: right;">₹50</span>
+                                    <p class="deliveryCharges" style="width: 100%;">Delivery Charges <span
+                                            style="float: right;">₹50</span>
                                     </p>
                                 </b>
 
@@ -366,7 +388,7 @@
                         <h6 class="finalAmount" style="width: 100%;">You Pay <span style="float: right;">₹50</span>
                         </h6>
 
-                        <a onclick="Checkout()" class="button w-inline-block"
+                        <a onclick="Checkout()" class="checkout button w-inline-block"
                             style="width: max-content; margin-top: 2em;">
                             <div class="text-button white" style="padding: 0 3em;">Checkout</div>
                         </a>

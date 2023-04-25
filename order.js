@@ -13,43 +13,66 @@ const customerOtp = orderSummaryForm.querySelector("#customerOtp");
 const verifyOtpBtn = orderSummaryForm.querySelector("#verifyOtpBtn");
 const getOtpBtn = orderSummaryForm.querySelector("#getOtpBtn");
 
-let orderObj = JSON.parse(sessionStorage.getItem("customerData")) ?? {
-  UUID: "",
-  UserID: "",
-  Name: "",
-  Mobile: "",
-  MobileVerified: false,
-  OTP: "",
-  OtpCreatedOn: "",
-  UpdatedBy: "",
-  Address: "",
-  Apt: "",
-  City: "",
-  Country: "",
-  Pin: "",
-  AddressType: "",
-  Subtotal: "",
-  Delivery: "",
-  Total: "",
-  Step: "",
-  Status: "",
-  Items: "",
-};
+let orderObj = JSON.parse(sessionStorage.getItem("customerData"))
+  ? JSON.parse(sessionStorage.getItem("customerData"))
+  : {
+      UUID: "",
+      UserID: "",
+      Name: "",
+      Mobile: "",
+      MobileVerified: false,
+      OTP: "",
+      OtpCreatedOn: "",
+      UpdatedBy: "",
+      Address: "",
+      Apt: "",
+      City: "",
+      Country: "",
+      Pin: "",
+      AddressType: "",
+      Subtotal: "",
+      Delivery: "",
+      Total: "",
+      Step: "",
+      Status: "",
+      Items: "",
+    };
 
-// let sessionStorageData = JSON.parse(sessionStorage.getItem("customerData"));
-orderObj && (shippingDetails(), setOrderSummary());
+orderObj.Address !== "" && (shippingDetails(), setOrderSummary());
 
 function setCustomerDeatils() {
   orderObj = JSON.parse(sessionStorage.getItem("customerData"));
 }
 
-function shippingDetails() {
-  shippingDetailsElem.style.display = "none";
-  orderSummaryForm.style.display = "flex";
-  progressBarElem.style.background =
-    "linear-gradient(to right, #2F8AB2 0%, #2F8AB2 50%, #ffffff 50%, #ffffff 100%)";
+const errorMessage = shippingDetailsElem.querySelectorAll(".errorMessage");
 
-  progressElem[1].classList.add("activeProgress");
+function shippingDetails() {
+  shippingDetailInput.forEach((input, index) => {
+    if (input.type == "text") {
+      formComplete = true;
+      const inputValue = input.value.trim();
+
+      if (!inputValue) {
+        errorMessage[index].innerHTML = "Field cannot remain empty!";
+        input.addEventListener(
+          "keypress",
+          () => (errorMessage[index].innerHTML = "")
+        );
+        formComplete = false;
+      } else {
+        errorMessage[index].innerHTML = "";
+      }
+    }
+  });
+
+  if (formComplete) {
+    shippingDetailsElem.style.display = "none";
+    orderSummaryForm.style.display = "flex";
+    progressBarElem.style.background =
+      "linear-gradient(to right, #2F8AB2 0%, #2F8AB2 50%, #ffffff 50%, #ffffff 100%)";
+
+    progressElem[1].classList.add("activeProgress");
+  }
 }
 
 function setShippingDetails() {
@@ -170,9 +193,9 @@ orderObj.Subtotal = subtotal;
 const subtotalElem = orderSummaryForm.querySelector(".subtotal span");
 subtotalElem.innerHTML = `₹${subtotal}`;
 
-const finalAmount = subtotal + 50
+const finalAmount = subtotal + 50;
 
-orderObj.Total = finalAmount
+orderObj.Total = finalAmount;
 
 const finalAmountElem = orderSummaryForm.querySelector(".finalAmount span");
 finalAmountElem.innerHTML = `₹${finalAmount}`;
@@ -191,3 +214,11 @@ orderList.map((productDetail) => {
   </div>
 `;
 });
+
+const checkoutBtn = orderSummaryForm.querySelector(".checkout.button");
+
+if (orderList == "") {
+  checkoutBtn.style.display = "none";
+} else {
+  checkoutBtn.style.display = "block";
+}
