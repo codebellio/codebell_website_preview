@@ -200,8 +200,8 @@ function getCustomerOtp() {
     orderObj.Mobile = customerPhone.value;
     // JSON.stringify(orderObj.Items);
     sessionStorage.setItem("customerData", JSON.stringify(orderObj));
-    console.log(orderObj);
-    // getOtp();
+    // console.log(orderObj);
+    getOtp();
 
     setTimeout(() => {
       customerPhone.disabled = false;
