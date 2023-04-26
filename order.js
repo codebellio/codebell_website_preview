@@ -18,14 +18,14 @@ const checkoutBtn = orderSummaryForm.querySelector(".checkout.button");
 let orderObj = JSON.parse(sessionStorage.getItem("customerData"))
   ? JSON.parse(sessionStorage.getItem("customerData"))
   : {
-      UUID: "",
-      UserID: "",
+      // UUID: "",
+      // UserID: "",
       Name: "",
       Mobile: "",
       MobileVerified: false,
-      OTP: "",
+      // OTP: "",
       OtpCreatedOn: 0,
-      UpdatedBy: "",
+      // UpdatedBy: "",
       Address: "",
       Apt: "",
       City: "",
@@ -33,10 +33,10 @@ let orderObj = JSON.parse(sessionStorage.getItem("customerData"))
       Pin: "",
       AddressType: "",
       Subtotal: "",
-      Delivery: "",
+      // Delivery: "",
       Total: "",
-      Step: "",
-      Status: "",
+      // Step: "",
+      // Status: "",
       Items: "",
     };
 
@@ -158,28 +158,28 @@ function changeAddress() {
 
   formValidation();
 }
-
 function getOtp() {
+  const record = { record: orderObj };
   return fetch("https://api.codebell.io/api/update_order", {
     method: "post",
     mode: "no-cors",
     headers: {
       "Content-type": "application/json; charset=UTF-8",
     },
-    body: JSON.stringify({ record: orderObj }),
+    body: JSON.stringify(record),
   })
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      if (data.Result.Order) {
-        data.order = data.Result.Order;
-        if (data.order.Items) {
-          var items = JSON.parse(data.order.Items);
-          data.codebells = items.codebells;
-          data.codebells_ids = Object.keys(data.codebells);
-          data.plan = items.plan;
-        }
-      }
+      // if (data.Result.Order) {
+      //   data.order = data.Result.Order;
+      //   if (data.order.Items) {
+      //     var items = JSON.parse(data.order.Items);
+      //     data.codebells = items.codebells;
+      //     data.codebells_ids = Object.keys(data.codebells);
+      //     data.plan = items.plan;
+      //   }
+      // }
       return data;
     })
     .catch((error) => {
