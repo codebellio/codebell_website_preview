@@ -162,6 +162,7 @@ function changeAddress() {
 function getOtp() {
   return fetch("https://api.codebell.io/api/update_order", {
     method: "post",
+    mode: "no-cors",
     headers: {
       "Content-type": "application/json; charset=UTF-8",
     },
