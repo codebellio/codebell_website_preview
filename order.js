@@ -159,8 +159,8 @@ function changeAddress() {
   formValidation();
 }
 
-async function getOtp() {
-  return await fetch("https://api.codebell.io/api/update_order", {
+function getOtp() {
+  return fetch("https://api.codebell.io/api/update_order", {
     method: "post",
     headers: {
       "Content-type": "application/json; charset=UTF-8",
