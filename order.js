@@ -169,6 +169,7 @@ async function getOtp() {
   })
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       if (data.Result.Order) {
         data.order = data.Result.Order;
         if (data.order.Items) {
