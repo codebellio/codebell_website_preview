@@ -18,14 +18,10 @@ const checkoutBtn = orderSummaryForm.querySelector(".checkout.button");
 let orderObj = JSON.parse(sessionStorage.getItem("customerData"))
   ? JSON.parse(sessionStorage.getItem("customerData"))
   : {
-      // UUID: "",
-      // UserID: "",
       Name: "",
       Mobile: "",
       MobileVerified: false,
-      // OTP: "",
       OtpCreatedOn: 0,
-      // UpdatedBy: "",
       Address: "",
       Apt: "",
       City: "",
@@ -33,10 +29,7 @@ let orderObj = JSON.parse(sessionStorage.getItem("customerData"))
       Pin: "",
       AddressType: "",
       Subtotal: "",
-      // Delivery: "",
       Total: "",
-      // Step: "",
-      // Status: "",
       Items: "",
     };
 
