@@ -35,10 +35,9 @@ function order(productIndex) {
     productListIndex < 0
       ? orderList.push(productsObj[productIndex])
       : (orderList[productListIndex].count += 1);
-
-    sessionStorage.setItem("orderList", JSON.stringify(orderList));
   } else {
     orderList.push(productsObj[productIndex]);
-    sessionStorage.setItem("orderList", JSON.stringify(orderList));
   }
+
+  sessionStorage.setItem("orderList", JSON.stringify(orderList));
 }

@@ -13,6 +13,8 @@ const customerOtp = orderSummaryForm.querySelector("#customerOtp");
 const verifyOtpBtn = orderSummaryForm.querySelector("#verifyOtpBtn");
 const getOtpBtn = orderSummaryForm.querySelector("#getOtpBtn");
 
+const checkoutBtn = orderSummaryForm.querySelector(".checkout.button");
+
 let orderObj = JSON.parse(sessionStorage.getItem("customerData"))
   ? JSON.parse(sessionStorage.getItem("customerData"))
   : {
@@ -22,7 +24,7 @@ let orderObj = JSON.parse(sessionStorage.getItem("customerData"))
       Mobile: "",
       MobileVerified: false,
       OTP: "",
-      OtpCreatedOn: "",
+      OtpCreatedOn: 0,
       UpdatedBy: "",
       Address: "",
       Apt: "",
@@ -38,15 +40,30 @@ let orderObj = JSON.parse(sessionStorage.getItem("customerData"))
       Items: "",
     };
 
-orderObj.Address !== "" && (shippingDetails(), setOrderSummary());
+// sessionStorage.clear("orderList");
+
+// console.log(JSON.parse(sessionStorage.getItem("orderList")));
+
+orderList = sessionStorage.getItem("orderList")
+  ? JSON.parse(sessionStorage.getItem("orderList"))
+  : [];
+
+var itemsObj = {};
+orderList.map((orders, index) => {
+  itemsObj[index] = orders;
+});
+
+orderObj.Items = JSON.stringify(itemsObj);
+
+orderObj.Address !== "" && (setOrderSummary(), shippingDetails());
 
 function setCustomerDeatils() {
   orderObj = JSON.parse(sessionStorage.getItem("customerData"));
 }
 
-const errorMessage = shippingDetailsElem.querySelectorAll(".errorMessage");
+function formValidation() {
+  const errorMessage = shippingDetailsElem.querySelectorAll(".errorMessage");
 
-function shippingDetails() {
   shippingDetailInput.forEach((input, index) => {
     if (input.type == "text") {
       formComplete = true;
@@ -64,8 +81,12 @@ function shippingDetails() {
       }
     }
   });
+}
 
-  if (formComplete) {
+function shippingDetails() {
+  formValidation();
+
+  if (formComplete || orderObj.Address !== "") {
     shippingDetailsElem.style.display = "none";
     orderSummaryForm.style.display = "flex";
     progressBarElem.style.background =
@@ -73,6 +94,10 @@ function shippingDetails() {
 
     progressElem[1].classList.add("activeProgress");
   }
+
+  (orderList != "") & (orderObj.OtpCreatedOn > 0)
+    ? (checkoutBtn.style.display = "block")
+    : (checkoutBtn.style.display = "none");
 }
 
 function setShippingDetails() {
@@ -130,6 +155,34 @@ function changeAddress() {
   inputs[3].value = orderObj["Apt"];
   inputs[4].value = orderObj["City"];
   inputs[5].value = orderObj["Pin"];
+
+  formValidation();
+}
+
+async function getOtp() {
+  return await fetch("https://api.codebell.io/api/update_order", {
+    method: "post",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+    body: JSON.stringify({ record: orderObj }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.Result.Order) {
+        data.order = data.Result.Order;
+        if (data.order.Items) {
+          var items = JSON.parse(data.order.Items);
+          data.codebells = items.codebells;
+          data.codebells_ids = Object.keys(data.codebells);
+          data.plan = items.plan;
+        }
+      }
+      return data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 function getCustomerOtp() {
@@ -144,18 +197,19 @@ function getCustomerOtp() {
     getOtpBtn.style.backgroundColor = "#4a4a4a";
 
     orderObj.Mobile = customerPhone.value;
+    // JSON.stringify(orderObj.Items);
     sessionStorage.setItem("customerData", JSON.stringify(orderObj));
-
-    // console.log(sessionStorageData);
+    console.log(orderObj);
+    // getOtp();
 
     setTimeout(() => {
       customerPhone.disabled = false;
       getOtpBtn.disabled = false;
     }, 10000);
 
-    let timer = 10;
+    let timer = 15;
     const changePhoneNumber = setInterval(() => {
-      getOtpBtn.innerHTML = timer;
+      getOtpBtn.innerHTML = `${timer}s`;
       timer -= 1;
       timer < 0 &&
         ((getOtpBtn.innerHTML = "Get otp"),
@@ -174,15 +228,19 @@ function verifyCustomerOtp() {
   verifyOtpBtn.disabled = true;
   customerOtp.disabled = true;
   verifyOtpBtn.style.backgroundColor = "#4a4a4a";
+
+  orderObj.OTP = customerOtp.value;
+  getOtp().then((data) => {
+    console.log(data);
+    (data.record.OtpCreatedOn > 0) & (orderList != "")
+      ? (checkoutBtn.style.display = "block")
+      : (checkoutBtn.style.display = "none");
+  });
 }
 
-orderList = JSON.parse(sessionStorage.getItem("orderList")) ?? [];
-orderObj.Items = sessionStorage.getItem("orderList");
-console.log(orderList);
 console.log(orderObj);
 
-// sessionStorage.clear("orderList")
-// sessionStorage.clear("customerData");
+// sessionStorage.clear("orderObj")
 
 const subtotal = orderList.reduce((accumulator, productDetail) => {
   return accumulator + parseInt(productDetail.price * productDetail.count);
@@ -214,11 +272,3 @@ orderList.map((productDetail) => {
   </div>
 `;
 });
-
-const checkoutBtn = orderSummaryForm.querySelector(".checkout.button");
-
-if (orderList == "") {
-  checkoutBtn.style.display = "none";
-} else {
-  checkoutBtn.style.display = "block";
-}
