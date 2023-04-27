@@ -71,6 +71,10 @@
             color: rgb(255, 92, 92);
         }
 
+        a:hover {
+            cursor: pointer;
+        }
+
         @media screen and (max-width: 867px) {
             .content {
                 width: 90% !important;
@@ -329,29 +333,37 @@
                             </a>
                         </div>
                         <div class="features-bg" style="flex: 1; display: flex; flex-direction: column; gap: 2em;">
-                            <div>
-                                <label for="first name" style="color: #4a4a4a"> Phone number* </label>
-                                <div class="verificationForm" style="display: flex; gap: 2em;">
+                            <div id="phoneNumberForm">
+                                <label for="phone number" id="phoneLabel" style="color: #4a4a4a"> Phone number* </label>
+                                <div class="verificationForm" style="display: flex; flex-direction: column; gap: 1em;">
                                     <input id="phoneNumber" type="tel"
-                                        style="padding: 1em; width: 60%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
+                                        style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
                                         placeholder="xxxxx-xxxxx">
 
-                                    <button type="button" onclick="getCustomerOtp()" id="getOtpBtn"
-                                        style="background-color: #059862; padding: 0em 1em; color: white; border-radius: 0.5em;">Get
-                                        otp</button>
+                                    <div style="color: white; width: 100%; height: 4em;">
+                                        <button id="getOtpBtn" type="button" class="button"
+                                            style="width: 100%; height: inherit;" onclick="getCustomerOtp()">
+                                            Get Otp</button>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div>
-                                <label for="first name" style="color: #4a4a4a"> OTP* </label>
-                                <div class="verificationForm" style="display: flex; gap: 2em;">
+                            <div id="otpForm" style="display: none;">
+                                <label for="otp" id="otpLabel" style="color: #4a4a4a"> OTP* </label>
+                                <div class="verificationForm" style="display: flex; flex-direction: column; gap: 1em;">
                                     <input id="customerOtp" type="text"
-                                        style="padding: 1em; width: 60%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
+                                        style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
                                         placeholder="Enter otp here" disabled>
 
-                                    <button type="button" onclick="verifyCustomerOtp()" id="verifyOtpBtn"
-                                        style="background-color: #059862; background-color: #4a4a4a; padding: 0em 1em; color: white; border-radius: 0.5em;"
-                                        disabled>Verify</button>
+                                    <p id="coolDown" style="width: 100%;">Time remaining: <span></span> <a
+                                            onclick="getOtp()" style="float: right; pointer-events: none;">Resend
+                                            otp</a></p>
+
+                                    <div style="display: flex; gap: 1em; color: white; width: 100%;">
+                                        <button id="verifyOtpBtn" type="button" class="button" style="min-width: 100%;"
+                                            onclick="verifyCustomerOtp()">
+                                            Verify Otp</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -377,8 +389,8 @@
                                     </p>
                                 </b>
 
-                                <p style="color: #2F8AB2; font-size: x-small; margin-top: 0.5em;">
-                                    (Can be waved off if you purchase our premium membership)
+                                <p style="color: #2F8AB2; font-size: x-small; margin-top: 0.5em;">(Can be waved off if
+                                    you purchase our premium membership)
                                 </p>
                             </div>
                         </div>

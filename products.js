@@ -1,23 +1,29 @@
 const productsObj = {
   1: {
-    name: "Codebell with proximity light",
-    price: "200",
-    count: 1,
-    image:
+    ID: 1,
+    Summary: "",
+    Title: "Codebell with proximity light",
+    Price: 200,
+    Count: 1,
+    Photo:
       "https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct3.png",
   },
   2: {
-    name: "Car codbell",
-    price: "350",
-    count: 1,
-    image:
+    ID: 2,
+    Title: "Car codbell",
+    Summary: "",
+    Price: 350,
+    Count: 1,
+    Photo:
       "https://s3.ap-south-1.amazonaws.com/device.localhost/products/product5.png",
   },
   3: {
-    name: "Free Codebell",
-    price: "15",
-    count: 1,
-    image:
+    ID: 3,
+    Title: "Free Codebell",
+    Summary: "",
+    Price: 15,
+    Count: 1,
+    Photo:
       "https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct1.png",
   },
 };
@@ -29,12 +35,12 @@ function order(productIndex) {
     orderList = JSON.parse(sessionStorage.getItem("orderList"));
 
     let productListIndex = orderList.findIndex(
-      (product) => product.name === productsObj[productIndex].name
+      (product) => product.Title === productsObj[productIndex].Title
     );
 
     productListIndex < 0
       ? orderList.push(productsObj[productIndex])
-      : (orderList[productListIndex].count += 1);
+      : (orderList[productListIndex].Count += 1);
   } else {
     orderList.push(productsObj[productIndex]);
   }

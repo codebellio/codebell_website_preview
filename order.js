@@ -6,6 +6,11 @@ const orderSummaryForm = document.getElementById("orderSummary");
 const customerNameElem = orderSummaryForm.querySelector("#customerName");
 const customerAddressElem = orderSummaryForm.querySelector("#customerAddress");
 
+const phoneNumberForm = orderSummaryForm.querySelector("#phoneNumberForm");
+const otpForm = orderSummaryForm.querySelector("#otpForm");
+const otpLabel = orderSummaryForm.querySelector("#otpLabel");
+const coolDownElem = orderSummaryForm.querySelector("#coolDown span");
+
 const progressElem = document.getElementsByClassName("progress");
 const progressBarElem = document.getElementById("progressBar");
 
@@ -13,6 +18,8 @@ const customerPhone = orderSummaryForm.querySelector("#phoneNumber");
 const customerOtp = orderSummaryForm.querySelector("#customerOtp");
 const verifyOtpBtn = orderSummaryForm.querySelector("#verifyOtpBtn");
 const getOtpBtn = orderSummaryForm.querySelector("#getOtpBtn");
+
+const resendOtpElem = orderSummaryForm.querySelector("#coolDown a");
 
 const checkoutBtn = orderSummaryForm.querySelector(".checkout.button");
 
@@ -31,7 +38,6 @@ let orderObj = JSON.parse(sessionStorage.getItem("customerData"))
       AddressType: "",
       Subtotal: "",
       Total: "",
-      Items: "",
     };
 
 // sessionStorage.clear("orderList");
@@ -42,14 +48,9 @@ orderList = sessionStorage.getItem("orderList")
   ? JSON.parse(sessionStorage.getItem("orderList"))
   : [];
 
-var itemsObj = {};
-orderList.map((orders, index) => {
-  itemsObj[index] = orders;
-});
-
-orderObj.Items = JSON.stringify(itemsObj);
-
-orderObj.Address !== "" && (setOrderSummary(), shippingDetails());
+orderObj.Address !== "" &&
+  (changeAddress(), orderList != "") &&
+  (setOrderSummary(), shippingDetails());
 
 function setCustomerDeatils() {
   orderObj = JSON.parse(sessionStorage.getItem("customerData"));
@@ -80,7 +81,7 @@ function formValidation() {
 function shippingDetails() {
   formValidation();
 
-  if (formComplete || orderObj.Address !== "") {
+  if ((formComplete || orderObj.Address !== "") & (orderList != "")) {
     headingTopElem.innerHTML = `Almost <span class="text-transparent">there...</span>`;
     shippingDetailsElem.style.display = "none";
     orderSummaryForm.style.display = "flex";
@@ -89,8 +90,9 @@ function shippingDetails() {
 
     progressElem[1].classList.add("activeProgress");
   }
-
-  (orderList != "") & (orderObj.OtpCreatedOn > 0)
+  orderList == "" &&
+  alert("Please add products to order!")(orderList != "") &
+    (orderObj.OtpCreatedOn > 0)
     ? (checkoutBtn.style.display = "block")
     : (checkoutBtn.style.display = "none");
 }
@@ -154,10 +156,15 @@ function changeAddress() {
 
   formValidation();
 }
-function getOtp() {
-  const record = { record: orderObj };
+console.log(orderList);
+
+async function getOtp() {
+  const record = {
+    record: orderObj,
+    items: orderList,
+  };
   var api = "https://api.codebell.io/api/update_order";
-  return fetch(api, {
+  return await fetch(api, {
     method: "post",
     headers: {
       "Content-type": "application/json; charset=UTF-8",
@@ -167,6 +174,36 @@ function getOtp() {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+
+      function countdown(minutes) {
+        var seconds = 60;
+        var mins = minutes;
+        function tick() {
+          //This script expects an element with an ID = "counter". You can change that to what ever you want.
+          var current_minutes = mins - 1;
+          seconds--;
+          coolDownElem.innerHTML =
+            current_minutes.toString() +
+            ":" +
+            (seconds < 10 ? "0" : "") +
+            String(seconds);
+          if (seconds > 0) {
+            setTimeout(tick, 1000);
+          } else {
+            if (mins > 1) {
+              countdown(mins - 1);
+            }
+          }
+          if ((mins - 1 == 0) & (seconds == 0)) {
+            resendOtpElem.style.color = "#2F8AB2";
+            resendOtpElem.style.pointerEvents = "all";
+            // customerPhone.disabled = false;
+            // getOtpBtn.disabled = false;
+          }
+        }
+        tick();
+      }
+      countdown(5);
       // if (data.Result.Order) {
       //   data.order = data.Result.Order;
       //   if (data.order.Items) {
@@ -184,10 +221,12 @@ function getOtp() {
 }
 
 function getCustomerOtp() {
-  // otp code goes here.
   if (customerPhone.value.length === 10) {
-    verifyOtpBtn.disabled = false;
-    customerOtp.disabled = false;
+    phoneNumberForm.style.display = "none";
+    otpForm.style.display = "block";
+
+    // verifyOtpBtn.disabled = false;
+    // customerOtp.disabled = false;
     customerPhone.disabled = true;
     getOtpBtn.disabled = true;
 
@@ -195,25 +234,13 @@ function getCustomerOtp() {
     getOtpBtn.style.backgroundColor = "#4a4a4a";
 
     orderObj.Mobile = customerPhone.value;
+    otpLabel.innerHTML = `Phone number - ${orderObj.Mobile}`;
     // JSON.stringify(orderObj.Items);
     sessionStorage.setItem("customerData", JSON.stringify(orderObj));
+
     console.log(orderObj);
+
     getOtp();
-
-    setTimeout(() => {
-      customerPhone.disabled = false;
-      getOtpBtn.disabled = false;
-    }, 10000);
-
-    let timer = 15;
-    const changePhoneNumber = setInterval(() => {
-      getOtpBtn.innerHTML = `${timer}s`;
-      timer -= 1;
-      timer < 0 &&
-        ((getOtpBtn.innerHTML = "Get otp"),
-        (getOtpBtn.style.backgroundColor = "#059862"),
-        clearInterval(changePhoneNumber));
-    }, 1000);
   }
 
   if (customerPhone.value.length < 10) {
@@ -241,7 +268,7 @@ console.log(orderObj);
 // sessionStorage.clear("orderObj")
 
 const subtotal = orderList.reduce((accumulator, productDetail) => {
-  return accumulator + parseInt(productDetail.price * productDetail.count);
+  return accumulator + parseInt(productDetail.Price * productDetail.Count);
 }, 0);
 
 orderObj.Subtotal = subtotal;
@@ -261,11 +288,11 @@ const orderContainerElem = orderSummaryForm.querySelector(".orderContainer");
 orderList.map((productDetail) => {
   orderContainerElem.innerHTML += `
   <div style="display: flex; align-items: center; gap: 1.5em; margin: 2em 0;">
-      <img src="${productDetail.image}" alt="Doormount image" style="width: 40%; height: 40%;">
+      <img src="${productDetail.Photo}" alt="${productDetail.Photo} image" style="width: 40%; height: 40%;">
   
       <div>
-          <h6>${productDetail.name}</h6>
-          <p>${productDetail.count} unit</p>
+          <h6>${productDetail.Title}</h6>
+          <p>${productDetail.Count} unit</p>
       </div>
   </div>
 `;
