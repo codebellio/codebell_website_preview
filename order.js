@@ -153,7 +153,9 @@ function changeAddress() {
 }
 function getOtp() {
   const record = { record: orderObj };
-  return fetch("https://api.codebell.io/api/update_order", {
+  var api = "https://api.codebell.io/api/update_order"
+  api = "https://api.codebell.io/api/test"
+  return fetch(api, {
     method: "post",
     mode: "no-cors",
     headers: {
