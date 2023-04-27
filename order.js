@@ -1,4 +1,5 @@
 const shippingDetailsElem = document.getElementById("shippingDetails");
+const headingTopElem = document.querySelector(".heading-top");
 const shippingDetailInput = shippingDetailsElem.querySelectorAll("input");
 const shippingDetailsSelect = shippingDetailsElem.querySelector("select");
 const orderSummaryForm = document.getElementById("orderSummary");
@@ -80,6 +81,7 @@ function shippingDetails() {
   formValidation();
 
   if (formComplete || orderObj.Address !== "") {
+    headingTopElem.innerHTML = `Almost <span class="text-transparent">there...</span>`;
     shippingDetailsElem.style.display = "none";
     orderSummaryForm.style.display = "flex";
     progressBarElem.style.background =
@@ -132,6 +134,7 @@ function Checkout() {
 }
 
 function changeAddress() {
+  headingTopElem.innerHTML = `Purchase <span class="text-transparent">page</span>`;
   shippingDetailsElem.style.display = "flex";
   orderSummaryForm.style.display = "none";
 
@@ -153,7 +156,7 @@ function changeAddress() {
 }
 function getOtp() {
   const record = { record: orderObj };
-  var api = "https://api.codebell.io/api/update_order"
+  var api = "https://api.codebell.io/api/update_order";
   return fetch(api, {
     method: "post",
     headers: {
@@ -194,7 +197,7 @@ function getCustomerOtp() {
     orderObj.Mobile = customerPhone.value;
     // JSON.stringify(orderObj.Items);
     sessionStorage.setItem("customerData", JSON.stringify(orderObj));
-    // console.log(orderObj);
+    console.log(orderObj);
     getOtp();
 
     setTimeout(() => {
@@ -227,7 +230,7 @@ function verifyCustomerOtp() {
   orderObj.OTP = customerOtp.value;
   getOtp().then((data) => {
     console.log(data);
-    (data.record.OtpCreatedOn > 0) & (orderList != "")
+    (data.Result.Order.OtpCreatedOn > 0) & (orderList != "")
       ? (checkoutBtn.style.display = "block")
       : (checkoutBtn.style.display = "none");
   });
