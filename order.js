@@ -157,7 +157,6 @@ function getOtp() {
   api = "https://api.codebell.io/api/test"
   return fetch(api, {
     method: "post",
-    mode: "no-cors",
     headers: {
       "Content-type": "application/json; charset=UTF-8",
     },
