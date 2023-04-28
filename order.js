@@ -326,7 +326,8 @@ function verifyCustomerOtp() {
   customerOtp.disabled = true;
   verifyOtpBtn.style.backgroundColor = "#4a4a4a";
 
-  orderObj.OTP = customerOtp.value;
+  orderObj["OTP"] = customerOtp.value;
+  console.log(orderObj);
   fetchData().then((data) => {
     console.log(data);
     (data.Result.Order.MobileVerified === true) &
