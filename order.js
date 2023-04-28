@@ -1,4 +1,6 @@
 const shippingDetailsElem = document.getElementById("shippingDetails");
+const paymentMethods = document.getElementById("paymentMethods");
+
 const headingTopElem = document.querySelector(".heading-top");
 const shippingDetailInput = shippingDetailsElem.querySelectorAll("input");
 const shippingDetailsSelect = shippingDetailsElem.querySelector("select");
@@ -158,11 +160,42 @@ function setOrderSummaryForm() {
 }
 
 function Checkout() {
-  orderSummaryForm.style.display = "none";
+  fetchData().then((data) => {
+    if (
+      (data.Result.Order.MobileVerified === true) &
+      (data.Result.Order.TotalVerified === true)
+    ) {
+      orderSummaryForm.style.display = "none";
+      paymentMethods.style.display = "block";
 
-  progressBarElem.style.background =
-    "linear-gradient(to right, #2F8AB2 0%, #2F8AB2 100%)";
-  progressElem[2].classList.add("activeProgress");
+      progressBarElem.style.background =
+        "linear-gradient(to right, #2F8AB2 0%, #2F8AB2 100%)";
+      progressElem[2].classList.add("activeProgress");
+    }
+  });
+}
+
+function paymentMehtod(type) {
+  orderObj["PaymentMethod"] = type;
+
+  fetchData().then((data) => {
+    if (
+      (data.Result.Order.MobileVerified === true) &
+      (data.Result.Order.TotalVerified === true)
+    ) {
+      orderObj = data.Result.Order;
+      sessionStorage.setItem("customerData", orderObj);
+
+      if (data.Result.Order.PaymentMethod === "onlinePayment") {
+
+        // payment gateway code.
+      }
+      if (data.Result.Order.PaymentMethod === "COD") {
+        const UUID = data.Result.Order.UUID;
+        window.location.replace(`https://preview.codebell.io/purchase?id=${UUID}`);
+      }
+    }
+  });
 }
 
 function changeAddress() {
@@ -189,12 +222,14 @@ function changeAddress() {
 console.log(orderList);
 
 let resendOtp = false;
-async function getOtp(bool) {
+
+async function fetchData(bool) {
   const record = {
     record: orderObj,
     items: orderList,
     ResendOTP: bool ? true : false,
   };
+
   var api = "https://api.codebell.io/api/update_order";
   return await fetch(api, {
     method: "post",
@@ -205,16 +240,7 @@ async function getOtp(bool) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
-      // if (data.Result.Order) {
-      //   data.order = data.Result.Order;
-      //   if (data.order.Items) {
-      //     var items = JSON.parse(data.order.Items);
-      //     data.codebells = items.codebells;
-      //     data.codebells_ids = Object.keys(data.codebells);
-      //     data.plan = items.plan;
-      //   }
-      // }
+      // console.log(data);
       return data;
     })
     .catch((error) => {
@@ -242,7 +268,7 @@ function getCustomerOtp() {
 
     console.log(orderObj);
 
-    getOtp().then((data) => {
+    fetchData().then((data) => {
       console.log(data);
       function countdown(minutes) {
         var seconds = 60;
@@ -288,7 +314,7 @@ function verifyCustomerOtp() {
   verifyOtpBtn.style.backgroundColor = "#4a4a4a";
 
   orderObj.OTP = customerOtp.value;
-  getOtp().then((data) => {
+  fetchData().then((data) => {
     console.log(data);
     (data.Result.Order.MobileVerified === true) &
     (data.Result.Order.TotalVerified === true)
