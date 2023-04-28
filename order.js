@@ -42,18 +42,45 @@ let orderObj = JSON.parse(sessionStorage.getItem("customerData"))
 
 // sessionStorage.clear("orderList");
 
-// console.log(JSON.parse(sessionStorage.getItem("orderList")));
+// console.log(JSON.parse(sessionStorage.getItem("customerData")));
 
 orderList = sessionStorage.getItem("orderList")
   ? JSON.parse(sessionStorage.getItem("orderList"))
   : [];
 
-orderObj.Address !== "" &&
+let customerAddress = localStorage.getItem("customerAddress")
+  ? JSON.parse(localStorage.getItem("customerAddress"))
+  : {};
+
+if (customerAddress) {
+  orderObj.Name = customerAddress.Name;
+  orderObj.Address = customerAddress.Address;
+  orderObj.Apt = customerAddress.Apt;
+  orderObj.Pin = customerAddress.Pin;
+  orderObj.City = customerAddress.City;
+  orderObj.AddressType = customerAddress.AddressType;
+  orderObj.Country = customerAddress.Country;
+}
+
+customerAddress.Address !== "" &&
   (changeAddress(), orderList != "") &&
-  (setOrderSummary(), shippingDetails());
+  (setOrderSummaryForm(), shippingDetails());
 
 function setCustomerDeatils() {
   orderObj = JSON.parse(sessionStorage.getItem("customerData"));
+
+  customerAddress = {
+    Name: orderObj.Name,
+    Address: orderObj.Address,
+    Apt: orderObj.Apt,
+    City: orderObj.City,
+    Country: orderObj.Country,
+    Pin: orderObj.Pin,
+    AddressType: orderObj.AddressType,
+  };
+
+  localStorage.setItem("customerAddress", JSON.stringify(customerAddress));
+  console.log(localStorage.getItem("customerAddress"));
 }
 
 function formValidation() {
@@ -90,6 +117,7 @@ function shippingDetails() {
 
     progressElem[1].classList.add("activeProgress");
   }
+
   orderList == "" &&
   alert("Please add products to order!")(orderList != "") &
     (orderObj.OtpCreatedOn > 0)
@@ -102,7 +130,8 @@ function setShippingDetails() {
   const data = new FormData(shippingDetailsElem);
 
   for (const entry of data) {
-    addressType = `${entry[0]}`;
+    console.log(entry);
+    addressType = `${entry[1]}`;
   }
 
   orderObj.Name = inputs[0].value + " " + inputs[1].value;
@@ -114,16 +143,17 @@ function setShippingDetails() {
   orderObj.Country = shippingDetailsSelect.value;
 
   sessionStorage.setItem("customerData", JSON.stringify(orderObj));
+  console.log(orderObj);
 
   setCustomerDeatils();
-  setOrderSummary();
+  setOrderSummaryForm();
 }
 
-function setOrderSummary() {
-  customerNameElem.innerHTML = orderObj.Name;
-  customerAddressElem.innerHTML = `${orderObj.Apt}, ${orderObj.Address},
-      ${orderObj.City},
-      ${orderObj.Pin}
+function setOrderSummaryForm() {
+  customerNameElem.innerHTML = customerAddress.Name;
+  customerAddressElem.innerHTML = `${customerAddress.Apt}, ${customerAddress.Address},
+      ${customerAddress.City},
+      ${customerAddress.Pin}
   `;
 }
 
@@ -145,23 +175,25 @@ function changeAddress() {
   progressElem[1].classList.remove("activeProgress");
 
   const inputs = shippingDetailInput;
-  const name = orderObj["Name"].split(" ");
+  const name = customerAddress["Name"].split(" ");
 
   inputs[0].value = name[0];
   inputs[1].value = name[1];
-  inputs[2].value = orderObj["Address"];
-  inputs[3].value = orderObj["Apt"];
-  inputs[4].value = orderObj["City"];
-  inputs[5].value = orderObj["Pin"];
+  inputs[2].value = customerAddress["Address"];
+  inputs[3].value = customerAddress["Apt"];
+  inputs[4].value = customerAddress["City"];
+  inputs[5].value = customerAddress["Pin"];
 
   formValidation();
 }
 console.log(orderList);
 
-async function getOtp() {
+let resendOtp = false;
+async function getOtp(bool) {
   const record = {
     record: orderObj,
     items: orderList,
+    ResendOTP: bool ? true : false,
   };
   var api = "https://api.codebell.io/api/update_order";
   return await fetch(api, {
@@ -174,7 +206,44 @@ async function getOtp() {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+      // if (data.Result.Order) {
+      //   data.order = data.Result.Order;
+      //   if (data.order.Items) {
+      //     var items = JSON.parse(data.order.Items);
+      //     data.codebells = items.codebells;
+      //     data.codebells_ids = Object.keys(data.codebells);
+      //     data.plan = items.plan;
+      //   }
+      // }
+      return data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
 
+function getCustomerOtp() {
+  if (customerPhone.value.length === 10) {
+    phoneNumberForm.style.display = "none";
+    otpForm.style.display = "block";
+
+    // verifyOtpBtn.disabled = false;
+    customerOtp.disabled = false;
+    customerPhone.disabled = true;
+    getOtpBtn.disabled = true;
+
+    verifyOtpBtn.style.backgroundColor = "#059862";
+    getOtpBtn.style.backgroundColor = "#4a4a4a";
+
+    orderObj.Mobile = customerPhone.value;
+    otpLabel.innerHTML = `Phone number - ${orderObj.Mobile}`;
+    // JSON.stringify(orderObj.Items);
+    sessionStorage.setItem("customerData", JSON.stringify(orderObj));
+
+    console.log(orderObj);
+
+    getOtp().then((data) => {
+      console.log(data);
       function countdown(minutes) {
         var seconds = 60;
         var mins = minutes;
@@ -204,43 +273,7 @@ async function getOtp() {
         tick();
       }
       countdown(5);
-      // if (data.Result.Order) {
-      //   data.order = data.Result.Order;
-      //   if (data.order.Items) {
-      //     var items = JSON.parse(data.order.Items);
-      //     data.codebells = items.codebells;
-      //     data.codebells_ids = Object.keys(data.codebells);
-      //     data.plan = items.plan;
-      //   }
-      // }
-      return data;
-    })
-    .catch((error) => {
-      console.error(error);
     });
-}
-
-function getCustomerOtp() {
-  if (customerPhone.value.length === 10) {
-    phoneNumberForm.style.display = "none";
-    otpForm.style.display = "block";
-
-    // verifyOtpBtn.disabled = false;
-    // customerOtp.disabled = false;
-    customerPhone.disabled = true;
-    getOtpBtn.disabled = true;
-
-    verifyOtpBtn.style.backgroundColor = "#059862";
-    getOtpBtn.style.backgroundColor = "#4a4a4a";
-
-    orderObj.Mobile = customerPhone.value;
-    otpLabel.innerHTML = `Phone number - ${orderObj.Mobile}`;
-    // JSON.stringify(orderObj.Items);
-    sessionStorage.setItem("customerData", JSON.stringify(orderObj));
-
-    console.log(orderObj);
-
-    getOtp();
   }
 
   if (customerPhone.value.length < 10) {
@@ -257,7 +290,8 @@ function verifyCustomerOtp() {
   orderObj.OTP = customerOtp.value;
   getOtp().then((data) => {
     console.log(data);
-    (data.Result.Order.OtpCreatedOn > 0) & (orderList != "")
+    (data.Result.Order.MobileVerified === true) &
+    (data.Result.Order.TotalVerified === true)
       ? (checkoutBtn.style.display = "block")
       : (checkoutBtn.style.display = "none");
   });
