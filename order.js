@@ -54,9 +54,11 @@ let customerAddress = localStorage.getItem("customerAddress")
   ? JSON.parse(localStorage.getItem("customerAddress"))
   : {};
 
-  console.log(customerAddress);
+console.log(customerAddress);
 
 if (customerAddress) {
+  console.log(customerAddress);
+
   orderObj.Name = customerAddress.Name;
   orderObj.Address = customerAddress.Address;
   orderObj.Apt = customerAddress.Apt;
@@ -189,12 +191,13 @@ function paymentMehtod(type) {
       sessionStorage.setItem("customerData", orderObj);
 
       if (data.Result.Order.PaymentMethod === "onlinePayment") {
-
         // payment gateway code.
       }
       if (data.Result.Order.PaymentMethod === "COD") {
         const UUID = data.Result.Order.UUID;
-        window.location.replace(`https://preview.codebell.io/purchase?id=${UUID}`);
+        window.location.replace(
+          `https://preview.codebell.io/purchase?id=${UUID}`
+        );
       }
     }
   });
