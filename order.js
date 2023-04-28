@@ -52,7 +52,15 @@ orderList = sessionStorage.getItem("orderList")
 
 let customerAddress = localStorage.getItem("customerAddress")
   ? JSON.parse(localStorage.getItem("customerAddress"))
-  : {};
+  : {
+      Name: "",
+      Address: "",
+      Apt: "",
+      City: "",
+      Country: "",
+      Pin: "",
+      AddressType: "",
+    };
 
 console.log(customerAddress);
 
