@@ -54,6 +54,8 @@ let customerAddress = localStorage.getItem("customerAddress")
   ? JSON.parse(localStorage.getItem("customerAddress"))
   : {};
 
+  console.log(customerAddress);
+
 if (customerAddress) {
   orderObj.Name = customerAddress.Name;
   orderObj.Address = customerAddress.Address;
