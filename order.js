@@ -283,7 +283,8 @@ function getCustomerOtp() {
     fetchData().then((data) => {
       console.log(data);
 
-      orderObj["UUID"] = `${data.Result.Order.UUID}`;
+      // orderObj["UUID"] = `${data.Result.Order.UUID}`;
+      orderObj = data.Result.Order;
 
       Snackbar.show({
         pos: "top-left",
