@@ -287,7 +287,11 @@ function getCustomerOtp() {
       sessionStorage.setItem("customerData", JSON.stringify(orderObj));
 
       const UUID = orderObj.UUID;
-      window.location.replace(`https://preview.codebell.io/order?id=${UUID}`);
+      history.replaceState(
+        id,
+        "Codebell",
+        `https://preview.codebell.io/purchase?id=${UUID}`
+      );
 
       Snackbar.show({
         pos: "top-left",
