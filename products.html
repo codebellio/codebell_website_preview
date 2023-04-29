@@ -26,7 +26,6 @@
         }(window, document);
     </script>
 
-    <script src="/assets/snack_bar/snackbar.js"></script>
     <script src="/assets/js/helper.js"></script>
 
     <style>
@@ -81,7 +80,7 @@
                             style="background-color: white; border-radius: 1em;">
                             <img src="./assets/img/cart.png" alt="" style="width: 32px; height: inherit;">
 
-                            <span id="productCount">3</span>
+                            <span id="productCount">0</span>
                             <br>
                         </a>
                     </cart-view>
@@ -140,7 +139,7 @@
                         <div style="display: flex; gap: 1em; color: white;">
                             <a href="/order"> <button onclick="order(1)" class="button"> Order Now </button></a>
 
-                            <button onclick="addToCart(1)" class="button w-inline-block"
+                            <button onclick="order(1), setProductCount()" class="button w-inline-block"
                                 style="width: max-content; margin: auto 0 0 auto; background-color: transparent; border: 2px solid #161613;">
                                 <div class="text-button" style="color:#161613;">Add to Cart</div>
                             </button>
@@ -179,7 +178,7 @@
                         <div style="display: flex; gap: 1em; color: white;">
                             <a href="order"><button class="button" onclick="order(2)"> Order Now </button></a>
 
-                            <button onclick="addToCart(2)" class="button w-inline-block"
+                            <button onclick="order(2), setProductCount()" class="button w-inline-block"
                                 style="width: max-content; margin: auto 0 0 auto; background-color: transparent; border: 2px solid #161613;">
                                 <div class="text-button" style="color:#161613;">Add to Cart</div>
                             </button>
@@ -218,7 +217,7 @@
                         <div style="display: flex; gap: 1em; color: white;">
                             <a href="order"><button class="button" onclick="order(3)"> Order Now </button></a>
 
-                            <button onclick="addToCart(3)" class="button w-inline-block"
+                            <button onclick="order(3), setProductCount()" class="button w-inline-block"
                                 style="width: max-content; margin: auto 0 0 auto; background-color: transparent; border: 2px solid #161613;">
                                 <div class="text-button" style="color:#161613;">Add to Cart</div>
                             </button>
@@ -288,6 +287,15 @@
         <script src="./new_assets/app.js" type="text/javascript"></script>
 
         <script src="products.js"></script>
+
+        <script>
+            function setProductCount(params) {
+                const productCount = JSON.parse(localStorage.getItem("orderList")).totalCount
+
+                document.querySelector("#productCount").innerHTML = productCount;
+            }
+
+        </script>
 
     </body>
 

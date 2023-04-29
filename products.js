@@ -31,8 +31,8 @@ const productsObj = {
 let orderList = [];
 
 function order(productIndex) {
-  if (sessionStorage.getItem("orderList")) {
-    orderList = JSON.parse(sessionStorage.getItem("orderList"));
+  if (localStorage.getItem("orderList")) {
+    orderList = JSON.parse(localStorage.getItem("orderList")).orderList;
 
     let productListIndex = orderList.findIndex(
       (product) => product.Title === productsObj[productIndex].Title
@@ -45,5 +45,16 @@ function order(productIndex) {
     orderList.push(productsObj[productIndex]);
   }
 
-  sessionStorage.setItem("orderList", JSON.stringify(orderList));
+  let totalCount = 0;
+  orderList.map((orders) => {
+    totalCount += orders.Count;
+  });
+
+  localStorage.setItem(
+    "orderList",
+    JSON.stringify({ orderList, totalCount })
+  );
+  console.log(JSON.parse(localStorage.getItem("orderList")).orderList);
 }
+
+// sessionStorage.clear("orderList")

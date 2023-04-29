@@ -46,8 +46,8 @@ let orderObj = JSON.parse(sessionStorage.getItem("customerData"))
 
 // console.log(JSON.parse(sessionStorage.getItem("customerData")));
 
-orderList = sessionStorage.getItem("orderList")
-  ? JSON.parse(sessionStorage.getItem("orderList"))
+orderList = localStorage.getItem("orderList")
+  ? JSON.parse(localStorage.getItem("orderList")).orderList
   : [];
 
 let customerAddress = localStorage.getItem("customerAddress")
@@ -239,7 +239,7 @@ async function fetchData(bool) {
     record: orderObj,
     items: orderList,
   };
-  
+
   bool && (record["ResendOTP"] = true);
 
   var api = "https://api.codebell.io/api/update_order";
@@ -252,7 +252,6 @@ async function fetchData(bool) {
   })
     .then((response) => response.json())
     .then((data) => {
-      // console.log(data);
       return data;
     })
     .catch((error) => {
@@ -279,12 +278,14 @@ function getCustomerOtp() {
     // JSON.stringify(orderObj.Items);
     sessionStorage.setItem("customerData", JSON.stringify(orderObj));
 
-    console.log(orderObj);
-
     fetchData().then((data) => {
       console.log(data);
 
       orderObj["UUID"] = `${data.Result.Order.UUID}`;
+      sessionStorage.setItem("customerData", orderObj);
+
+      const UUID = orderObj.UUID;
+      window.location.replace(`https://preview.codebell.io/order?id=${UUID}`);
 
       Snackbar.show({
         pos: "top-left",
@@ -338,21 +339,37 @@ function verifyCustomerOtp() {
   // otp verification code goes here.
   verifyOtpBtn.disabled = true;
   customerOtp.disabled = true;
-  verifyOtpBtn.style.backgroundColor = "#4a4a4a";
 
   orderObj["OTP"] = `${customerOtp.value}`;
   console.log(orderObj);
   fetchData().then((data) => {
     console.log(data);
-    (data.Result.Order.MobileVerified === true &&
+
+    if (data.Result.Order.MobileVerified === true) {
       Snackbar.show({
-        pos: "top-left",
+        backgroundColor: "#047857",
+        pos: "top-right",
         showAction: false,
         text: data.Message,
-      })) &
-    (data.Result.Order.TotalVerified === true)
-      ? (checkoutBtn.style.display = "block")
-      : (checkoutBtn.style.display = "none");
+      });
+
+      customerOtp.remove();
+      verifyOtpBtn.innerHTML = "Verified ✅";
+
+      data.Result.Order.TotalVerified === true
+        ? (checkoutBtn.style.display = "block")
+        : (checkoutBtn.style.display = "none");
+    } else {
+      Snackbar.show({
+        backgroundColor: "#dc2626",
+        pos: "top-right",
+        showAction: false,
+        text: data.Message,
+      });
+
+      verifyOtpBtn.disabled = false;
+      customerOtp.disabled = false;
+    }
   });
 }
 
@@ -381,7 +398,9 @@ const orderContainerElem = orderSummaryForm.querySelector(".orderContainer");
 orderList.map((productDetail) => {
   orderContainerElem.innerHTML += `
   <div style="display: flex; align-items: center; gap: 1.5em; margin: 2em 0;">
-      <img src="${productDetail.Photo}" alt="${productDetail.Photo} image" style="width: 40%; height: 40%;">
+      <div style="min-width: 138px; width: 138px; height: 138px;">
+        <img src="${productDetail.Photo}" alt="${productDetail.Photo} image" style="width: 100%; height: 100%; object-fit: contain;">
+      </div>
   
       <div>
           <h6>${productDetail.Title}</h6>

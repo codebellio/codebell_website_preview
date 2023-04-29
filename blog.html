@@ -59,7 +59,7 @@
                     <a href="/order" class="nav-link w-nav-link" style="background-color: white; border-radius: 1em;">
                         <img src="./assets/img/cart.png" alt="" style="width: 32px; height: inherit;">
 
-                        <span id="productCount">3</span>
+                        <span id="productCount">0</span>
                         <br>
                     </a>
                 </cart-view>
@@ -270,6 +270,11 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="./spectrum_assets_files/webflow.1ffaff07a.js.download" type="text/javascript"></script>
     <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+        <script>
+            const productCount = JSON.parse(localStorage.getItem("orderList")).totalCount
+
+            document.querySelector("#productCount").innerHTML = productCount;
+        </script>
 </body>
 
 </html>

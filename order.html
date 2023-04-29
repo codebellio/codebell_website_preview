@@ -162,7 +162,7 @@
                             style="background-color: white; border-radius: 1em;">
                             <img src="./assets/img/cart.png" alt="" style="width: 32px; height: inherit;">
 
-                            <span id="productCount">3</span>
+                            <span id="productCount">0</span>
                             <br>
                         </a>
                     </cart-view>
@@ -485,6 +485,11 @@
 
         <script type="text/javascript" src="order.js"></script>
 
+            <script>
+                const productCount = JSON.parse(localStorage.getItem("orderList")).totalCount
+
+                document.querySelector("#productCount").innerHTML = productCount;
+            </script>
     </body>
 
 </html>
