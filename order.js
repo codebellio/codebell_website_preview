@@ -171,6 +171,7 @@ function setOrderSummaryForm() {
 
 function Checkout() {
   fetchData().then((data) => {
+    console.log(data);
     if (
       (data.Result.Order.MobileVerified === true) &
       (data.Result.Order.TotalVerified === true)
@@ -189,6 +190,7 @@ function paymentMehtod(type) {
   orderObj["PaymentMethod"] = type;
 
   fetchData().then((data) => {
+    console.log(data);
     if (
       (data.Result.Order.MobileVerified === true) &
       (data.Result.Order.TotalVerified === true)
@@ -197,11 +199,15 @@ function paymentMehtod(type) {
       sessionStorage.setItem("customerData", JSON.stringify(orderObj));
 
       if (data.Result.Order.PaymentMethod === "onlinePayment") {
-        // payment gateway code.
+        Snackbar.show({
+          pos: "top-right",
+          showAction: false,
+          text: "Online payment is temprarily disabled!",
+        });
       }
       if (data.Result.Order.PaymentMethod === "COD") {
         const UUID = data.Result.Order.UUID;
-        window.location.replace(
+        location.replace(
           `https://preview.codebell.io/purchase?id=${UUID}`
         );
       }
@@ -286,7 +292,7 @@ function getCustomerOtp() {
 
       const UUID = orderObj.UUID;
       history.pushState(
-        id,
+        {},
         "Codebell",
         `https://preview.codebell.io/purchase?id=${UUID}`
       );
@@ -350,12 +356,12 @@ function verifyCustomerOtp() {
     console.log(data);
 
     if (data.Result.Order.MobileVerified === true) {
-      Snackbar.show({
-        backgroundColor: "#047857",
-        pos: "top-right",
-        showAction: false,
-        text: data.Message,
-      });
+      // Snackbar.show({
+      //   backgroundColor: "#047857",
+      //   pos: "top-right",
+      //   showAction: false,
+      //   text: data.Message,
+      // });
 
       customerOtp.remove();
       verifyOtpBtn.innerHTML = "Verified ✅";
