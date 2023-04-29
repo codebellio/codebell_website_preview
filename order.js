@@ -201,9 +201,7 @@ function paymentMehtod(type) {
       }
       if (data.Result.Order.PaymentMethod === "COD") {
         const UUID = data.Result.Order.UUID;
-        history.replaceState(
-          id,
-          "Codebell",
+        window.location.replace(
           `https://preview.codebell.io/purchase?id=${UUID}`
         );
       }
@@ -287,7 +285,11 @@ function getCustomerOtp() {
       sessionStorage.setItem("customerData", JSON.stringify(orderObj));
 
       const UUID = orderObj.UUID;
-      window.history.replace(`https://preview.codebell.io/purchase?id=${UUID}`);
+      history.pushState(
+        id,
+        "Codebell",
+        `https://preview.codebell.io/purchase?id=${UUID}`
+      );
 
       Snackbar.show({
         pos: "top-left",
