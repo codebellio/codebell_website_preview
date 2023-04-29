@@ -11,7 +11,9 @@ const customerAddressElem = orderSummaryForm.querySelector("#customerAddress");
 const phoneNumberForm = orderSummaryForm.querySelector("#phoneNumberForm");
 const otpForm = orderSummaryForm.querySelector("#otpForm");
 const otpLabel = orderSummaryForm.querySelector("#otpLabel");
-const coolDownElem = orderSummaryForm.querySelector("#coolDown span");
+const coolDownElem = orderSummaryForm.querySelector("#coolDown");
+const coolDownTimerElem = coolDownElem.querySelector("#coolDown span");
+const resendOtpElem = coolDownElem.querySelector("#coolDown a");
 
 const progressElem = document.getElementsByClassName("progress");
 const progressBarElem = document.getElementById("progressBar");
@@ -20,8 +22,6 @@ const customerPhone = orderSummaryForm.querySelector("#phoneNumber");
 const customerOtp = orderSummaryForm.querySelector("#customerOtp");
 const verifyOtpBtn = orderSummaryForm.querySelector("#verifyOtpBtn");
 const getOtpBtn = orderSummaryForm.querySelector("#getOtpBtn");
-
-const resendOtpElem = orderSummaryForm.querySelector("#coolDown a");
 
 const checkoutBtn = orderSummaryForm.querySelector(".checkout.button");
 
@@ -188,6 +188,7 @@ function Checkout() {
 
 function paymentMehtod(type) {
   orderObj["PaymentMethod"] = type;
+  console.log(orderObj);
 
   fetchData().then((data) => {
     console.log(data);
@@ -207,7 +208,7 @@ function paymentMehtod(type) {
       }
       if (data.Result.Order.PaymentMethod === "COD") {
         const UUID = data.Result.Order.UUID;
-        location.replace(
+        window.location.replace(
           `https://preview.codebell.io/purchase?id=${UUID}`
         );
       }
@@ -310,7 +311,7 @@ function getCustomerOtp() {
           //This script expects an element with an ID = "counter". You can change that to what ever you want.
           var current_minutes = mins - 1;
           seconds--;
-          coolDownElem.innerHTML =
+          coolDownTimerElem.innerHTML =
             current_minutes.toString() +
             ":" +
             (seconds < 10 ? "0" : "") +
@@ -352,6 +353,7 @@ function verifyCustomerOtp() {
 
   orderObj["OTP"] = `${customerOtp.value}`;
   console.log(orderObj);
+
   fetchData().then((data) => {
     console.log(data);
 
@@ -364,6 +366,7 @@ function verifyCustomerOtp() {
       // });
 
       customerOtp.remove();
+      coolDownElem.remove();
       verifyOtpBtn.innerHTML = "Verified ✅";
 
       data.Result.Order.TotalVerified === true
