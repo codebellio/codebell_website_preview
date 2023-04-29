@@ -201,7 +201,9 @@ function paymentMehtod(type) {
       }
       if (data.Result.Order.PaymentMethod === "COD") {
         const UUID = data.Result.Order.UUID;
-        window.location.replace(
+        history.pushState(
+          id,
+          "Codebell",
           `https://preview.codebell.io/purchase?id=${UUID}`
         );
       }
