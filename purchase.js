@@ -1,6 +1,10 @@
 const url = window.location.href;
-orderObj = JSON.parse(sessionStorage.getItem("customerData"));
-const UUID = orderObj.Result.Order.UUID;
+orderObj = sessionStorage.getItem("customerData")
+  ? JSON.parse(sessionStorage.getItem("customerData"))
+  : {};
+
+const UUID =
+  Object.keys(orderObj).length !== 0 ? orderObj.Result.Order.UUID : null;
 
 console.log(url.substring(url.lastIndexOf("?") + 4));
 

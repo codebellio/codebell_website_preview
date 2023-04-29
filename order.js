@@ -132,9 +132,7 @@ function shippingDetails() {
     progressElem[1].classList.add("activeProgress");
   }
 
-  orderList == "" &&
-  alert("Please add products to order!")(orderList != "") &
-    (orderObj.OtpCreatedOn > 0)
+  (orderList != "") & (orderObj.OtpCreatedOn > 0)
     ? (checkoutBtn.style.display = "block")
     : (checkoutBtn.style.display = "none");
 }
@@ -276,6 +274,7 @@ function getCustomerOtp() {
 
     orderObj.Mobile = customerPhone.value;
     otpLabel.innerHTML = `Phone number - ${orderObj.Mobile}`;
+
     // JSON.stringify(orderObj.Items);
     sessionStorage.setItem("customerData", JSON.stringify(orderObj));
 
@@ -283,6 +282,15 @@ function getCustomerOtp() {
 
     fetchData().then((data) => {
       console.log(data);
+
+      orderObj["UUID"] = `${data.Result.Order.UUID}`;
+
+      Snackbar.show({
+        pos: "top-left",
+        showAction: false,
+        text: data.Message,
+      });
+
       function countdown(minutes) {
         var seconds = 60;
         var mins = minutes;
@@ -316,7 +324,12 @@ function getCustomerOtp() {
   }
 
   if (customerPhone.value.length < 10) {
-    alert("Please check your phone number again.");
+    Snackbar.show({
+      actionTextColor: "#ef4444",
+      pos: "top-left",
+      // showAction: false,
+      text: "Please check your phone number!",
+    });
   }
 }
 
@@ -326,11 +339,16 @@ function verifyCustomerOtp() {
   customerOtp.disabled = true;
   verifyOtpBtn.style.backgroundColor = "#4a4a4a";
 
-  orderObj["OTP"] = customerOtp.value;
+  orderObj["OTP"] = `${customerOtp.value}`;
   console.log(orderObj);
   fetchData().then((data) => {
     console.log(data);
-    (data.Result.Order.MobileVerified === true) &
+    (data.Result.Order.MobileVerified === true &&
+      Snackbar.show({
+        pos: "top-left",
+        showAction: false,
+        text: data.Message,
+      })) &
     (data.Result.Order.TotalVerified === true)
       ? (checkoutBtn.style.display = "block")
       : (checkoutBtn.style.display = "none");
