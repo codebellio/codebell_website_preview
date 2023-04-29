@@ -191,22 +191,23 @@ function paymentMehtod(type) {
   console.log(orderObj);
 
   fetchData().then((data) => {
-    console.log(data);
     if (
       (data.Result.Order.MobileVerified === true) &
       (data.Result.Order.TotalVerified === true)
-    ) {
+      ) {
+      console.log("ok");
+
       orderObj = data.Result.Order;
       sessionStorage.setItem("customerData", JSON.stringify(orderObj));
 
-      if (data.Result.Order.PaymentMethod === "onlinePayment") {
+      if (type === "onlinePayment") {
         Snackbar.show({
           pos: "top-right",
           showAction: false,
           text: "Online payment is temprarily disabled!",
         });
       }
-      if (data.Result.Order.PaymentMethod === "COD") {
+      if (type === "COD") {
         const UUID = data.Result.Order.UUID;
         window.location.replace(
           `https://preview.codebell.io/purchase?id=${UUID}`
