@@ -76,7 +76,15 @@
                         <a href="/blog" class="nav-link w-nav-link">Blog<br></a>
                         <a href="/support" class="nav-link w-nav-link">Support<br></a>
                     </nav>
-                    <cart-view></cart-view>
+                    <cart-view>
+                        <a href="/order" class="nav-link w-nav-link"
+                            style="background-color: white; border-radius: 1em;">
+                            <img src="./assets/img/cart.png" alt="" style="width: 32px; height: inherit;">
+
+                            <span id="productCount">3</span>
+                            <br>
+                        </a>
+                    </cart-view>
                     <a href="/get-the-app" class="nav-button w-inline-block">
                         <img src="./spectrum_assets_files/6391742c49aaab268ec5c5c5_download_dark.svg" loading="eager"
                             alt="" class="icon-button">
@@ -130,8 +138,12 @@
                         <p class="paragraph">In dark if some one come nearby proximity sensor will light the codebell so
                             visitor can find it easily</p>
                         <div style="display: flex; gap: 1em; color: white;">
-                            <a href="/order"> <button onclick="order(1)" class="button">
-                                    Order Now </button></a>
+                            <a href="/order"> <button onclick="order(1)" class="button"> Order Now </button></a>
+
+                            <button onclick="addToCart(1)" class="button w-inline-block"
+                                style="width: max-content; margin: auto 0 0 auto; background-color: transparent; border: 2px solid #161613;">
+                                <div class="text-button" style="color:#161613;">Add to Cart</div>
+                            </button>
                         </div>
                     </div>
                     <div class="app-focus-separate no_sm_mt">
@@ -165,8 +177,12 @@
                         </div>
                         <p class="paragraph">Car codebell</p>
                         <div style="display: flex; gap: 1em; color: white;">
-                            <a href="order"><button class="button" onclick="order(2)">
-                                    Order Now </button></a>
+                            <a href="order"><button class="button" onclick="order(2)"> Order Now </button></a>
+
+                            <button onclick="addToCart(2)" class="button w-inline-block"
+                                style="width: max-content; margin: auto 0 0 auto; background-color: transparent; border: 2px solid #161613;">
+                                <div class="text-button" style="color:#161613;">Add to Cart</div>
+                            </button>
                         </div>
                     </div>
                     <div class="app-focus-separate no_sm_mt">
@@ -200,8 +216,12 @@
                         </div>
                         <p class="paragraph">New Product 1</p>
                         <div style="display: flex; gap: 1em; color: white;">
-                            <a href="order"><button class="button" onclick="order(3)">
-                                    Order Now </button></a>
+                            <a href="order"><button class="button" onclick="order(3)"> Order Now </button></a>
+
+                            <button onclick="addToCart(3)" class="button w-inline-block"
+                                style="width: max-content; margin: auto 0 0 auto; background-color: transparent; border: 2px solid #161613;">
+                                <div class="text-button" style="color:#161613;">Add to Cart</div>
+                            </button>
                         </div>
                     </div>
                     <div class="app-focus-separate no_sm_mt">

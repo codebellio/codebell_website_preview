@@ -238,8 +238,9 @@ async function fetchData(bool) {
   const record = {
     record: orderObj,
     items: orderList,
-    ResendOTP: bool ? true : false,
   };
+  
+  bool && (record["ResendOTP"] = true);
 
   var api = "https://api.codebell.io/api/update_order";
   return await fetch(api, {
@@ -283,8 +284,7 @@ function getCustomerOtp() {
     fetchData().then((data) => {
       console.log(data);
 
-      // orderObj["UUID"] = `${data.Result.Order.UUID}`;
-      orderObj = data.Result.Order;
+      orderObj["UUID"] = `${data.Result.Order.UUID}`;
 
       Snackbar.show({
         pos: "top-left",
