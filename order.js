@@ -194,7 +194,7 @@ function paymentMehtod(type) {
     if (
       (data.Result.Order.MobileVerified === true) &
       (data.Result.Order.TotalVerified === true)
-      ) {
+    ) {
       console.log("ok");
 
       orderObj = data.Result.Order;
@@ -208,6 +208,9 @@ function paymentMehtod(type) {
         });
       }
       if (type === "COD") {
+        sessionStorage.clear("customerData");
+        sessionStorage.clear("orderList");
+
         const UUID = data.Result.Order.UUID;
         window.location.replace(
           `https://preview.codebell.io/purchase?id=${UUID}`
