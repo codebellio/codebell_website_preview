@@ -204,7 +204,7 @@ function paymentMehtod(type) {
         Snackbar.show({
           pos: "top-right",
           showAction: false,
-          text: "Online payment is temprarily disabled!",
+          text: data.Message,
         });
       }
       if (type === "COD") {
@@ -303,7 +303,7 @@ function getCustomerOtp() {
       );
 
       Snackbar.show({
-        pos: "top-left",
+        pos: "top-right",
         showAction: false,
         text: data.Message,
       });
@@ -343,7 +343,7 @@ function getCustomerOtp() {
   if (customerPhone.value.length < 10) {
     Snackbar.show({
       actionTextColor: "#ef4444",
-      pos: "top-left",
+      pos: "top-right",
       // showAction: false,
       text: "Please check your phone number!",
     });
