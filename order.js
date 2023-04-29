@@ -201,7 +201,7 @@ function paymentMehtod(type) {
       }
       if (data.Result.Order.PaymentMethod === "COD") {
         const UUID = data.Result.Order.UUID;
-        history.pushState(
+        history.replaceState(
           id,
           "Codebell",
           `https://preview.codebell.io/purchase?id=${UUID}`
