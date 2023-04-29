@@ -94,7 +94,7 @@ function setCustomerDeatils() {
   };
 
   localStorage.setItem("customerAddress", JSON.stringify(customerAddress));
-  console.log(localStorage.getItem("customerAddress"));
+  // console.log(localStorage.getItem("customerAddress"));
 }
 
 function formValidation() {
@@ -194,7 +194,7 @@ function paymentMehtod(type) {
       (data.Result.Order.TotalVerified === true)
     ) {
       orderObj = data.Result.Order;
-      sessionStorage.setItem("customerData", orderObj);
+      sessionStorage.setItem("customerData", JSON.stringify(orderObj));
 
       if (data.Result.Order.PaymentMethod === "onlinePayment") {
         // payment gateway code.
@@ -282,7 +282,7 @@ function getCustomerOtp() {
       console.log(data);
 
       orderObj["UUID"] = `${data.Result.Order.UUID}`;
-      sessionStorage.setItem("customerData", orderObj);
+      sessionStorage.setItem("customerData", JSON.stringify(orderObj));
 
       const UUID = orderObj.UUID;
       window.location.replace(`https://preview.codebell.io/order?id=${UUID}`);
