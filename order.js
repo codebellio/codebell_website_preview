@@ -42,10 +42,6 @@ let orderObj = JSON.parse(localStorage.getItem("customerData"))
       Total: "",
     };
 
-// sessionStorage.clear("orderList");
-
-// console.log(JSON.parse(sessionStorage.getItem("customerData")));
-
 orderList = localStorage.getItem("orderList")
   ? JSON.parse(localStorage.getItem("orderList")).orderList
   : [];
@@ -62,11 +58,7 @@ let customerAddress = localStorage.getItem("customerAddress")
       AddressType: "",
     };
 
-console.log(customerAddress);
-
 if (customerAddress) {
-  console.log(customerAddress);
-
   orderObj.Name = customerAddress.Name;
   orderObj.Address = customerAddress.Address;
   orderObj.Apt = customerAddress.Apt;
@@ -94,7 +86,6 @@ function setCustomerDeatils() {
   };
 
   localStorage.setItem("customerAddress", JSON.stringify(customerAddress));
-  // console.log(localStorage.getItem("customerAddress"));
 }
 
 function formValidation() {
@@ -104,7 +95,6 @@ function formValidation() {
   shippingDetailInput.forEach((input, index) => {
     if (input.type == "text") {
       const inputValue = input.value.trim();
-      console.log(formComplete);
 
       if (!inputValue) {
         errorMessage[index].innerHTML = "Field cannot remain empty!";
@@ -162,7 +152,6 @@ function setShippingDetails() {
   orderObj.Country = shippingDetailsSelect.value;
 
   localStorage.setItem("customerData", JSON.stringify(orderObj));
-  console.log(orderObj);
 
   setCustomerDeatils();
   setOrderSummaryForm();
@@ -178,7 +167,6 @@ function setOrderSummaryForm() {
 
 function Checkout() {
   fetchData().then((data) => {
-    console.log(data);
     if (
       (data.Result.Order.MobileVerified === true) &
       (data.Result.Order.TotalVerified === true)
@@ -195,7 +183,6 @@ function Checkout() {
 
 function paymentMehtod(type) {
   orderObj["PaymentMethod"] = type;
-  console.log(orderObj);
 
   fetchData().then((data) => {
     if (
@@ -245,7 +232,6 @@ function changeAddress() {
 
   formValidation();
 }
-console.log(orderList);
 
 let resendOtp = false;
 
@@ -298,8 +284,6 @@ function getCustomerOtp() {
 
     if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
       fetchData().then((data) => {
-        console.log(data);
-
         orderObj["UUID"] = `${data.Result.Order.UUID}`;
         localStorage.setItem("customerData", JSON.stringify(orderObj));
 
@@ -350,8 +334,6 @@ function getCustomerOtp() {
           phoneNumberForm.querySelector(".errorMessage");
         phoneErrorMsgElem.innerHTML = "Please enter a valid phone number.";
 
-        console.log(customerPhone);
-
         customerPhone.addEventListener("input", () => {
           phoneErrorMsgElem.innerHTML = "";
         });
@@ -379,11 +361,8 @@ function verifyCustomerOtp() {
   customerOtp.disabled = true;
 
   orderObj["OTP"] = `${customerOtp.value}`;
-  console.log(orderObj);
 
   fetchData().then((data) => {
-    console.log(data);
-
     if (data.Result.Order.MobileVerified === true) {
       orderObj["OTP"] = "";
       // Snackbar.show({
@@ -414,8 +393,6 @@ function verifyCustomerOtp() {
     }
   });
 }
-
-console.log(orderObj);
 
 // sessionStorage.clear("orderObj")
 
@@ -491,16 +468,16 @@ function decItemCount(productIndex) {
       totalCount += orders.Count;
     });
 
+    localStorage.setItem(
+      "orderList",
+      JSON.stringify({ orderList, totalCount })
+    );
+
     const productCount = JSON.parse(
       localStorage.getItem("orderList")
     ).totalCount;
 
     document.querySelector("#productCount").innerHTML = productCount;
-
-    localStorage.setItem(
-      "orderList",
-      JSON.stringify({ orderList, totalCount })
-    );
   }
 }
 

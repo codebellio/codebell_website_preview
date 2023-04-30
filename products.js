@@ -54,7 +54,6 @@ function order(productIndex) {
     "orderList",
     JSON.stringify({ orderList, totalCount })
   );
-  console.log(JSON.parse(localStorage.getItem("orderList")).orderList);
 }
 
 // sessionStorage.clear("orderList")

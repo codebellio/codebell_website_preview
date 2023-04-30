@@ -3,7 +3,6 @@ orderObj = localStorage.getItem("customerData")
   ? JSON.parse(localStorage.getItem("customerData"))
   : {};
 
-console.log(orderObj);
 
 const UUID = Object.keys(orderObj).length !== 0 ? orderObj.UUID : null;
 
