@@ -294,7 +294,7 @@ function getCustomerOtp() {
     getOtpBtn.disabled = true;
 
     otpLabel.innerHTML = `
-    Phone number - ${orderObj.Mobile} <button onclick="changePhoneNum()" style="background-color: transparent; width: max-content; border-radius: 1em; color: #2F8AB2;">Change</button>`;
+    Phone number - ${orderObj.Mobile} <button type="button" onclick="changePhoneNum()" style="background-color: transparent; width: max-content; border-radius: 1em; color: #2F8AB2;">Change</button>`;
 
     // JSON.stringify(orderObj.Items);
     const url = window.location.href;
