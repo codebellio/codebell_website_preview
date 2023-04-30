@@ -293,10 +293,8 @@ function getCustomerOtp() {
     customerPhone.disabled = true;
     getOtpBtn.disabled = true;
 
-    verifyOtpBtn.style.backgroundColor = "#059862";
-    getOtpBtn.style.backgroundColor = "#4a4a4a";
-
-    otpLabel.innerHTML = `Phone number - ${orderObj.Mobile}`;
+    otpLabel.innerHTML = `
+    Phone number - ${orderObj.Mobile} <button onclick="changePhoneNum()" style="background-color: transparent; width: max-content; border-radius: 1em; color: #2F8AB2;">Change</button>`;
 
     // JSON.stringify(orderObj.Items);
     const url = window.location.href;
@@ -343,8 +341,6 @@ function getCustomerOtp() {
             if ((mins - 1 == 0) & (seconds == 0)) {
               resendOtpElem.style.color = "#2F8AB2";
               resendOtpElem.style.pointerEvents = "all";
-              // customerPhone.disabled = false;
-              // getOtpBtn.disabled = false;
             }
           }
           tick();
@@ -365,6 +361,17 @@ function getCustomerOtp() {
       }
     }
   }
+}
+
+function changePhoneNum() {
+  phoneNumberForm.style.display = "block";
+  otpForm.style.display = "none";
+
+  customerOtp.disabled = true;
+  customerPhone.disabled = false;
+  getOtpBtn.disabled = false;
+
+  clearTimeout(tick);
 }
 
 function verifyCustomerOtp() {
@@ -388,6 +395,7 @@ function verifyCustomerOtp() {
       // });
 
       customerOtp.remove();
+      clearTimeout(tick);
       coolDownElem.remove();
       verifyOtpBtn.innerHTML = "Verified ✅";
 
@@ -412,27 +420,32 @@ console.log(orderObj);
 
 // sessionStorage.clear("orderObj")
 
-const subtotal = orderList.reduce((accumulator, productDetail) => {
-  return accumulator + parseInt(productDetail.Price * productDetail.Count);
-}, 0);
+function findTotal() {
+  const subtotal = orderList.reduce((accumulator, productDetail) => {
+    return accumulator + parseInt(productDetail.Price * productDetail.Count);
+  }, 0);
 
-orderObj.Subtotal = subtotal;
+  orderObj.Subtotal = subtotal;
 
-const subtotalElem = orderSummaryForm.querySelector(".subtotal span");
-subtotalElem.innerHTML = `₹${subtotal}`;
+  const subtotalElem = orderSummaryForm.querySelector(".subtotal span");
+  subtotalElem.innerHTML = `₹${subtotal}`;
 
-const finalAmount = subtotal + 50;
+  const finalAmount = subtotal + 50;
 
-orderObj.Total = finalAmount;
+  orderObj.Total = finalAmount;
 
-const finalAmountElem = orderSummaryForm.querySelector(".finalAmount span");
-finalAmountElem.innerHTML = `₹${finalAmount}`;
+  const finalAmountElem = orderSummaryForm.querySelector(".finalAmount span");
+  finalAmountElem.innerHTML = `₹${finalAmount}`;
+}
+findTotal();
 
 const orderContainerElem = orderSummaryForm.querySelector(".orderContainer");
 
 function incItemCount(productIndex) {
   if (localStorage.getItem("orderList")) {
     orderList[productIndex].Count += 1;
+
+    findTotal();
 
     const itemCount = orderSummaryForm.querySelector(
       `#itemCount-${productIndex}`
@@ -445,16 +458,16 @@ function incItemCount(productIndex) {
       totalCount += orders.Count;
     });
 
+    localStorage.setItem(
+      "orderList",
+      JSON.stringify({ orderList, totalCount })
+    );
+
     const productCount = JSON.parse(
       localStorage.getItem("orderList")
     ).totalCount;
 
     document.querySelector("#productCount").innerHTML = productCount;
-
-    localStorage.setItem(
-      "orderList",
-      JSON.stringify({ orderList, totalCount })
-    );
   }
 }
 
@@ -467,6 +480,12 @@ function decItemCount(productIndex) {
     );
 
     itemCount.innerHTML = orderList[productIndex].Count + " " + "unit";
+
+    orderList[productIndex].Count == 0 &&
+      (orderSummaryForm.querySelector(`#itemDetail-${productIndex}`).remove(),
+      orderList.splice(productIndex, 1));
+
+    findTotal();
 
     let totalCount = 0;
     orderList.map((orders) => {
@@ -488,7 +507,7 @@ function decItemCount(productIndex) {
 
 orderList.map((productDetail, index) => {
   orderContainerElem.innerHTML += `
-  <div style="display: flex; align-items: center; gap: 1.5em; margin: 2em 0;">
+  <div style="display: flex; align-items: center; gap: 1.5em; margin: 2em 0;" id="itemDetail-${index}">
       <div style="min-width: 138px; width: 138px; height: 138px;">
         <img src="${productDetail.Photo}" alt="${productDetail.Photo} image" style="width: 100%; height: 100%; object-fit: contain;">
       </div>
