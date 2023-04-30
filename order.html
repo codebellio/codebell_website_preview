@@ -163,7 +163,7 @@
                             style="background-color: white; border-radius: 1em;">
                             <img src="./assets/img/cart.png" alt="" style="width: 32px; height: inherit;">
 
-                            <span id="productCount">0</span>
+                            <span id="productCount" style="color: black">0</span>
                             <br>
                         </a>
                     </cart-view>
@@ -344,14 +344,14 @@
                                 <div class="text-button" style="color:#161613;">Change</div>
                             </a>
                         </div>
-                        <div class="features-bg" style="flex: 1; display: flex; flex-direction: column; gap: 2em;">
+                        <div class="features-bg" style="flex: 1;">
                             <div id="phoneNumberForm">
                                 <label for="phone number" id="phoneLabel" style="color: #4a4a4a"> Phone number* </label>
                                 <div class="verificationForm" style="display: flex; flex-direction: column; gap: 1em;">
                                     <input id="phoneNumber" type="tel"
                                         style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
                                         placeholder="xxxxx-xxxxx">
-                                    <p class="errorMessage"></p>
+                                    <p class="errorMessage" style="display: none;"></p>
 
                                     <div style="color: white; width: 100%; height: 4em;">
                                         <button id="getOtpBtn" type="button" class="button"
@@ -386,10 +386,28 @@
                     <div class="features-bg" style="flex: 1;">
                         <h4>Your order</h4>
 
-                        <div class="orderContainer">
+                        <div class="orderContainer"></div>
 
+                        <div style="width: 95%; height: 1px; background-color: black; margin: 1.5em 0;"></div>
+
+                        <div id="couponCode">
+                            <label for="coupon code" style="color: #4a4a4a"> Coupon Code </label>
+                            <div class="" style="display: flex; gap: 0.5em;">
+                                <input id="couponCodeInput" type="text"
+                                    style="padding: 1em; width: 70%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
+                                    placeholder="Enter your Coupon Code">
+
+                                <div style="color: white; width: 30%; height: 4em;">
+                                    <button id="couponCodeBtn" type="button" class="button"
+                                        style="width: 100%; height: inherit; border-radius: 1em;"
+                                        onclick="verifyCouponCode()">
+                                        Apply
+                                    </button>
+
+                                </div>
+                            </div>
+                            <p class="errorMessage" style="display: none; margin-top: 1em;"></p>
                         </div>
-
 
                         <div style="margin-top: 3em">
                             <h4>Price Details</h4>
@@ -404,9 +422,15 @@
                                     </p>
                                 </b>
 
-                                <p style="color: #2F8AB2; font-size: x-small; margin-top: 0.5em;">(Can be waved off if
+                                <p style="color: #2F8AB2; font-size: small; margin-top: 0.5em;">(Can be waved off if
                                     you purchase our premium membership)
                                 </p>
+
+                                <b id="appliedCoupon" style="display: none; align-items: center; gap: 0.5em;">
+                                    <img src="./assets/img/coupon.png" style="height: 20px; width: 20px;" alt="">
+
+                                    <p id="appliedCouponDetails" style="width: 100%; height: 20px; align-items: center;"></p>
+                                </b>
                             </div>
                         </div>
 

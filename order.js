@@ -169,7 +169,8 @@ function Checkout() {
   fetchData().then((data) => {
     if (
       (data.Result.Order.MobileVerified === true) &
-      (data.Result.Order.TotalVerified === true)
+      (data.Result.Order.TotalVerified === true) &
+      (orderList != "")
     ) {
       orderSummaryForm.style.display = "none";
       paymentMethods.style.display = "block";
@@ -332,10 +333,13 @@ function getCustomerOtp() {
       if (customerPhone.value.length < 10) {
         const phoneErrorMsgElem =
           phoneNumberForm.querySelector(".errorMessage");
+
+        phoneErrorMsgElem.style.display = "block";
         phoneErrorMsgElem.innerHTML = "Please enter a valid phone number.";
 
         customerPhone.addEventListener("input", () => {
           phoneErrorMsgElem.innerHTML = "";
+          phoneErrorMsgElem.style.display = "none";
         });
       }
     }
@@ -508,6 +512,47 @@ orderList.map((productDetail, index) => {
   </div>
 `;
 });
+
+function verifyCouponCode() {
+  const couponCodeElem = orderSummaryForm.querySelector("#couponCode");
+  const couponCodeInput = couponCodeElem.querySelector("#couponCodeInput");
+  const couponCodeBtn = couponCodeElem.querySelector("#couponCodeBtn");
+  const couponCodeError = couponCodeElem.querySelector(".errorMessage");
+
+  const couponCode = couponCodeInput.value;
+
+  // verify coupon code on server side, and get true/false in response.
+  couponCodeVerified = true;
+  if (couponCodeVerified === true) {
+    const appliedCouponElem = orderSummaryForm.querySelector("#appliedCoupon");
+    const appliedCouponDetails = orderSummaryForm.querySelector(
+      "#appliedCouponDetails"
+    );
+
+    // couponCodeInput.disabled = true;
+    // couponCodeBtn.disabled = true;
+
+    couponCodeBtn.innerHTML = "Applied!";
+
+    // get discount from response.
+    discount = 50
+
+    appliedCouponElem.style.display = "flex";
+    appliedCouponDetails.innerHTML = `
+      ${couponCode} <span style="float: right;">-₹${discount}</span>
+      `;
+
+    // set new values for subtotal
+  } else {
+    couponCodeError.style.display = "block";
+    couponCodeError.innerHTML = "Invalid Coupon Code!";
+
+    couponCodeInput.addEventListener("input", () => {
+      couponCodeError.innerHTML = "";
+      couponCodeError.style.display = "none";
+    });
+  }
+}
 
 // localStorage.removeItem("orderList");
 
