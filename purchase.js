@@ -3,8 +3,9 @@ orderObj = localStorage.getItem("customerData")
   ? JSON.parse(localStorage.getItem("customerData"))
   : {};
 
-const UUID =
-  Object.keys(orderObj).length !== 0 ? orderObj.Result.Order.UUID : null;
+console.log(orderObj);
+
+const UUID = Object.keys(orderObj).length !== 0 ? orderObj.UUID : null;
 
 if (url.substring(url.lastIndexOf("?") + 4) != UUID) {
   window.location.replace("https://preview.codebell.io/");
