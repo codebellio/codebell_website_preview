@@ -370,6 +370,8 @@ function changePhoneNum() {
   customerPhone.disabled = false;
   getOtpBtn.disabled = false;
 
+  orderObj.UUID = ""
+  localStorage.setItem("customerData", JSON.stringify(orderObj))
   // clearTimeout(tick);
 }
 
