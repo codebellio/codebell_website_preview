@@ -215,7 +215,6 @@ function paymentMehtod(type) {
         });
       }
       if (type === "COD") {
-        localStorage.clear("customerData");
         localStorage.clear("orderList");
 
         const UUID = data.Result.Order.UUID;
