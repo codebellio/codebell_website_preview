@@ -25,8 +25,8 @@ const getOtpBtn = orderSummaryForm.querySelector("#getOtpBtn");
 
 const checkoutBtn = orderSummaryForm.querySelector(".checkout.button");
 
-let orderObj = JSON.parse(sessionStorage.getItem("customerData"))
-  ? JSON.parse(sessionStorage.getItem("customerData"))
+let orderObj = JSON.parse(localStorage.getItem("customerData"))
+  ? JSON.parse(localStorage.getItem("customerData"))
   : {
       Name: "",
       Mobile: "",
@@ -81,7 +81,7 @@ customerAddress.Address !== "" &&
   (setOrderSummaryForm(), shippingDetails());
 
 function setCustomerDeatils() {
-  orderObj = JSON.parse(sessionStorage.getItem("customerData"));
+  orderObj = JSON.parse(localStorage.getItem("customerData"));
 
   customerAddress = {
     Name: orderObj.Name,
@@ -100,15 +100,16 @@ function setCustomerDeatils() {
 function formValidation() {
   const errorMessage = shippingDetailsElem.querySelectorAll(".errorMessage");
 
+  formComplete = true;
   shippingDetailInput.forEach((input, index) => {
     if (input.type == "text") {
-      formComplete = true;
       const inputValue = input.value.trim();
+      console.log(formComplete);
 
       if (!inputValue) {
         errorMessage[index].innerHTML = "Field cannot remain empty!";
         input.addEventListener(
-          "keypress",
+          "input",
           () => (errorMessage[index].innerHTML = "")
         );
         formComplete = false;
@@ -122,7 +123,7 @@ function formValidation() {
 function shippingDetails() {
   formValidation();
 
-  if ((formComplete || orderObj.Address !== "") & (orderList != "")) {
+  if (formComplete & (orderObj.Address !== "") & (orderList != "")) {
     headingTopElem.innerHTML = `Almost <span class="text-transparent">there...</span>`;
     shippingDetailsElem.style.display = "none";
     orderSummaryForm.style.display = "flex";
@@ -132,9 +133,16 @@ function shippingDetails() {
     progressElem[1].classList.add("activeProgress");
   }
 
-  (orderList != "") & (orderObj.OtpCreatedOn > 0)
-    ? (checkoutBtn.style.display = "block")
-    : (checkoutBtn.style.display = "none");
+orderList == "" &&
+  Snackbar.show({
+    pos: "top-right",
+    showAction: false,
+    text: "Please Add Items to cart",
+  });
+
+  // (orderList != "") & (orderObj.OtpCreatedOn > 0)
+  //   ? (checkoutBtn.style.display = "block")
+  //   : (checkoutBtn.style.display = "none");
 }
 
 function setShippingDetails() {
@@ -142,7 +150,6 @@ function setShippingDetails() {
   const data = new FormData(shippingDetailsElem);
 
   for (const entry of data) {
-    console.log(entry);
     addressType = `${entry[1]}`;
   }
 
@@ -154,7 +161,7 @@ function setShippingDetails() {
   orderObj.AddressType = addressType;
   orderObj.Country = shippingDetailsSelect.value;
 
-  sessionStorage.setItem("customerData", JSON.stringify(orderObj));
+  localStorage.setItem("customerData", JSON.stringify(orderObj));
   console.log(orderObj);
 
   setCustomerDeatils();
@@ -198,7 +205,7 @@ function paymentMehtod(type) {
       console.log("ok");
 
       orderObj = data.Result.Order;
-      sessionStorage.setItem("customerData", JSON.stringify(orderObj));
+      localStorage.setItem("customerData", JSON.stringify(orderObj));
 
       if (type === "onlinePayment") {
         Snackbar.show({
@@ -208,8 +215,8 @@ function paymentMehtod(type) {
         });
       }
       if (type === "COD") {
-        sessionStorage.clear("customerData");
-        sessionStorage.clear("orderList");
+        localStorage.clear("customerData");
+        localStorage.clear("orderList");
 
         const UUID = data.Result.Order.UUID;
         window.location.replace(
@@ -270,8 +277,14 @@ async function fetchData(bool) {
     });
 }
 
+orderObj.Mobile !== "" && getCustomerOtp();
 function getCustomerOtp() {
   if (customerPhone.value.length === 10) {
+    orderObj.Mobile = customerPhone.value;
+    localStorage.setItem("customerData", JSON.stringify(orderObj));
+  }
+
+  if (orderObj.Mobile !== "") {
     phoneNumberForm.style.display = "none";
     otpForm.style.display = "block";
 
@@ -283,70 +296,74 @@ function getCustomerOtp() {
     verifyOtpBtn.style.backgroundColor = "#059862";
     getOtpBtn.style.backgroundColor = "#4a4a4a";
 
-    orderObj.Mobile = customerPhone.value;
     otpLabel.innerHTML = `Phone number - ${orderObj.Mobile}`;
 
     // JSON.stringify(orderObj.Items);
-    sessionStorage.setItem("customerData", JSON.stringify(orderObj));
+    const url = window.location.href;
 
-    fetchData().then((data) => {
-      console.log(data);
+    if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
+      fetchData().then((data) => {
+        console.log(data);
 
-      orderObj["UUID"] = `${data.Result.Order.UUID}`;
-      sessionStorage.setItem("customerData", JSON.stringify(orderObj));
+        orderObj["UUID"] = `${data.Result.Order.UUID}`;
+        localStorage.setItem("customerData", JSON.stringify(orderObj));
 
-      const UUID = orderObj.UUID;
-      history.pushState(
-        {},
-        "Codebell",
-        `https://preview.codebell.io/purchase?id=${UUID}`
-      );
+        const UUID = orderObj.UUID;
+        history.pushState(
+          {},
+          "Codebell",
+          `https://preview.codebell.io/purchase?id=${UUID}`
+        );
 
-      Snackbar.show({
-        pos: "top-right",
-        showAction: false,
-        text: data.Message,
-      });
+        Snackbar.show({
+          pos: "top-right",
+          showAction: false,
+          text: data.Message,
+        });
 
-      function countdown(minutes) {
-        var seconds = 60;
-        var mins = minutes;
-        function tick() {
-          //This script expects an element with an ID = "counter". You can change that to what ever you want.
-          var current_minutes = mins - 1;
-          seconds--;
-          coolDownTimerElem.innerHTML =
-            current_minutes.toString() +
-            ":" +
-            (seconds < 10 ? "0" : "") +
-            String(seconds);
-          if (seconds > 0) {
-            setTimeout(tick, 1000);
-          } else {
-            if (mins > 1) {
-              countdown(mins - 1);
+        function countdown(minutes) {
+          var seconds = 60;
+          var mins = minutes;
+          function tick() {
+            //This script expects an element with an ID = "counter". You can change that to what ever you want.
+            var current_minutes = mins - 1;
+            seconds--;
+            coolDownTimerElem.innerHTML =
+              current_minutes.toString() +
+              ":" +
+              (seconds < 10 ? "0" : "") +
+              String(seconds);
+            if (seconds > 0) {
+              setTimeout(tick, 1000);
+            } else {
+              if (mins > 1) {
+                countdown(mins - 1);
+              }
+            }
+            if ((mins - 1 == 0) & (seconds == 0)) {
+              resendOtpElem.style.color = "#2F8AB2";
+              resendOtpElem.style.pointerEvents = "all";
+              // customerPhone.disabled = false;
+              // getOtpBtn.disabled = false;
             }
           }
-          if ((mins - 1 == 0) & (seconds == 0)) {
-            resendOtpElem.style.color = "#2F8AB2";
-            resendOtpElem.style.pointerEvents = "all";
-            // customerPhone.disabled = false;
-            // getOtpBtn.disabled = false;
-          }
+          tick();
         }
-        tick();
-      }
-      countdown(5);
-    });
-  }
+        countdown(5);
+      });
 
-  if (customerPhone.value.length < 10) {
-    Snackbar.show({
-      actionTextColor: "#ef4444",
-      pos: "top-right",
-      // showAction: false,
-      text: "Please check your phone number!",
-    });
+      if (customerPhone.value.length < 10) {
+        const phoneErrorMsgElem =
+          phoneNumberForm.querySelector(".errorMessage");
+        phoneErrorMsgElem.innerHTML = "Please enter a valid phone number.";
+
+        console.log(customerPhone);
+
+        customerPhone.addEventListener("input", () => {
+          phoneErrorMsgElem.innerHTML = "";
+        });
+      }
+    }
   }
 }
 
@@ -362,6 +379,7 @@ function verifyCustomerOtp() {
     console.log(data);
 
     if (data.Result.Order.MobileVerified === true) {
+      orderObj["OTP"] = ""
       // Snackbar.show({
       //   backgroundColor: "#047857",
       //   pos: "top-right",
@@ -412,7 +430,59 @@ finalAmountElem.innerHTML = `₹${finalAmount}`;
 
 const orderContainerElem = orderSummaryForm.querySelector(".orderContainer");
 
-orderList.map((productDetail) => {
+function incItemCount(productIndex) {
+  if (localStorage.getItem("orderList")) {
+    orderList[productIndex].Count += 1;
+
+    const itemCount = orderSummaryForm.querySelector("#itemCount");
+
+    itemCount.innerHTML = orderList[productIndex].Count + " " + "unit";
+
+    let totalCount = 0;
+    orderList.map((orders) => {
+      totalCount += orders.Count;
+    });
+
+    const productCount = JSON.parse(
+      localStorage.getItem("orderList")
+    ).totalCount;
+
+    document.querySelector("#productCount").innerHTML = productCount;
+
+    localStorage.setItem(
+      "orderList",
+      JSON.stringify({ orderList, totalCount })
+    );
+  }
+}
+
+function decItemCount(productIndex) {
+  if (localStorage.getItem("orderList")) {
+    orderList[productIndex].Count -= 1;
+
+    const itemCount = orderSummaryForm.querySelector("#itemCount");
+
+    itemCount.innerHTML = orderList[productIndex].Count + " " + "unit";
+
+    let totalCount = 0;
+    orderList.map((orders) => {
+      totalCount += orders.Count;
+    });
+
+    const productCount = JSON.parse(
+      localStorage.getItem("orderList")
+    ).totalCount;
+
+    document.querySelector("#productCount").innerHTML = productCount;
+
+    localStorage.setItem(
+      "orderList",
+      JSON.stringify({ orderList, totalCount })
+    );
+  }
+}
+
+orderList.map((productDetail, index) => {
   orderContainerElem.innerHTML += `
   <div style="display: flex; align-items: center; gap: 1.5em; margin: 2em 0;">
       <div style="min-width: 138px; width: 138px; height: 138px;">
@@ -421,8 +491,23 @@ orderList.map((productDetail) => {
   
       <div>
           <h6>${productDetail.Title}</h6>
-          <p>${productDetail.Count} unit</p>
+
+          <div style="display: flex; margin-top: 1em; align-items: center; gap: 0.5em">
+
+            <button type="button" onclick="decItemCount(${index})" style="background: transparent">
+              <img src="./assets/img/remove.png" alt="" style="width: 28px; height: 28px;">
+            </button>
+
+            <p id="itemCount">${productDetail.Count} unit</p>
+
+            <button type="button" onclick="incItemCount(${index})" style="background: transparent">
+              <img src="./assets/img/add.png" alt="" style="width: 24px; height: 24px;">
+            </button>
+
+        </div>
       </div>
   </div>
 `;
 });
+
+// localStorage.clear("customerData")

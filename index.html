@@ -456,7 +456,7 @@
     <script src="./new_assets/app.js" type="text/javascript"></script>
 
     <script>
-        const productCount = JSON.parse(localStorage.getItem("orderList")).totalCount
+        const productCount = localStorage.getItem("orderList") ? JSON.parse(localStorage.getItem("orderList")).totalCount : 0
 
         document.querySelector("#productCount").innerHTML = productCount;
     </script>

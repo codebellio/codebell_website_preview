@@ -316,7 +316,7 @@
                         </div>
                     </div>
 
-                    <button onclick="shippingDetails(), setShippingDetails()" type="submit"
+                    <button onclick="setShippingDetails(), shippingDetails()" type="submit"
                         class="button w-inline-block" style="width: max-content;">
                         <div class="text-button white" style="padding: 0 1em;">Continue</div>
                     </button>
@@ -350,6 +350,7 @@
                                     <input id="phoneNumber" type="tel"
                                         style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
                                         placeholder="xxxxx-xxxxx">
+                                    <p class="errorMessage"></p>
 
                                     <div style="color: white; width: 100%; height: 4em;">
                                         <button id="getOtpBtn" type="button" class="button"
@@ -430,9 +431,6 @@
                 </div>
             </div>
 
-
-
-
             <div data-w-id="c053d444-8ab2-b840-959e-829994c34843" style="opacity: 1;" class="gradient-top-b">
                 <div class="noise"></div>
             </div>
@@ -485,11 +483,11 @@
 
         <script type="text/javascript" src="order.js"></script>
 
-            <script>
-                const productCount = JSON.parse(localStorage.getItem("orderList")).totalCount
+        <script>
+            const productCount = localStorage.getItem("orderList") ? JSON.parse(localStorage.getItem("orderList")).totalCount : 0
 
-                document.querySelector("#productCount").innerHTML = productCount;
-            </script>
+            document.querySelector("#productCount").innerHTML = productCount;
+        </script>
     </body>
 
 </html>

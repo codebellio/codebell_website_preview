@@ -332,7 +332,7 @@
     <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 
     <script>
-        const productCount = JSON.parse(localStorage.getItem("orderList")).totalCount
+        const productCount = localStorage.getItem("orderList") ? JSON.parse(localStorage.getItem("orderList")).totalCount : 0
 
         document.querySelector("#productCount").innerHTML = productCount;
     </script>

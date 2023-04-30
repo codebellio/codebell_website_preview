@@ -290,7 +290,7 @@
 
         <script>
             function setProductCount(params) {
-                const productCount = JSON.parse(localStorage.getItem("orderList")).totalCount
+                const productCount = localStorage.getItem("orderList") ? JSON.parse(localStorage.getItem("orderList")).totalCount : 0
 
                 document.querySelector("#productCount").innerHTML = productCount;
             }; setProductCount();
