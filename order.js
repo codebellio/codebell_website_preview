@@ -133,12 +133,12 @@ function shippingDetails() {
     progressElem[1].classList.add("activeProgress");
   }
 
-orderList == "" &&
-  Snackbar.show({
-    pos: "top-right",
-    showAction: false,
-    text: "Please Add Items to cart",
-  });
+  orderList == "" &&
+    Snackbar.show({
+      pos: "top-right",
+      showAction: false,
+      text: "Please Add Items to cart",
+    });
 
   // (orderList != "") & (orderObj.OtpCreatedOn > 0)
   //   ? (checkoutBtn.style.display = "block")
@@ -379,7 +379,7 @@ function verifyCustomerOtp() {
     console.log(data);
 
     if (data.Result.Order.MobileVerified === true) {
-      orderObj["OTP"] = ""
+      orderObj["OTP"] = "";
       // Snackbar.show({
       //   backgroundColor: "#047857",
       //   pos: "top-right",
@@ -434,7 +434,9 @@ function incItemCount(productIndex) {
   if (localStorage.getItem("orderList")) {
     orderList[productIndex].Count += 1;
 
-    const itemCount = orderSummaryForm.querySelector("#itemCount");
+    const itemCount = orderSummaryForm.querySelector(
+      `#itemCount-${productIndex}`
+    );
 
     itemCount.innerHTML = orderList[productIndex].Count + " " + "unit";
 
@@ -460,7 +462,9 @@ function decItemCount(productIndex) {
   if (localStorage.getItem("orderList")) {
     orderList[productIndex].Count -= 1;
 
-    const itemCount = orderSummaryForm.querySelector("#itemCount");
+    const itemCount = orderSummaryForm.querySelector(
+      `#itemCount-${productIndex}`
+    );
 
     itemCount.innerHTML = orderList[productIndex].Count + " " + "unit";
 
@@ -498,7 +502,7 @@ orderList.map((productDetail, index) => {
               <img src="./assets/img/remove.png" alt="" style="width: 28px; height: 28px;">
             </button>
 
-            <p id="itemCount">${productDetail.Count} unit</p>
+            <p id="itemCount-${index}">${productDetail.Count} unit</p>
 
             <button type="button" onclick="incItemCount(${index})" style="background: transparent">
               <img src="./assets/img/add.png" alt="" style="width: 24px; height: 24px;">
