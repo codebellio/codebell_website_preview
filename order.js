@@ -202,8 +202,6 @@ function paymentMehtod(type) {
       (data.Result.Order.MobileVerified === true) &
       (data.Result.Order.TotalVerified === true)
     ) {
-      console.log("ok");
-
       orderObj = data.Result.Order;
       localStorage.setItem("customerData", JSON.stringify(orderObj));
 
@@ -215,7 +213,7 @@ function paymentMehtod(type) {
         });
       }
       if (type === "COD") {
-        localStorage.clear("orderList");
+        localStorage.removeItem("orderList");
 
         const UUID = data.Result.Order.UUID;
         window.location.replace(
@@ -370,8 +368,8 @@ function changePhoneNum() {
   customerPhone.disabled = false;
   getOtpBtn.disabled = false;
 
-  orderObj.UUID = ""
-  localStorage.setItem("customerData", JSON.stringify(orderObj))
+  orderObj.UUID = "";
+  localStorage.setItem("customerData", JSON.stringify(orderObj));
   // clearTimeout(tick);
 }
 
@@ -533,5 +531,7 @@ orderList.map((productDetail, index) => {
   </div>
 `;
 });
+
+// localStorage.removeItem("orderList");
 
 // localStorage.clear("customerData")
