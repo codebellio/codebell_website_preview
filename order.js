@@ -371,7 +371,7 @@ function changePhoneNum() {
   customerPhone.disabled = false;
   getOtpBtn.disabled = false;
 
-  clearTimeout(tick);
+  // clearTimeout(tick);
 }
 
 function verifyCustomerOtp() {
@@ -395,7 +395,7 @@ function verifyCustomerOtp() {
       // });
 
       customerOtp.remove();
-      clearTimeout(tick);
+      // clearTimeout(tick);
       coolDownElem.remove();
       verifyOtpBtn.innerHTML = "Verified ✅";
 
