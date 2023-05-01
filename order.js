@@ -171,7 +171,7 @@ function setOrderSummaryForm() {
 }
 
 async function getCouponDetails(couponCode) {
-  const couponObj = { coupon_code: couponCode ? couponCode : "" };
+  couponObj = { coupon_code: couponCode ? couponCode : "" };
 
   var api = "https://api.codebell.io/api/coupon";
   return await fetch(api, {
@@ -194,7 +194,7 @@ async function validateCheckout() {
   const products = {
     UUID: orderObj.UUID,
     products: orderList,
-    coupon_code: couponCode,
+    coupon_code: couponObj.coupon_code,
   };
 
   var api = "https://api.codebell.io/api/checkout";
