@@ -23,6 +23,11 @@ const customerOtp = orderSummaryForm.querySelector("#customerOtp");
 const verifyOtpBtn = orderSummaryForm.querySelector("#verifyOtpBtn");
 const getOtpBtn = orderSummaryForm.querySelector("#getOtpBtn");
 
+const couponCodeElem = orderSummaryForm.querySelector("#couponCode");
+const couponCodeInput = couponCodeElem.querySelector("#couponCodeInput");
+const couponCodeBtn = couponCodeElem.querySelector("#couponCodeBtn");
+const couponCodeError = couponCodeElem.querySelector(".errorMessage");
+
 const checkoutBtn = orderSummaryForm.querySelector(".checkout.button");
 
 let orderObj = JSON.parse(localStorage.getItem("customerData"))
@@ -165,13 +170,53 @@ function setOrderSummaryForm() {
   `;
 }
 
+async function getCouponDetails(couponCode) {
+  const couponObj = { coupon_code: couponCode ? couponCode : "" };
+
+  var api = "https://api.codebell.io/api/coupon";
+  return await fetch(api, {
+    method: "post",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+    body: JSON.stringify(couponObj),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+async function validateCheckout() {
+  const products = {
+    UUID: orderObj.UUID,
+    products: orderList,
+    coupon_code: couponCode,
+  };
+
+  var api = "https://api.codebell.io/api/checkout";
+  return await fetch(api, {
+    method: "post",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+    body: JSON.stringify(products),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 function Checkout() {
-  fetchData().then((data) => {
-    if (
-      (data.Result.Order.MobileVerified === true) &
-      (data.Result.Order.TotalVerified === true) &
-      (orderList != "")
-    ) {
+  validateCheckout().then((data) => {
+    if (data.Status == 2) {
       orderSummaryForm.style.display = "none";
       paymentMethods.style.display = "block";
 
@@ -239,7 +284,6 @@ let resendOtp = false;
 async function fetchData(bool) {
   const record = {
     record: orderObj,
-    items: orderList,
   };
 
   bool && (record["ResendOTP"] = true);
@@ -369,12 +413,6 @@ function verifyCustomerOtp() {
   fetchData().then((data) => {
     if (data.Result.Order.MobileVerified === true) {
       orderObj["OTP"] = "";
-      // Snackbar.show({
-      //   backgroundColor: "#047857",
-      //   pos: "top-right",
-      //   showAction: false,
-      //   text: data.Message,
-      // });
 
       customerOtp.remove();
       // clearTimeout(tick);
@@ -513,46 +551,61 @@ orderList.map((productDetail, index) => {
 `;
 });
 
-function verifyCouponCode() {
-  const couponCodeElem = orderSummaryForm.querySelector("#couponCode");
-  const couponCodeInput = couponCodeElem.querySelector("#couponCodeInput");
-  const couponCodeBtn = couponCodeElem.querySelector("#couponCodeBtn");
-  const couponCodeError = couponCodeElem.querySelector(".errorMessage");
+function verifyCouponCode(elem) {
+  const couponCode = elem && couponCodeInput.value;
 
-  const couponCode = couponCodeInput.value;
+  getCouponDetails(couponCode).then((data) => {
+    if (data.Status === 2) {
+      data.Result.Coupon.PreApply &&
+        (couponCodeInput.value = data.Result.Coupon.Code);
 
-  // verify coupon code on server side, and get true/false in response.
-  couponCodeVerified = true;
-  if (couponCodeVerified === true) {
-    const appliedCouponElem = orderSummaryForm.querySelector("#appliedCoupon");
-    const appliedCouponDetails = orderSummaryForm.querySelector(
-      "#appliedCouponDetails"
-    );
+      const appliedCouponElem =
+        orderSummaryForm.querySelector("#appliedCoupon");
+      const appliedCouponDetails = orderSummaryForm.querySelector(
+        "#appliedCouponDetails"
+      );
 
-    // couponCodeInput.disabled = true;
-    // couponCodeBtn.disabled = true;
+      couponCodeBtn.innerHTML = "Applied!";
 
-    couponCodeBtn.innerHTML = "Applied!";
+      // get discount from response.
+      discountType = data.Result.Coupon.Type;
 
-    // get discount from response.
-    discount = 50
+      couponCodeError.style.display = "block";
+      couponCodeError.innerHTML =
+        discountType == "Percentage"
+          ? `Hurray!! You got flat ${data.Result.Coupon.Value}% off`
+          : `Hurray!! You got flat ₹${data.Result.Coupon.Value} off`;
 
-    appliedCouponElem.style.display = "flex";
-    appliedCouponDetails.innerHTML = `
-      ${couponCode} <span style="float: right;">-₹${discount}</span>
+      couponCodeError.style.display = "block";
+      couponCodeError.style.color = "#15803d";
+
+      const subTotal = orderObj.Subtotal;
+
+      discountAmm =
+        discountType == "Percentage"
+          ? `-₹${subTotal * (data.Result.Coupon.Value / 100)}`
+          : `-₹${data.Result.Coupon.Value}`;
+
+      appliedCouponElem.style.display = "flex";
+      appliedCouponDetails.innerHTML = `
+      ${couponCode} <span style="float: right;">${discountAmm}</span>
       `;
 
-    // set new values for subtotal
-  } else {
-    couponCodeError.style.display = "block";
-    couponCodeError.innerHTML = "Invalid Coupon Code!";
+      // set new values for subtotal
+    } else {
+      if (elem) {
+        couponCodeError.style.display = "block";
+        couponCodeError.innerHTML = "Invalid Coupon Code!";
 
-    couponCodeInput.addEventListener("input", () => {
-      couponCodeError.innerHTML = "";
-      couponCodeError.style.display = "none";
-    });
-  }
+        couponCodeInput.addEventListener("input", () => {
+          couponCodeError.innerHTML = "";
+          couponCodeError.style.display = "none";
+        });
+      }
+    }
+  });
 }
+verifyCouponCode();
 
 // localStorage.removeItem("orderList");
 

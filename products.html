@@ -26,6 +26,10 @@
         }(window, document);
     </script>
 
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/node-snackbar@latest/src/js/snackbar.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/node-snackbar@latest/dist/snackbar.min.css" />
     <script src="/assets/js/helper.js"></script>
 
     <style>
@@ -123,122 +127,126 @@
         </div>
 
 
-        <div class="section wf-section">
-            <div class="content">
-                <div class="w-layout-grid grid-focus-left">
-                    <div class="focus-separate">
-                        <div class="block-heading">
-                            <h2 class="heading">Codebell with proximity light</span></h2>
-                            <div class="subtitle">
-                                <div class="text-subtitle">₹200</div>
+
+        <div id="productWrapper">
+            <!-- <div class="section wf-section">
+                <div class="content">
+                    <div class="w-layout-grid grid-focus-left">
+                        <div class="focus-separate">
+                            <div class="block-heading">
+                                <h2 class="heading">Codebell with proximity light</span></h2>
+                                <div class="subtitle">
+                                    <div class="text-subtitle">₹200</div>
+                                </div>
+                            </div>
+                            <p class="paragraph">In dark if some one come nearby proximity sensor will light the
+                                codebell so
+                                visitor can find it easily</p>
+                            <div style="display: flex; gap: 1em; color: white;">
+                                <a href="/order"> <button onclick="order(1)" class="button"> Order Now </button></a>
+
+                                <button onclick="order(1), setProductCount()" class="button w-inline-block"
+                                    style="width: max-content; margin: auto 0 0 auto; background-color: transparent; border: 2px solid #161613;">
+                                    <div class="text-button" style="color:#161613;">Add to Cart</div>
+                                </button>
                             </div>
                         </div>
-                        <p class="paragraph">In dark if some one come nearby proximity sensor will light the codebell so
-                            visitor can find it easily</p>
-                        <div style="display: flex; gap: 1em; color: white;">
-                            <a href="/order"> <button onclick="order(1)" class="button"> Order Now </button></a>
-
-                            <button onclick="order(1), setProductCount()" class="button w-inline-block"
-                                style="width: max-content; margin: auto 0 0 auto; background-color: transparent; border: 2px solid #161613;">
-                                <div class="text-button" style="color:#161613;">Add to Cart</div>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="app-focus-separate no_sm_mt">
-                        <div class="app-focus---wrapper">
-                            <div class="app-focus---content"
-                                style="will-change: transform; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(23deg) rotateY(-23deg) rotateZ(23deg) skew(0deg, 0deg); transform-style: preserve-3d;">
-                                <div class="app-focus---shadow"></div>
-                                <div class="app-focus---image"><img
-                                        src="https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct3.png"
-                                        loading="eager"
-                                        sizes="(max-width: 479px) 40vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                        srcset="https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct3.png 500w, https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct3.png 504w"
-                                        alt="" class="image-app---focus-1">
+                        <div class="app-focus-separate no_sm_mt">
+                            <div class="app-focus---wrapper">
+                                <div class="app-focus---content"
+                                    style="will-change: transform; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(23deg) rotateY(-23deg) rotateZ(23deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                                    <div class="app-focus---shadow"></div>
+                                    <div class="app-focus---image"><img
+                                            src="https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct3.png"
+                                            loading="eager"
+                                            sizes="(max-width: 479px) 40vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
+                                            srcset="https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct3.png 500w, https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct3.png 504w"
+                                            alt="" class="image-app---focus-1">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div> -->
 
-        <div class="section wf-section">
-            <div class="content">
-                <div class="w-layout-grid grid-focus-left">
-                    <div class="focus-separate">
-                        <div class="block-heading">
-                            <h2 class="heading">Car</span></h2>
-                            <div class="subtitle">
-                                <div class="text-subtitle">₹350</div>
+            <!-- <div class="section wf-section">
+                <div class="content">
+                    <div class="w-layout-grid grid-focus-left">
+                        <div class="focus-separate">
+                            <div class="block-heading">
+                                <h2 class="heading">Car</span></h2>
+                                <div class="subtitle">
+                                    <div class="text-subtitle">₹350</div>
+                                </div>
+                            </div>
+                            <p class="paragraph">Car codebell</p>
+                            <div style="display: flex; gap: 1em; color: white;">
+                                <a href="order"><button class="button" onclick="order(2)"> Order Now </button></a>
+
+                                <button onclick="order(2), setProductCount()" class="button w-inline-block"
+                                    style="width: max-content; margin: auto 0 0 auto; background-color: transparent; border: 2px solid #161613;">
+                                    <div class="text-button" style="color:#161613;">Add to Cart</div>
+                                </button>
                             </div>
                         </div>
-                        <p class="paragraph">Car codebell</p>
-                        <div style="display: flex; gap: 1em; color: white;">
-                            <a href="order"><button class="button" onclick="order(2)"> Order Now </button></a>
-
-                            <button onclick="order(2), setProductCount()" class="button w-inline-block"
-                                style="width: max-content; margin: auto 0 0 auto; background-color: transparent; border: 2px solid #161613;">
-                                <div class="text-button" style="color:#161613;">Add to Cart</div>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="app-focus-separate no_sm_mt">
-                        <div class="app-focus---wrapper">
-                            <div class="app-focus---content"
-                                style="will-change: transform; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(23deg) rotateY(-23deg) rotateZ(23deg) skew(0deg, 0deg); transform-style: preserve-3d;">
-                                <div class="app-focus---shadow"></div>
-                                <div class="app-focus---image"><img
-                                        src="https://s3.ap-south-1.amazonaws.com/device.localhost/products/product5.png"
-                                        loading="eager"
-                                        sizes="(max-width: 479px) 40vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                        srcset="https://s3.ap-south-1.amazonaws.com/device.localhost/products/product5.png 500w, https://s3.ap-south-1.amazonaws.com/device.localhost/products/product5.png 504w"
-                                        alt="" class="image-app---focus-1">
+                        <div class="app-focus-separate no_sm_mt">
+                            <div class="app-focus---wrapper">
+                                <div class="app-focus---content"
+                                    style="will-change: transform; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(23deg) rotateY(-23deg) rotateZ(23deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                                    <div class="app-focus---shadow"></div>
+                                    <div class="app-focus---image"><img
+                                            src="https://s3.ap-south-1.amazonaws.com/device.localhost/products/product5.png"
+                                            loading="eager"
+                                            sizes="(max-width: 479px) 40vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
+                                            srcset="https://s3.ap-south-1.amazonaws.com/device.localhost/products/product5.png 500w, https://s3.ap-south-1.amazonaws.com/device.localhost/products/product5.png 504w"
+                                            alt="" class="image-app---focus-1">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div> -->
 
-        <div class="section wf-section">
-            <div class="content">
-                <div class="w-layout-grid grid-focus-left">
-                    <div class="focus-separate">
-                        <div class="block-heading">
-                            <h2 class="heading">Free Codebell</span></h2>
-                            <div class="subtitle">
-                                <div class="text-subtitle">₹15</div>
+            <!-- <div class="section wf-section">
+                <div class="content">
+                    <div class="w-layout-grid grid-focus-left">
+                        <div class="focus-separate">
+                            <div class="block-heading">
+                                <h2 class="heading">Free Codebell</span></h2>
+                                <div class="subtitle">
+                                    <div class="text-subtitle">₹15</div>
+                                </div>
+                            </div>
+                            <p class="paragraph">New Product 1</p>
+                            <div style="display: flex; gap: 1em; color: white;">
+                                <a href="order"><button class="button" onclick="order(3)"> Order Now </button></a>
+
+                                <button onclick="order(3), setProductCount()" class="button w-inline-block"
+                                    style="width: max-content; margin: auto 0 0 auto; background-color: transparent; border: 2px solid #161613;">
+                                    <div class="text-button" style="color:#161613;">Add to Cart</div>
+                                </button>
                             </div>
                         </div>
-                        <p class="paragraph">New Product 1</p>
-                        <div style="display: flex; gap: 1em; color: white;">
-                            <a href="order"><button class="button" onclick="order(3)"> Order Now </button></a>
-
-                            <button onclick="order(3), setProductCount()" class="button w-inline-block"
-                                style="width: max-content; margin: auto 0 0 auto; background-color: transparent; border: 2px solid #161613;">
-                                <div class="text-button" style="color:#161613;">Add to Cart</div>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="app-focus-separate no_sm_mt">
-                        <div class="app-focus---wrapper">
-                            <div class="app-focus---content"
-                                style="will-change: transform; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(23deg) rotateY(-23deg) rotateZ(23deg) skew(0deg, 0deg); transform-style: preserve-3d;">
-                                <div class="app-focus---shadow"></div>
-                                <div class="app-focus---image"><img
-                                        src="https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct1.png"
-                                        loading="eager"
-                                        sizes="(max-width: 479px) 40vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                        srcset="https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct1.png 500w, https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct1.png 504w"
-                                        alt="" class="image-app---focus-1">
+                        <div class="app-focus-separate no_sm_mt">
+                            <div class="app-focus---wrapper">
+                                <div class="app-focus---content"
+                                    style="will-change: transform; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(23deg) rotateY(-23deg) rotateZ(23deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                                    <div class="app-focus---shadow"></div>
+                                    <div class="app-focus---image"><img
+                                            src="https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct1.png"
+                                            loading="eager"
+                                            sizes="(max-width: 479px) 40vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
+                                            srcset="https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct1.png 500w, https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct1.png 504w"
+                                            alt="" class="image-app---focus-1">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
 
