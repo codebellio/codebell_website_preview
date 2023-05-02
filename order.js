@@ -462,7 +462,6 @@ function findTotal(discountAmm) {
   const finalAmountElem = orderSummaryForm.querySelector(".finalAmount span");
   finalAmountElem.innerHTML = `₹${finalAmount}`;
 }
-findTotal();
 
 const orderContainerElem = orderSummaryForm.querySelector(".orderContainer");
 
@@ -563,58 +562,71 @@ orderList.map((productDetail, index) => {
 function verifyCouponCode(elem) {
   const couponCodeVal = elem && couponCodeInput.value;
 
-  getCouponDetails(couponCodeVal).then((data) => {
-    if (data.Status === 2) {
-      data.Result.Coupon.PreApply &&
-        (couponCodeInput.value = data.Result.Coupon.Code);
+  if (couponCodeVal == "") {
+    couponCodeError.style.display = "block";
+    couponCodeError.style.color = "#ff5c5c";
+    couponCodeError.innerHTML = "Please enter a coupon code!";
 
-      couponCodeBtn.innerHTML = "Applied!";
+    couponCodeInput.addEventListener("input", () => {
+      couponCodeError.innerHTML = "";
+      couponCodeError.style.display = "none";
+    });
+  } else {
+    getCouponDetails(couponCodeVal).then((data) => {
+      if (data.Status === 2) {
+        data.Result.Coupon.PreApply &&
+          (couponCodeInput.value = data.Result.Coupon.Code);
 
-      // get discount from response.
-      const discountType = data.Result.Coupon.Type;
+        couponCodeBtn.innerHTML = "Applied!";
 
-      couponCodeError.style.display = "block";
-      couponCodeError.innerHTML =
-        discountType == "Percentage"
-          ? `Hurray!! You got flat ${data.Result.Coupon.Value}% off`
-          : `Hurray!! You got flat ₹${data.Result.Coupon.Value} off`;
+        // get discount from response.
+        const discountType = data.Result.Coupon.Type;
 
-      couponCodeError.style.display = "block";
-      couponCodeError.style.color = "#15803d";
+        couponCodeError.style.display = "block";
+        couponCodeError.innerHTML =
+          discountType == "Percentage"
+            ? `Hurray!! You got flat ${data.Result.Coupon.Value}% off`
+            : `Hurray!! You got flat ₹${data.Result.Coupon.Value} off`;
 
-      const subTotal = orderObj.Subtotal;
+        couponCodeError.style.display = "block";
+        couponCodeError.style.color = "#15803d";
 
-      discountAmm =
-        discountType == "Percentage"
-          ? subTotal * (data.Result.Coupon.Value / 100)
-          : data.Result.Coupon.Value;
+        const subTotal = orderObj.Subtotal;
 
-      findTotal(discountAmm);
+        discountAmm =
+          discountType == "Percentage"
+            ? subTotal * (data.Result.Coupon.Value / 100)
+            : data.Result.Coupon.Value;
 
-      appliedCouponElem.style.display = "flex";
-      appliedCouponDetails.innerHTML = `
+        findTotal(discountAmm);
+
+        appliedCouponElem.style.display = "flex";
+        appliedCouponDetails.innerHTML = `
       ${data.Result.Coupon.Code} <span style="float: right;">-₹${discountAmm}</span>
       `;
 
-      // set new values for subtotal
-    } else {
-      if (elem) {
+        // set new values for subtotal
+      } else {
         findTotal();
 
-        couponCodeError.style.display = "block";
-        couponCodeError.style.color = "#ff5c5c";
-        couponCodeError.innerHTML = "Invalid Coupon Code!";
+        if (elem) {
+          findTotal();
 
-        appliedCouponElem.style.display = "none";
-        appliedCouponDetails.innerHTML = "";
+          couponCodeError.style.display = "block";
+          couponCodeError.style.color = "#ff5c5c";
+          couponCodeError.innerHTML = "Invalid Coupon Code!";
 
-        couponCodeInput.addEventListener("input", () => {
-          couponCodeError.innerHTML = "";
-          couponCodeError.style.display = "none";
-        });
+          appliedCouponElem.style.display = "none";
+          appliedCouponDetails.innerHTML = "";
+
+          couponCodeInput.addEventListener("input", () => {
+            couponCodeError.innerHTML = "";
+            couponCodeError.style.display = "none";
+          });
+        }
       }
-    }
-  });
+    });
+  }
 }
 verifyCouponCode();
 

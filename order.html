@@ -395,7 +395,7 @@
                             <div class="" style="display: flex; gap: 0.5em;">
                                 <input id="couponCodeInput" type="text"
                                     style="padding: 1em; width: 70%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
-                                    placeholder="Enter your Coupon Code">
+                                    placeholder="Enter your Coupon Code" required>
 
                                 <div style="color: white; width: 30%; height: 4em;">
                                     <button id="couponCodeBtn" type="button" class="button"
@@ -403,7 +403,6 @@
                                         onclick="verifyCouponCode(this)">
                                         Apply
                                     </button>
-
                                 </div>
                             </div>
                             <p class="errorMessage" style="display: none; margin-top: 1em;"></p>
@@ -429,7 +428,8 @@
                                 <b id="appliedCoupon" style="display: none; align-items: center; gap: 0.5em;">
                                     <img src="./assets/img/coupon.png" style="height: 20px; width: 20px;" alt="">
 
-                                    <p id="appliedCouponDetails" style="width: 100%; height: 20px; align-items: center;"></p>
+                                    <p id="appliedCouponDetails"
+                                        style="width: 100%; height: 20px; align-items: center;"></p>
                                 </b>
                             </div>
                         </div>
