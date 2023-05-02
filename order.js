@@ -202,6 +202,8 @@ async function validateCheckout(couponCode) {
     coupon_code: couponCode ? couponCode : "",
   };
 
+  console.log(products);
+
   var api = "https://api.codebell.io/api/checkout";
   return await fetch(api, {
     method: "post",
@@ -212,6 +214,7 @@ async function validateCheckout(couponCode) {
   })
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       return data;
     })
     .catch((error) => {
@@ -343,7 +346,6 @@ function getCustomerOtp() {
     otpLabel.innerHTML = `
     Phone number - ${orderObj.Mobile} <button type="button" onclick="changePhoneNum()" style="background-color: transparent; width: max-content; border-radius: 1em; color: #2F8AB2;">Change</button>`;
 
-    // JSON.stringify(orderObj.Items);
     const url = window.location.href;
 
     if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
@@ -405,6 +407,8 @@ function getCustomerOtp() {
           phoneErrorMsgElem.style.display = "none";
         });
       }
+    } else {
+      verifyCustomerOtp();
     }
   }
 }
@@ -419,11 +423,9 @@ function changePhoneNum() {
 
   orderObj.UUID = "";
   localStorage.setItem("customerData", JSON.stringify(orderObj));
-  // clearTimeout(tick);
 }
 
 function verifyCustomerOtp() {
-  // otp verification code goes here.
   verifyOtpBtn.disabled = true;
   customerOtp.disabled = true;
 
