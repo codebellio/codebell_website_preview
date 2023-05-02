@@ -224,7 +224,7 @@ function Checkout() {
         "linear-gradient(to right, #2F8AB2 0%, #2F8AB2 100%)";
       progressElem[2].classList.add("activeProgress");
 
-      localStorage.removeItem("orderList")
+      localStorage.removeItem("orderList");
     }
   });
 }
@@ -445,9 +445,9 @@ function findTotal(data) {
     return accumulator + parseInt(productDetail.Price * productDetail.Count);
   }, 0);
 
-  
-
-  orderObj.Subtotal = data ? subtotal * (data.Result.Coupon.Value / 100) : subtotal
+  orderObj.Subtotal = data
+    ? subtotal * (data.Result.Coupon.Value / 100)
+    : subtotal;
 
   const subtotalElem = orderSummaryForm.querySelector(".subtotal span");
   subtotalElem.innerHTML = `₹${subtotal}`;
@@ -589,7 +589,7 @@ function verifyCouponCode(elem) {
         discountType == "Percentage"
           ? `-₹${subTotal * (data.Result.Coupon.Value / 100)}`
           : `-₹${data.Result.Coupon.Value}`;
-      
+
       findTotal(data);
 
       appliedCouponElem.style.display = "flex";
@@ -601,6 +601,7 @@ function verifyCouponCode(elem) {
     } else {
       if (elem) {
         couponCodeError.style.display = "block";
+        couponCodeError.style.color = "#ff5c5c";
         couponCodeError.innerHTML = "Invalid Coupon Code!";
 
         couponCodeInput.addEventListener("input", () => {
