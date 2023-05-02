@@ -271,9 +271,7 @@ function paymentMehtod(type) {
         localStorage.removeItem("orderList");
 
         const UUID = data.Result.Order.UUID;
-        window.location.replace(
-          `https://preview.codebell.io/purchase?id=${UUID}`
-        );
+        location.replace(`https://preview.codebell.io/purchase?id=${UUID}`);
       }
     }
   });

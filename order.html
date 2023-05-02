@@ -447,14 +447,14 @@
                 </form>
 
                 <div id="paymentMethods" style="display: none;">
-                    <a onclick="paymentMehtod(`onlinePayment`)" class="checkout button w-inline-block"
-                        style="width: max-content; margin: 0 auto 1em auto;">
+                    <button onclick="paymentMehtod('onlinePayment')" type="button"
+                        class="checkout button w-inline-block" style="width: max-content; margin: 0 auto 1em auto;">
                         <div class="text-button white" style="padding: 0 3em;">Online payment</div>
-                    </a>
-                    <a onclick="paymentMehtod(`COD`)" class="checkout button w-inline-block"
+                    </button>
+                    <button onclick="paymentMehtod('COD')" type="button" class="checkout button w-inline-block"
                         style="width: max-content; margin: 0 auto 1em auto;">
                         <div class="text-button white" style="padding: 0 3em;">Cash on delivery</div>
-                    </a>
+                    </button>
                 </div>
             </div>
 
