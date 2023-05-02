@@ -223,6 +223,8 @@ function Checkout() {
       progressBarElem.style.background =
         "linear-gradient(to right, #2F8AB2 0%, #2F8AB2 100%)";
       progressElem[2].classList.add("activeProgress");
+
+      localStorage.removeItem("orderList")
     }
   });
 }
@@ -336,7 +338,7 @@ function getCustomerOtp() {
         history.pushState(
           {},
           "Codebell",
-          `https://preview.codebell.io/purchase?id=${UUID}`
+          `https://preview.codebell.io/order?id=${UUID}`
         );
 
         Snackbar.show({
