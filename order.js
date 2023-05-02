@@ -445,9 +445,7 @@ function findTotal(data) {
     return accumulator + parseInt(productDetail.Price * productDetail.Count);
   }, 0);
 
-  orderObj.Subtotal = data
-    ? subtotal * (data.Result.Coupon.Value / 100)
-    : subtotal;
+  orderObj.Subtotal = data ? subtotal - data : subtotal;
 
   const subtotalElem = orderSummaryForm.querySelector(".subtotal span");
   subtotalElem.innerHTML = `₹${subtotal}`;
@@ -572,7 +570,7 @@ function verifyCouponCode(elem) {
       couponCodeBtn.innerHTML = "Applied!";
 
       // get discount from response.
-      discountType = data.Result.Coupon.Type;
+      const discountType = data.Result.Coupon.Type;
 
       couponCodeError.style.display = "block";
       couponCodeError.innerHTML =
@@ -585,16 +583,16 @@ function verifyCouponCode(elem) {
 
       const subTotal = orderObj.Subtotal;
 
-      discountAmm =
+      const discountAmm =
         discountType == "Percentage"
-          ? `-₹${subTotal * (data.Result.Coupon.Value / 100)}`
-          : `-₹${data.Result.Coupon.Value}`;
+          ? subTotal * (data.Result.Coupon.Value / 100)
+          : data.Result.Coupon.Value;
 
-      findTotal(data);
+      findTotal(discountAmm);
 
       appliedCouponElem.style.display = "flex";
       appliedCouponDetails.innerHTML = `
-      ${couponCode} <span style="float: right;">${discountAmm}</span>
+      ${couponCode} <span style="float: right;">-₹${discountAmm}</span>
       `;
 
       // set new values for subtotal
