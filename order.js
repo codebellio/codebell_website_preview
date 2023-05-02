@@ -446,7 +446,7 @@ function findTotal(data) {
   }, 0);
 
   console.log(data);
-  
+
   orderObj.Subtotal = subtotal;
 
   const subtotalElem = orderSummaryForm.querySelector(".subtotal span");
@@ -556,9 +556,9 @@ orderList.map((productDetail, index) => {
 });
 
 function verifyCouponCode(elem) {
-  const couponCode = elem && couponCodeInput.value;
+  const couponCodeVal = elem && couponCodeInput.value;
 
-  getCouponDetails(couponCode).then((data) => {
+  getCouponDetails(couponCodeVal).then((data) => {
     if (data.Status === 2) {
       data.Result.Coupon.PreApply &&
         (couponCodeInput.value = data.Result.Coupon.Code);
@@ -594,7 +594,7 @@ function verifyCouponCode(elem) {
 
       appliedCouponElem.style.display = "flex";
       appliedCouponDetails.innerHTML = `
-      ${couponCode} <span style="float: right;">-₹${discountAmm}</span>
+      ${data.Result.Coupon.Code} <span style="float: right;">-₹${discountAmm}</span>
       `;
 
       // set new values for subtotal
