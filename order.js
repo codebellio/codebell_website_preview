@@ -561,6 +561,7 @@ orderList.map((productDetail, index) => {
 
 function verifyCouponCode(elem) {
   const couponCodeVal = elem && couponCodeInput.value;
+  console.log(couponCodeVal);
 
   if (couponCodeVal == "") {
     couponCodeError.style.display = "block";
@@ -593,10 +594,14 @@ function verifyCouponCode(elem) {
 
         const subTotal = orderObj.Subtotal;
 
+        console.log(subTotal);
+
         discountAmm =
           discountType == "Percentage"
             ? subTotal * (data.Result.Coupon.Value / 100)
             : data.Result.Coupon.Value;
+
+        console.log(discountType);
 
         findTotal(discountAmm);
 
