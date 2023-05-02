@@ -592,6 +592,8 @@ function verifyCouponCode(elem) {
         couponCodeError.style.display = "block";
         couponCodeError.style.color = "#15803d";
 
+        findTotal();
+
         const subTotal = orderObj.Subtotal;
 
         console.log(subTotal);
@@ -610,7 +612,6 @@ function verifyCouponCode(elem) {
       ${data.Result.Coupon.Code} <span style="float: right;">-₹${discountAmm}</span>
       `;
 
-        // set new values for subtotal
       } else {
         findTotal();
 
