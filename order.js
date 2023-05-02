@@ -195,11 +195,11 @@ async function getCouponDetails(couponCode) {
     });
 }
 
-async function validateCheckout() {
+async function validateCheckout(couponCode) {
   const products = {
     UUID: orderObj.UUID,
     products: orderList,
-    coupon_code: couponObj.coupon_code,
+    coupon_code: couponCode ? couponCode : "",
   };
 
   var api = "https://api.codebell.io/api/checkout";
@@ -219,8 +219,8 @@ async function validateCheckout() {
     });
 }
 
-function Checkout() {
-  validateCheckout().then((data) => {
+function Checkout(couponCode) {
+  validateCheckout(couponCode).then((data) => {
     if (data.Status == 2) {
       orderSummaryForm.style.display = "none";
       paymentMethods.style.display = "block";
@@ -230,6 +230,12 @@ function Checkout() {
       progressElem[2].classList.add("activeProgress");
 
       localStorage.removeItem("orderList");
+    } else {
+      Snackbar.show({
+        pos: "top-right",
+        showAction: true,
+        text: data.Message,
+      });
     }
   });
 }
@@ -469,7 +475,7 @@ function incItemCount(productIndex) {
   if (localStorage.getItem("orderList")) {
     orderList[productIndex].Count += 1;
 
-    verifyCouponCode();
+    verifyCouponCode(true);
     findTotal(discountAmm);
 
     const itemCount = orderSummaryForm.querySelector(
@@ -510,7 +516,7 @@ function decItemCount(productIndex) {
       (orderSummaryForm.querySelector(`#itemDetail-${productIndex}`).remove(),
       orderList.splice(productIndex, 1));
 
-    verifyCouponCode();
+    verifyCouponCode(true);
     findTotal(discountAmm);
 
     let totalCount = 0;
@@ -559,9 +565,9 @@ orderList.map((productDetail, index) => {
 `;
 });
 
-function verifyCouponCode(elem) {
-  const couponCodeVal = elem && couponCodeInput.value;
-  console.log(couponCodeVal);
+function verifyCouponCode(bool) {
+  const couponCodeVal = bool && couponCodeInput.value;
+  couponCode = couponCodeVal;
 
   if (couponCodeVal == "") {
     couponCodeError.style.display = "block";
@@ -611,7 +617,6 @@ function verifyCouponCode(elem) {
         appliedCouponDetails.innerHTML = `
       ${data.Result.Coupon.Code} <span style="float: right;">-₹${discountAmm}</span>
       `;
-
       } else {
         findTotal();
 
@@ -621,6 +626,7 @@ function verifyCouponCode(elem) {
           couponCodeError.style.display = "block";
           couponCodeError.style.color = "#ff5c5c";
           couponCodeError.innerHTML = "Invalid Coupon Code!";
+          // couponCodeError.innerHTML = data.Message;
 
           appliedCouponElem.style.display = "none";
           appliedCouponDetails.innerHTML = "";
