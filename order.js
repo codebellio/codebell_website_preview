@@ -445,19 +445,17 @@ function verifyCustomerOtp() {
 
 // sessionStorage.clear("orderObj")
 
-function findTotal(data) {
+function findTotal(discountAmm) {
   const subtotal = orderList.reduce((accumulator, productDetail) => {
     return accumulator + parseInt(productDetail.Price * productDetail.Count);
   }, 0);
-
-  console.log(data);
 
   orderObj.Subtotal = subtotal;
 
   const subtotalElem = orderSummaryForm.querySelector(".subtotal span");
   subtotalElem.innerHTML = `₹${subtotal}`;
 
-  const finalAmount = subtotal - (data ? data : 0) + 50;
+  const finalAmount = subtotal - (discountAmm ? discountAmm : 0) + 50;
 
   orderObj.Total = finalAmount;
 
@@ -472,7 +470,7 @@ function incItemCount(productIndex) {
   if (localStorage.getItem("orderList")) {
     orderList[productIndex].Count += 1;
 
-    findTotal();
+    findTotal(discountAmm);
 
     const itemCount = orderSummaryForm.querySelector(
       `#itemCount-${productIndex}`
@@ -512,7 +510,7 @@ function decItemCount(productIndex) {
       (orderSummaryForm.querySelector(`#itemDetail-${productIndex}`).remove(),
       orderList.splice(productIndex, 1));
 
-    findTotal();
+    findTotal(discountAmm);
 
     let totalCount = 0;
     orderList.map((orders) => {
@@ -584,7 +582,7 @@ function verifyCouponCode(elem) {
 
       const subTotal = orderObj.Subtotal;
 
-      const discountAmm =
+      discountAmm =
         discountType == "Percentage"
           ? subTotal * (data.Result.Coupon.Value / 100)
           : data.Result.Coupon.Value;
