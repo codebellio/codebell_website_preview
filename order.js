@@ -470,6 +470,7 @@ function incItemCount(productIndex) {
   if (localStorage.getItem("orderList")) {
     orderList[productIndex].Count += 1;
 
+    verifyCouponCode();
     findTotal(discountAmm);
 
     const itemCount = orderSummaryForm.querySelector(
@@ -510,6 +511,7 @@ function decItemCount(productIndex) {
       (orderSummaryForm.querySelector(`#itemDetail-${productIndex}`).remove(),
       orderList.splice(productIndex, 1));
 
+    verifyCouponCode();
     findTotal(discountAmm);
 
     let totalCount = 0;
