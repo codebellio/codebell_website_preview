@@ -445,12 +445,14 @@ function findTotal(data) {
     return accumulator + parseInt(productDetail.Price * productDetail.Count);
   }, 0);
 
-  orderObj.Subtotal = data ? subtotal - data : subtotal;
+  console.log(data);
+  
+  orderObj.Subtotal = subtotal;
 
   const subtotalElem = orderSummaryForm.querySelector(".subtotal span");
   subtotalElem.innerHTML = `₹${subtotal}`;
 
-  const finalAmount = subtotal + 50;
+  const finalAmount = subtotal - (data ? data : 0) + 50;
 
   orderObj.Total = finalAmount;
 
