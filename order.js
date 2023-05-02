@@ -440,12 +440,14 @@ function verifyCustomerOtp() {
 
 // sessionStorage.clear("orderObj")
 
-function findTotal() {
+function findTotal(data) {
   const subtotal = orderList.reduce((accumulator, productDetail) => {
     return accumulator + parseInt(productDetail.Price * productDetail.Count);
   }, 0);
 
-  orderObj.Subtotal = subtotal;
+  
+
+  orderObj.Subtotal = data ? subtotal * (data.Result.Coupon.Value / 100) : subtotal
 
   const subtotalElem = orderSummaryForm.querySelector(".subtotal span");
   subtotalElem.innerHTML = `₹${subtotal}`;
@@ -587,6 +589,8 @@ function verifyCouponCode(elem) {
         discountType == "Percentage"
           ? `-₹${subTotal * (data.Result.Coupon.Value / 100)}`
           : `-₹${data.Result.Coupon.Value}`;
+      
+      findTotal(data);
 
       appliedCouponElem.style.display = "flex";
       appliedCouponDetails.innerHTML = `
