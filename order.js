@@ -232,13 +232,13 @@ function Checkout(couponCode) {
         "linear-gradient(to right, #2F8AB2 0%, #2F8AB2 100%)";
       progressElem[2].classList.add("activeProgress");
 
-      localStorage.removeItem("orderList");
-
       const productCount = JSON.parse(
         localStorage.getItem("orderList")
       ).totalCount;
 
       document.querySelector("#productCount").innerHTML = productCount;
+
+      localStorage.removeItem("orderList");
     } else {
       Snackbar.show({
         pos: "top-right",
@@ -408,13 +408,14 @@ function getCustomerOtp() {
         });
       }
     } else {
-      verifyCustomerOtp();
+      verifyCustomerOtp(true);
     }
   }
 }
 
 function changePhoneNum() {
   phoneNumberForm.style.display = "block";
+
   otpForm.style.display = "none";
 
   customerOtp.disabled = true;
@@ -425,7 +426,9 @@ function changePhoneNum() {
   localStorage.setItem("customerData", JSON.stringify(orderObj));
 }
 
-function verifyCustomerOtp() {
+function verifyCustomerOtp(bool) {
+  customerOtp.style.display = "block";
+  coolDownElem.style.display = "block";
   verifyOtpBtn.disabled = true;
   customerOtp.disabled = true;
 
@@ -435,9 +438,9 @@ function verifyCustomerOtp() {
     if (data.Result.Order.MobileVerified === true) {
       orderObj["OTP"] = "";
 
-      customerOtp.remove();
-      // clearTimeout(tick);
-      coolDownElem.remove();
+      customerOtp.style.display = "none";
+      coolDownElem.style.display = "none";
+
       verifyOtpBtn.innerHTML = "Verified ✅";
 
       data.Result.Order.TotalVerified === true
