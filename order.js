@@ -28,6 +28,11 @@ const couponCodeInput = couponCodeElem.querySelector("#couponCodeInput");
 const couponCodeBtn = couponCodeElem.querySelector("#couponCodeBtn");
 const couponCodeError = couponCodeElem.querySelector(".errorMessage");
 
+const appliedCouponElem = orderSummaryForm.querySelector("#appliedCoupon");
+const appliedCouponDetails = orderSummaryForm.querySelector(
+  "#appliedCouponDetails"
+);
+
 const checkoutBtn = orderSummaryForm.querySelector(".checkout.button");
 
 let orderObj = JSON.parse(localStorage.getItem("customerData"))
@@ -563,12 +568,6 @@ function verifyCouponCode(elem) {
       data.Result.Coupon.PreApply &&
         (couponCodeInput.value = data.Result.Coupon.Code);
 
-      const appliedCouponElem =
-        orderSummaryForm.querySelector("#appliedCoupon");
-      const appliedCouponDetails = orderSummaryForm.querySelector(
-        "#appliedCouponDetails"
-      );
-
       couponCodeBtn.innerHTML = "Applied!";
 
       // get discount from response.
@@ -600,9 +599,14 @@ function verifyCouponCode(elem) {
       // set new values for subtotal
     } else {
       if (elem) {
+        findTotal();
+
         couponCodeError.style.display = "block";
         couponCodeError.style.color = "#ff5c5c";
         couponCodeError.innerHTML = "Invalid Coupon Code!";
+
+        appliedCouponElem.style.display = "none";
+        appliedCouponDetails.innerHTML = "";
 
         couponCodeInput.addEventListener("input", () => {
           couponCodeError.innerHTML = "";
