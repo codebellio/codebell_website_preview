@@ -230,6 +230,12 @@ function Checkout(couponCode) {
       progressElem[2].classList.add("activeProgress");
 
       localStorage.removeItem("orderList");
+
+      const productCount = JSON.parse(
+        localStorage.getItem("orderList")
+      ).totalCount;
+
+      document.querySelector("#productCount").innerHTML = productCount;
     } else {
       Snackbar.show({
         pos: "top-right",
