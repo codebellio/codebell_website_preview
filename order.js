@@ -40,6 +40,7 @@ var url = window.location.href;
 let orderObj = JSON.parse(localStorage.getItem("customerData"))
   ? JSON.parse(localStorage.getItem("customerData"))
   : {
+      UUID: "",
       Name: "",
       Mobile: "",
       MobileVerified: false,
@@ -350,6 +351,8 @@ function getCustomerOtp() {
     Phone number - ${orderObj.Mobile} <button type="button" onclick="changePhoneNum()" style="background-color: transparent; width: max-content; border-radius: 1em; color: #2F8AB2;">Change</button>`;
 
     url = window.location.href;
+
+    console.log(orderObj);
 
     if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
       console.log("url not found");
