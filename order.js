@@ -458,10 +458,9 @@ function verifyCustomerOtp(bool) {
           showAction: false,
           text: data.Message,
         });
-
-        verifyOtpBtn.disabled = false;
-        customerOtp.disabled = false;
       }
+      verifyOtpBtn.disabled = false;
+      customerOtp.disabled = false;
     }
   });
 }
