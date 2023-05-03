@@ -586,6 +586,8 @@ function setOrders(orderList) {
 if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
   validateCheckout({}, false).then((data) => {
     orderList = data.Result.OrderProducts;
+
+    changeAddress(), setOrderSummaryForm(), shippingDetails();
   });
 }
 
