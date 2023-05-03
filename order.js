@@ -40,7 +40,6 @@ var url = window.location.href;
 let orderObj = JSON.parse(localStorage.getItem("customerData"))
   ? JSON.parse(localStorage.getItem("customerData"))
   : {
-      UUID: "",
       Name: "",
       Mobile: "",
       MobileVerified: false,
