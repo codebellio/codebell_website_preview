@@ -428,7 +428,7 @@ function changePhoneNum() {
   customerPhone.disabled = false;
   getOtpBtn.disabled = false;
 
-  orderObj[UUID] = "";
+  orderObj["UUID"] = "";
   localStorage.setItem("customerData", JSON.stringify(orderObj));
 }
 
