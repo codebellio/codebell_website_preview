@@ -333,12 +333,16 @@ function getCustomerOtp() {
     localStorage.setItem("customerData", JSON.stringify(orderObj));
   }
 
+  console.log(orderObj.Mobile);
+
   if (orderObj.Mobile !== "") {
+    console.log(orderObj.Mobile);
     phoneNumberForm.style.display = "none";
     otpForm.style.display = "block";
 
-    // verifyOtpBtn.disabled = false;
+    verifyOtpBtn.disabled = false;
     customerOtp.disabled = false;
+
     customerPhone.disabled = true;
     getOtpBtn.disabled = true;
 
@@ -348,6 +352,7 @@ function getCustomerOtp() {
     url = window.location.href;
 
     if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
+      console.log("url not found");
       fetchData().then((data) => {
         orderObj["UUID"] = `${data.Result.Order.UUID}`;
         localStorage.setItem("customerData", JSON.stringify(orderObj));
