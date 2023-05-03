@@ -583,15 +583,19 @@ function setOrders(orderList) {
   });
 }
 
+console.log(orderObj.UUID);
 if (url.substring(url.lastIndexOf("?") + 4) == orderObj.UUID) {
   validateCheckout({}, false).then((data) => {
     orderList = data.Result.OrderProducts;
 
-    changeAddress(), setOrderSummaryForm(), shippingDetails();
+    changeAddress(),
+      setOrderSummaryForm(),
+      shippingDetails(),
+      setOrders(orderList);
   });
+} else {
+  setOrders(orderList);
 }
-
-setOrders(orderList);
 
 let couponCode = "";
 function verifyCouponCode(bool) {
