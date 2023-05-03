@@ -88,7 +88,11 @@ Object.values(productsObj).map((products, index) => {
   `;
 });
 
-let orderList = [];
+let orderList = localStorage.getItem("orderList")
+  ? JSON.parse(localStorage.getItem("orderList"))
+  : [];
+
+console.log(orderList);
 
 function order(productIndex, triggerer) {
   if (localStorage.getItem("orderList")) {
