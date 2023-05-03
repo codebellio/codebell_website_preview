@@ -576,6 +576,7 @@ orderList.map((productDetail, index) => {
 `;
 });
 
+let couponCode = "";
 function verifyCouponCode(bool) {
   const couponCodeVal = bool && couponCodeInput.value;
   couponCode = couponCodeVal;
@@ -594,6 +595,8 @@ function verifyCouponCode(bool) {
       if (data.Status === 2) {
         data.Result.Coupon.PreApply &&
           (couponCodeInput.value = data.Result.Coupon.Code);
+
+        couponCode = data.Result.Coupon.Code;
 
         couponCodeBtn.innerHTML = "Applied!";
 
