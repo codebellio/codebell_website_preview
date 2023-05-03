@@ -35,7 +35,7 @@ const appliedCouponDetails = orderSummaryForm.querySelector(
 
 const checkoutBtn = orderSummaryForm.querySelector(".checkout.button");
 
-const url = window.location.href;
+var url = window.location.href;
 
 let orderObj = JSON.parse(localStorage.getItem("customerData"))
   ? JSON.parse(localStorage.getItem("customerData"))
