@@ -587,6 +587,7 @@ console.log(orderObj.UUID);
 if (url.substring(url.lastIndexOf("?") + 4) == orderObj.UUID) {
   validateCheckout({}, false).then((data) => {
     orderList = data.Result.OrderProducts;
+    localStorage.setItem("orderList", JSON.stringify(orderList));
 
     changeAddress(),
       setOrderSummaryForm(),
