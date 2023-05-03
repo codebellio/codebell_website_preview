@@ -80,10 +80,6 @@ if (customerAddress) {
   orderObj.Country = customerAddress.Country;
 }
 
-customerAddress.Address !== "" &&
-  (changeAddress(), orderList != "") &&
-  (setOrderSummaryForm(), shippingDetails());
-
 function setCustomerDeatils() {
   orderObj = JSON.parse(localStorage.getItem("customerData"));
 
@@ -584,10 +580,24 @@ function setOrders(orderList) {
 }
 
 console.log(orderObj.UUID);
-if (url.substring(url.lastIndexOf("?") + 4) == orderObj.UUID) {
+if (
+  url.substring(url.lastIndexOf("?") + 4) == orderObj.UUID &&
+  orderList == ""
+) {
   validateCheckout({}, false).then((data) => {
     orderList = data.Result.OrderProducts;
-    localStorage.setItem("orderList", JSON.stringify(orderList));
+
+    let totalCount = 0;
+    orderList.map((orders) => {
+      totalCount += orders.Count;
+    });
+
+    localStorage.setItem(
+      "orderList",
+      JSON.stringify({ orderList, totalCount })
+    );
+
+    console.log(orderList);
 
     changeAddress(),
       setOrderSummaryForm(),
@@ -595,6 +605,9 @@ if (url.substring(url.lastIndexOf("?") + 4) == orderObj.UUID) {
       setOrders(orderList);
   });
 } else {
+  customerAddress.Address !== "" &&
+    (changeAddress(), orderList != "") &&
+    (setOrderSummaryForm(), shippingDetails());
   setOrders(orderList);
 }
 
