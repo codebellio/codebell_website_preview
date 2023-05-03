@@ -376,7 +376,7 @@
 
                                     <div style="display: flex; gap: 1em; color: white; width: 100%;">
                                         <button id="verifyOtpBtn" type="button" class="button" style="min-width: 100%;"
-                                            onclick="verifyCustomerOtp()">
+                                            onclick="verifyCustomerOtp(true)">
                                             Verify Otp</button>
                                     </div>
                                 </div>
@@ -447,12 +447,12 @@
                 </form>
 
                 <div id="paymentMethods" style="display: none;">
-                    <button onclick="paymentMehtod('onlinePayment')" type="button"
+                    <button onclick="paymentMehtod('Online Payment')" type="button"
                         class="checkout button w-inline-block" style="width: max-content; margin: 0 auto 1em auto;">
                         <div class="text-button white" style="padding: 0 3em;">Online payment</div>
                     </button>
-                    <button onclick="paymentMehtod('COD')" type="button" class="checkout button w-inline-block"
-                        style="width: max-content; margin: 0 auto 1em auto;">
+                    <button onclick="paymentMehtod('Cash On Delivery')" type="button"
+                        class="checkout button w-inline-block" style="width: max-content; margin: 0 auto 1em auto;">
                         <div class="text-button white" style="padding: 0 3em;">Cash on delivery</div>
                     </button>
                 </div>

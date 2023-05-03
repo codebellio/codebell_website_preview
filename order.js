@@ -35,6 +35,8 @@ const appliedCouponDetails = orderSummaryForm.querySelector(
 
 const checkoutBtn = orderSummaryForm.querySelector(".checkout.button");
 
+const url = window.location.href;
+
 let orderObj = JSON.parse(localStorage.getItem("customerData"))
   ? JSON.parse(localStorage.getItem("customerData"))
   : {
@@ -195,11 +197,13 @@ async function getCouponDetails(couponCode) {
     });
 }
 
-async function validateCheckout(couponCode) {
+async function validateCheckout(couponCode, bool) {
   const products = {
     UUID: orderObj.UUID,
-    products: orderList,
-    coupon_code: couponCode ? couponCode : "",
+    ...(bool && {
+      products: orderList,
+      coupon_code: couponCode ? couponCode : "",
+    }),
   };
 
   console.log(products);
@@ -223,7 +227,7 @@ async function validateCheckout(couponCode) {
 }
 
 function Checkout(couponCode) {
-  validateCheckout(couponCode).then((data) => {
+  validateCheckout(couponCode, true).then((data) => {
     if (data.Status == 2) {
       orderSummaryForm.style.display = "none";
       paymentMethods.style.display = "block";
@@ -249,8 +253,8 @@ function Checkout(couponCode) {
   });
 }
 
-function paymentMehtod(type) {
-  orderObj["PaymentMethod"] = type;
+function paymentMehtod(paymentType) {
+  orderObj["PaymentMethod"] = paymentType;
 
   fetchData().then((data) => {
     console.log(data);
@@ -262,15 +266,14 @@ function paymentMehtod(type) {
       orderObj = data.Result.Order;
       localStorage.setItem("customerData", JSON.stringify(orderObj));
 
-      if (type === "onlinePayment") {
+      if (paymentType === "Online") {
         Snackbar.show({
           pos: "top-right",
           showAction: false,
           text: data.Message,
         });
       }
-      if (type === "COD") {
-        localStorage.removeItem("orderList");
+      if (paymentType === "Cash On Delivery") {
         console.log(data);
         const UUID = data.Result.Order.UUID;
         // location.replace(`https://preview.codebell.io/purchase?id=${UUID}`);
@@ -346,7 +349,7 @@ function getCustomerOtp() {
     otpLabel.innerHTML = `
     Phone number - ${orderObj.Mobile} <button type="button" onclick="changePhoneNum()" style="background-color: transparent; width: max-content; border-radius: 1em; color: #2F8AB2;">Change</button>`;
 
-    const url = window.location.href;
+    url = window.location.href;
 
     if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
       fetchData().then((data) => {
@@ -408,7 +411,7 @@ function getCustomerOtp() {
         });
       }
     } else {
-      verifyCustomerOtp(true);
+      verifyCustomerOtp(false);
     }
   }
 }
@@ -447,15 +450,17 @@ function verifyCustomerOtp(bool) {
         ? (checkoutBtn.style.display = "block")
         : (checkoutBtn.style.display = "none");
     } else {
-      Snackbar.show({
-        backgroundColor: "#dc2626",
-        pos: "top-right",
-        showAction: false,
-        text: data.Message,
-      });
+      if (bool) {
+        Snackbar.show({
+          backgroundColor: "#dc2626",
+          pos: "top-right",
+          showAction: false,
+          text: data.Message,
+        });
 
-      verifyOtpBtn.disabled = false;
-      customerOtp.disabled = false;
+        verifyOtpBtn.disabled = false;
+        customerOtp.disabled = false;
+      }
     }
   });
 }
@@ -548,8 +553,9 @@ function decItemCount(productIndex) {
   }
 }
 
-orderList.map((productDetail, index) => {
-  orderContainerElem.innerHTML += `
+function setOrders(orderList) {
+  orderList.map((productDetail, index) => {
+    orderContainerElem.innerHTML += `
   <div style="display: flex; align-items: center; gap: 1.5em; margin: 2em 0;" id="itemDetail-${index}">
       <div style="min-width: 138px; width: 138px; height: 138px;">
         <img src="${productDetail.Photo}" alt="${productDetail.Photo} image" style="width: 100%; height: 100%; object-fit: contain;">
@@ -574,7 +580,16 @@ orderList.map((productDetail, index) => {
       </div>
   </div>
 `;
-});
+  });
+}
+
+if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
+  validateCheckout({}, false).then((data) => {
+    orderList = data.Result.OrderProducts;
+  });
+}
+
+setOrders(orderList);
 
 let couponCode = "";
 function verifyCouponCode(bool) {
