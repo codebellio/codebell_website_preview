@@ -372,8 +372,7 @@
                                         style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
                                         placeholder="Enter otp here" disabled>
 
-                                    <p id="resendBtn" style="width: 100%;"> <a
-                                            onclick="getCustomerOtp(true)"
+                                    <p id="resendBtn" style="width: 100%;"> <a onclick="getCustomerOtp(true)"
                                             style="float: right; pointer-events: none;">Resend
                                             otp</a></p>
 
@@ -459,10 +458,10 @@
                         <h6 class="finalAmount" style="width: 100%;">You Pay <span style="float: right;">₹50</span>
                         </h6>
 
-                        <a onclick="Checkout(couponCode)" class="checkout button w-inline-block"
-                            style="display: none; width: max-content; margin-top: 2em;">
+                        <button type="button" onclick="Checkout(couponCode)" class="checkout button w-inline-block"
+                            style="display: none; width: max-content; margin-top: 2em;" disabled>
                             <div class="text-button white" style="padding: 0 3em;">Checkout</div>
-                        </a>
+                        </button>
                     </div>
                 </form>
 

@@ -407,6 +407,9 @@ function changePhoneNum() {
   customerPhone.disabled = false;
   getOtpBtn.disabled = false;
 
+  checkoutBtn.style.display = "none";
+  checkoutBtn.disabled = true;
+
   verifyOtpBtn.innerHTML = "Verify Otp";
 
   delete orderObj.UUID;
@@ -430,7 +433,8 @@ function verifyCustomerOtp(bool) {
       verifyOtpBtn.disabled = true;
 
       data.Result.Order.TotalVerified === true
-        ? (checkoutBtn.style.display = "block")
+        ? ((checkoutBtn.style.display = "block"),
+          (checkoutBtn.disabled = false))
         : (checkoutBtn.style.display = "none");
     } else {
       if (bool) {
