@@ -331,10 +331,23 @@ async function fetchData(bool) {
 }
 
 orderObj.Mobile !== "" && getCustomerOtp();
-function getCustomerOtp() {
+function getCustomerOtp(bool) {
   if (customerPhone.value.length === 10) {
     orderObj.Mobile = customerPhone.value;
     localStorage.setItem("customerData", JSON.stringify(orderObj));
+  } else {
+    if (bool == true) {
+      console.log("ops");
+      const phoneErrorMsgElem = phoneNumberForm.querySelector(".errorMessage");
+
+      phoneErrorMsgElem.style.display = "block";
+      phoneErrorMsgElem.innerHTML = "Please enter a valid phone number.";
+
+      customerPhone.addEventListener("input", () => {
+        phoneErrorMsgElem.innerHTML = "";
+        phoneErrorMsgElem.style.display = "none";
+      });
+    }
   }
 
   console.log(orderObj.Mobile);
@@ -381,20 +394,6 @@ function getCustomerOtp() {
       });
 
       console.log(customerPhone.value.length);
-
-      if (customerPhone.value.length < 10) {
-        console.log("ops");
-        const phoneErrorMsgElem =
-          phoneNumberForm.querySelector(".errorMessage");
-
-        phoneErrorMsgElem.style.display = "block";
-        phoneErrorMsgElem.innerHTML = "Please enter a valid phone number.";
-
-        customerPhone.addEventListener("input", () => {
-          phoneErrorMsgElem.innerHTML = "";
-          phoneErrorMsgElem.style.display = "none";
-        });
-      }
     } else {
       verifyCustomerOtp(false);
     }
