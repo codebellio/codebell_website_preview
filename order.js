@@ -639,7 +639,7 @@ function verifyCouponCode(bool) {
   } else {
     getCouponDetails(couponCodeVal).then((data) => {
       if (data.Status === 2) {
-        // findTotal();
+        findTotal();
         // data.Result.Coupon.PreApply &&
         //   ();
         addCouponForm.style.display = "none";
