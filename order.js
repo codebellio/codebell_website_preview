@@ -640,6 +640,7 @@ function verifyCouponCode(bool) {
         // findTotal();
         // data.Result.Coupon.PreApply &&
         //   ();
+        addCouponForm.style.display = "none";
         couponSummaryForm.style.display = "flex";
         // data.Result.Coupon.Code;
         couponName = data.Result.Coupon.Name;
