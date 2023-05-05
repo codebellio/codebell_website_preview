@@ -361,6 +361,7 @@ function getCustomerOtp() {
     if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
       console.log("url not found");
       fetchData().then((data) => {
+        console.log(data);
         orderObj["UUID"] = `${data.Result.Order.UUID}`;
         localStorage.setItem("customerData", JSON.stringify(orderObj));
 
@@ -433,7 +434,7 @@ function changePhoneNum() {
   customerPhone.disabled = false;
   getOtpBtn.disabled = false;
 
-  orderObj["UUID"] = "";
+  delete orderObj.UUID;
   localStorage.setItem("customerData", JSON.stringify(orderObj));
 }
 
