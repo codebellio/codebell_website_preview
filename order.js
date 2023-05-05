@@ -11,9 +11,6 @@ const customerAddressElem = orderSummaryForm.querySelector("#customerAddress");
 const phoneNumberForm = orderSummaryForm.querySelector("#phoneNumberForm");
 const otpForm = orderSummaryForm.querySelector("#otpForm");
 const otpLabel = orderSummaryForm.querySelector("#otpLabel");
-const coolDownElem = orderSummaryForm.querySelector("#coolDown");
-const coolDownTimerElem = coolDownElem.querySelector("#coolDown span");
-const resendOtpElem = coolDownElem.querySelector("#coolDown a");
 
 const progressElem = document.getElementsByClassName("progress");
 const progressBarElem = document.getElementById("progressBar");
@@ -22,6 +19,8 @@ const customerPhone = orderSummaryForm.querySelector("#phoneNumber");
 const customerOtp = orderSummaryForm.querySelector("#customerOtp");
 const verifyOtpBtn = orderSummaryForm.querySelector("#verifyOtpBtn");
 const getOtpBtn = orderSummaryForm.querySelector("#getOtpBtn");
+
+const resendBtn = orderSummaryForm.querySelector("#resendBtn");
 
 const couponCodeForm = orderSummaryForm.querySelector("#couponForm");
 const addCouponForm = couponCodeForm.querySelector("#addCouponForm");
@@ -378,33 +377,7 @@ function getCustomerOtp() {
           text: data.Message,
         });
 
-        function countdown(minutes) {
-          var seconds = 60;
-          var mins = minutes;
-          function tick() {
-            //This script expects an element with an ID = "counter". You can change that to what ever you want.
-            var current_minutes = mins - 1;
-            seconds--;
-            coolDownTimerElem.innerHTML =
-              current_minutes.toString() +
-              ":" +
-              (seconds < 10 ? "0" : "") +
-              String(seconds);
-            if (seconds > 0) {
-              setTimeout(tick, 1000);
-            } else {
-              if (mins > 1) {
-                countdown(mins - 1);
-              }
-            }
-            if ((mins - 1 == 0) & (seconds == 0)) {
-              resendOtpElem.style.color = "#2F8AB2";
-              resendOtpElem.style.pointerEvents = "all";
-            }
-          }
-          tick();
-        }
-        countdown(5);
+        resendBtn.style.display = "block"
       });
 
       if (customerPhone.value.length < 10) {
@@ -440,7 +413,6 @@ function changePhoneNum() {
 
 function verifyCustomerOtp(bool) {
   customerOtp.style.display = "block";
-  coolDownElem.style.display = "block";
   verifyOtpBtn.disabled = true;
   customerOtp.disabled = true;
 
@@ -451,8 +423,7 @@ function verifyCustomerOtp(bool) {
       orderObj["OTP"] = "";
 
       customerOtp.style.display = "none";
-      coolDownElem.style.display = "none";
-
+      resendBtn.style.display = "none"
       verifyOtpBtn.innerHTML = "Verified ✅";
 
       data.Result.Order.TotalVerified === true
