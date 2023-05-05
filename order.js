@@ -23,10 +23,15 @@ const customerOtp = orderSummaryForm.querySelector("#customerOtp");
 const verifyOtpBtn = orderSummaryForm.querySelector("#verifyOtpBtn");
 const getOtpBtn = orderSummaryForm.querySelector("#getOtpBtn");
 
-const couponCodeElem = orderSummaryForm.querySelector("#couponCode");
-const couponCodeInput = couponCodeElem.querySelector("#couponCodeInput");
-const couponCodeBtn = couponCodeElem.querySelector("#couponCodeBtn");
-const couponCodeError = couponCodeElem.querySelector(".errorMessage");
+const couponCodeForm = orderSummaryForm.querySelector("#couponForm");
+const addCouponForm = couponCodeForm.querySelector("#addCouponForm");
+const couponCodeInput = addCouponForm.querySelector("#couponCodeInput");
+const couponCodeError = addCouponForm.querySelector(".errorMessage");
+const couponSummaryForm = couponCodeForm.querySelector("#couponSummary");
+const couponOfferMsgElem = couponSummaryForm.querySelector(
+  "#couponOfferMsg span"
+);
+// const couponCodeBtn = couponCodeElem.querySelector("#couponCodeBtn");
 
 const appliedCouponElem = orderSummaryForm.querySelector("#appliedCoupon");
 const appliedCouponDetails = orderSummaryForm.querySelector(
@@ -569,7 +574,7 @@ function setOrders(orderList) {
           <div style="display: flex; margin-top: 1em; align-items: center; gap: 0.5em">
 
             <button type="button" onclick="decItemCount(${index})" style="background: transparent">
-              <img src="./assets/img/remove.png" alt="" style="width: 28px; height: 28px;">
+              <img src="./assets/img/minus.png" alt="" style="width: 28px; height: 28px;">
             </button>
 
             <p id="itemCount-${index}">${productDetail.Count} unit</p>
@@ -619,12 +624,10 @@ if (
 
 let couponCode = "";
 function verifyCouponCode(bool) {
-  const couponCodeVal = bool && couponCodeInput.value;
-  couponCode = couponCodeVal;
+  const couponCodeVal = bool ? couponCodeInput.value : "";
 
-  if (couponCodeVal == "") {
+  if (bool) {
     couponCodeError.style.display = "block";
-    couponCodeError.style.color = "#ff5c5c";
     couponCodeError.innerHTML = "Please enter a coupon code!";
 
     couponCodeInput.addEventListener("input", () => {
@@ -634,26 +637,22 @@ function verifyCouponCode(bool) {
   } else {
     getCouponDetails(couponCodeVal).then((data) => {
       if (data.Status === 2) {
-        data.Result.Coupon.PreApply &&
-          (couponCodeInput.value = data.Result.Coupon.Code);
+        // findTotal();
+        // data.Result.Coupon.PreApply &&
+        //   ();
+        couponSummaryForm.style.display = "flex";
+        // data.Result.Coupon.Code;
+        couponName = data.Result.Coupon.Name;
 
-        couponCode = data.Result.Coupon.Code;
-
-        couponCodeBtn.innerHTML = "Applied!";
+        // couponCodeBtn.innerHTML = "Applied!";
 
         // get discount from response.
         const discountType = data.Result.Coupon.Type;
 
-        couponCodeError.style.display = "block";
-        couponCodeError.innerHTML =
+        couponOfferMsgElem.innerHTML =
           discountType == "Percentage"
-            ? `Hurray!! You got flat ${data.Result.Coupon.Value}% off`
-            : `Hurray!! You got flat ₹${data.Result.Coupon.Value} off`;
-
-        couponCodeError.style.display = "block";
-        couponCodeError.style.color = "#15803d";
-
-        findTotal();
+            ? `${data.Result.Coupon.Value}% off`
+            : `₹${data.Result.Coupon.Value} off`;
 
         const subTotal = orderObj.Subtotal;
 
@@ -670,16 +669,13 @@ function verifyCouponCode(bool) {
 
         appliedCouponElem.style.display = "flex";
         appliedCouponDetails.innerHTML = `
-      ${data.Result.Coupon.Code} <span style="float: right;">-₹${discountAmm}</span>
+          Coupon discount <span style="float: right;">-₹${discountAmm}</span>
       `;
       } else {
         findTotal();
 
         if (elem) {
-          findTotal();
-
           couponCodeError.style.display = "block";
-          couponCodeError.style.color = "#ff5c5c";
           couponCodeError.innerHTML = "Invalid Coupon Code!";
           // couponCodeError.innerHTML = data.Message;
 
@@ -696,6 +692,17 @@ function verifyCouponCode(bool) {
   }
 }
 verifyCouponCode();
+
+function removeCoupon() {
+  couponSummaryForm.style.display = "none";
+  addCouponForm.style.display = "block";
+
+  appliedCouponElem.style.display = "none";
+  appliedCouponDetails.innerHTML = "";
+
+  discountAmm = 0;
+  findTotal(discountAmm);
+}
 
 // localStorage.removeItem("orderList");
 
