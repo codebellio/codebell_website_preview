@@ -498,7 +498,7 @@ function incItemCount(productIndex) {
   if (localStorage.getItem("orderList")) {
     orderList[productIndex].Count += 1;
 
-    verifyCouponCode(true);
+    verifyCouponCode(false);
     findTotal(discountAmm);
 
     const itemCount = orderSummaryForm.querySelector(
@@ -539,7 +539,7 @@ function decItemCount(productIndex) {
       (orderSummaryForm.querySelector(`#itemDetail-${productIndex}`).remove(),
       orderList.splice(productIndex, 1));
 
-    verifyCouponCode(true);
+    verifyCouponCode(false);
     findTotal(discountAmm);
 
     let totalCount = 0;
@@ -624,9 +624,10 @@ if (
 
 let couponCode = "";
 function verifyCouponCode(bool) {
-  const couponCodeVal = bool ? couponCodeInput.value : "";
+  const couponCodeVal = "";
 
-  if (bool) {
+  if (bool == true) {
+    couponCodeVal = couponCodeInput.value;
     couponCodeError.style.display = "block";
     couponCodeError.innerHTML = "Please enter a coupon code!";
 
@@ -692,7 +693,7 @@ function verifyCouponCode(bool) {
     });
   }
 }
-verifyCouponCode();
+verifyCouponCode(false);
 
 function removeCoupon() {
   couponSummaryForm.style.display = "none";
