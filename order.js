@@ -537,7 +537,8 @@ function decItemCount(productIndex) {
 
     orderList[productIndex].Count == 0 &&
       (orderSummaryForm.querySelector(`#itemDetail-${productIndex}`).remove(),
-      orderList.splice(productIndex, 1));
+      orderList.splice(productIndex, 1),
+      setOrders(orderList));
 
     verifyCouponCode(false);
     findTotal(discountAmm);
