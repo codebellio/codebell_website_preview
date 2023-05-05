@@ -377,10 +377,13 @@ function getCustomerOtp() {
           text: data.Message,
         });
 
-        resendBtn.style.display = "block"
+        resendBtn.style.display = "block";
       });
 
+      console.log(customerPhone.value.length);
+
       if (customerPhone.value.length < 10) {
+        console.log("ops");
         const phoneErrorMsgElem =
           phoneNumberForm.querySelector(".errorMessage");
 
@@ -423,7 +426,7 @@ function verifyCustomerOtp(bool) {
       orderObj["OTP"] = "";
 
       customerOtp.style.display = "none";
-      resendBtn.style.display = "none"
+      resendBtn.style.display = "none";
       verifyOtpBtn.innerHTML = "Verified ✅";
 
       data.Result.Order.TotalVerified === true
