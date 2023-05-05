@@ -627,7 +627,7 @@ let couponCode = "";
 function verifyCouponCode(bool) {
   var couponCodeVal = "";
 
-  if (bool == true) {
+  if (bool == true && couponCodeInput.value == "") {
     couponCodeVal = couponCodeInput.value;
     couponCodeError.style.display = "block";
     couponCodeError.innerHTML = "Please enter a coupon code!";
