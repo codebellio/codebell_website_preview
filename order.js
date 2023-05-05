@@ -350,15 +350,15 @@ function getCustomerOtp(bool) {
     }
   }
 
-  console.log(orderObj.Mobile);
-
   if (orderObj.Mobile !== "") {
     console.log(orderObj.Mobile);
     phoneNumberForm.style.display = "none";
     otpForm.style.display = "block";
+    customerOtp.style.display = "block";
 
     verifyOtpBtn.disabled = false;
     customerOtp.disabled = false;
+    resendBtn.style.display = "block";
 
     customerPhone.disabled = true;
     getOtpBtn.disabled = true;
@@ -389,8 +389,6 @@ function getCustomerOtp(bool) {
           showAction: false,
           text: data.Message,
         });
-
-        resendBtn.style.display = "block";
       });
 
       console.log(customerPhone.value.length);
@@ -408,6 +406,8 @@ function changePhoneNum() {
   customerOtp.disabled = true;
   customerPhone.disabled = false;
   getOtpBtn.disabled = false;
+
+  verifyOtpBtn.innerHTML = "Verify Otp";
 
   delete orderObj.UUID;
   localStorage.setItem("customerData", JSON.stringify(orderObj));
@@ -427,6 +427,7 @@ function verifyCustomerOtp(bool) {
       customerOtp.style.display = "none";
       resendBtn.style.display = "none";
       verifyOtpBtn.innerHTML = "Verified ✅";
+      verifyOtpBtn.disabled = true;
 
       data.Result.Order.TotalVerified === true
         ? (checkoutBtn.style.display = "block")
