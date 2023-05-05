@@ -562,6 +562,7 @@ function decItemCount(productIndex) {
 }
 
 function setOrders(orderList) {
+  orderContainerElem.innerHTML = ``;
   orderList.map((productDetail, index) => {
     orderContainerElem.innerHTML += `
   <div style="display: flex; align-items: center; gap: 1.5em; margin: 2em 0;" id="itemDetail-${index}">
