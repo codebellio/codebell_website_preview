@@ -179,7 +179,7 @@ function setOrderSummaryForm() {
 }
 
 async function getCouponDetails(couponCode) {
-  couponObj = { coupon_code: couponCode ? couponCode : "" };
+  couponObj = { coupon_code: couponCode };
 
   var api = "https://api.codebell.io/api/coupon";
   return await fetch(api, {
@@ -625,10 +625,10 @@ if (
 
 let couponCode = "";
 function verifyCouponCode(bool) {
-  var couponCodeVal = "";
+  const couponCodeVal = couponCodeInput.value;
 
-  if (bool == true && couponCodeInput.value == "") {
-    couponCodeVal = couponCodeInput.value;
+  if (bool == true && couponCodeVal == "") {
+    // couponCodeVal = couponCodeInput.value;
     couponCodeError.style.display = "block";
     couponCodeError.innerHTML = "Please enter a coupon code!";
 
