@@ -95,17 +95,17 @@ let orderList = localStorage.getItem("orderList")
 const orderPopUp = document.querySelector("#orderPopUp");
 
 function order(productIndex, triggerer) {
+  if (triggerer == "addToCart") {
+    orderPopUp.style.display = "flex";
+    document.querySelector("body").style.overflowY = "hidden";
+  }
+
   if (localStorage.getItem("orderList")) {
     orderList = JSON.parse(localStorage.getItem("orderList")).orderList;
 
     let productListIndex = orderList.findIndex(
       (product) => product.Title === productsObj[productIndex].Title
     );
-
-    if (triggerer == "addToCart") {
-      orderPopUp.style.display = "flex";
-      document.querySelector("body").style.overflowY = "hidden";
-    }
 
     productListIndex < 0
       ? orderList.push(productsObj[productIndex])
