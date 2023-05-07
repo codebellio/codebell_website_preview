@@ -373,6 +373,11 @@ function getCustomerOtp(bool) {
         showAction: false,
         text: data.Message,
       });
+
+      data.Result.Order.TotalVerified === true
+        ? ((checkoutBtn.style.display = "block"),
+          (checkoutBtn.disabled = false))
+        : (checkoutBtn.style.display = "none");
     });
   } else {
     verifyCustomerOtp(false);
@@ -420,11 +425,6 @@ function verifyCustomerOtp(bool) {
       setTimeout(() => {
         shippingDetails();
       }, 1500);
-
-      data.Result.Order.TotalVerified === true
-        ? ((checkoutBtn.style.display = "block"),
-          (checkoutBtn.disabled = false))
-        : (checkoutBtn.style.display = "none");
     } else {
       if (bool) {
         Snackbar.show({
@@ -439,7 +439,6 @@ function verifyCustomerOtp(bool) {
     }
   });
 }
-
 
 function findTotal(discountAmm) {
   const subtotal = orderList.reduce((accumulator, productDetail) => {
