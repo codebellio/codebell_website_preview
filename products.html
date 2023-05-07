@@ -250,6 +250,29 @@
             </div> -->
         </div>
 
+        <div id="orderPopUp"
+            style="display: none; z-index: 9999; position: fixed; top: 0; bottom: 0; left: 0; width: 100%; margin: auto; background: #000000d6;">
+            <div
+                style="width: 35em; margin: auto; background-color: rgba(22, 22, 19, 0.648); backdrop-filter: blur(5px); padding: 4em 8em; border-radius: 1.63em; align-items: center; display: flex; flex-direction: column; position: relative;">
+
+                <img src="./assets/img/success.png" alt="success icon" style="margin-bottom: 1em;">
+
+                <p id="cutomerPhoneLabel" style="margin: auto; margin-bottom: 0.5em; width: 100%; text-align: center;">
+                    <strong style="color: #f8f8f8">Item added to the cart!</strong>
+                </p>
+
+                <a href="/order" class="button w-inline-block"
+                    style="width: 100%; margin: 1em auto; background-color: #2F8AB2; padding: 1em;">
+                    <div class="text-button white" style="padding: 0 1em;">Go to Cart</div>
+                </a>
+
+                <button onclick="closePopUp()" class="button w-inline-block"
+                    style="width: 100%; margin: auto 0 0 auto; background-color: transparent;padding: 1em; border: 1px solid #f8f8f8;">
+                    <div class="text-button" style="color: #f8f8f8;">Continue Shopping</div>
+                </button>
+            </div>
+        </div>
+
         <footer class="section-footer wf-section">
             <div class="content">
                 <div class="w-layout-grid grid-footer">

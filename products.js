@@ -92,7 +92,7 @@ let orderList = localStorage.getItem("orderList")
   ? JSON.parse(localStorage.getItem("orderList"))
   : [];
 
-console.log(orderList);
+const orderPopUp = document.querySelector("#orderPopUp");
 
 function order(productIndex, triggerer) {
   if (localStorage.getItem("orderList")) {
@@ -102,12 +102,10 @@ function order(productIndex, triggerer) {
       (product) => product.Title === productsObj[productIndex].Title
     );
 
-    triggerer == "addToCart" &&
-      Snackbar.show({
-        pos: "top-right",
-        showAction: false,
-        text: "Item added to cart!",
-      });
+    if (triggerer == "addToCart") {
+      orderPopUp.style.display = "flex";
+      document.querySelector("body").style.overflowY = "hidden";
+    }
 
     productListIndex < 0
       ? orderList.push(productsObj[productIndex])
@@ -122,6 +120,11 @@ function order(productIndex, triggerer) {
   });
 
   localStorage.setItem("orderList", JSON.stringify({ orderList, totalCount }));
+}
+
+function closePopUp() {
+  orderPopUp.style.display = "none";
+  document.querySelector("body").style.overflowY = "scroll";
 }
 
 // sessionStorage.clear("orderList")
