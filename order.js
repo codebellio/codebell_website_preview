@@ -449,9 +449,10 @@ function verifyCustomerOtp(bool) {
       verifyOtpBtn.innerHTML = "Verified ✅";
       verifyOtpBtn.disabled = true;
 
-      setTimeout(1000, () => {
+      setTimeout(() => {
+        closeOtpForm();
         shippingDetails();
-      });
+      }, 1000);
 
       data.Result.Order.TotalVerified === true
         ? ((checkoutBtn.style.display = "block"),

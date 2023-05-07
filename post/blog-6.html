@@ -56,11 +56,14 @@
                     <a href="/support" class="nav-link w-nav-link">Support<br></a>
                 </nav>
                 <cart-view>
-                    <a href="/order" class="nav-link w-nav-link" style="background-color: white; border-radius: 1em;">
-                        <img src="/assets/img/cart.png" alt="" style="width: 32px; height: inherit;">
+                    <a href="/order" id="cart" class="nav-link w-nav-link"
+                        style="background-color: white; border-radius: 10em; display: none;">
 
-                        <span id="productCount" style="color: black">0</span>
-                        <br>
+                        <div class="text-button">
+                            <img src="./assets/img/cart.png" alt="" style="width: 32px; height: inherit;">
+
+                            <span id="productCount" style="color: black">0</span>
+                        </div>
                     </a>
                 </cart-view>
                 <a href="/get-the-app" class="nav-button w-inline-block"><img
@@ -181,18 +184,26 @@
                         system allows residents to monitor their property remotely, providing an added layer of
                         security.</p>
 
-                    <p><strong>Cost-effective:</strong> The Codebell QR Video Intercom is a cost-effective solution compared to traditional intercom systems. No hardware,
-                    Nothing to install, No app download, Built on the cloud, Just a QR code reducing the cost of repair & wiring hassel. The
-                    system is also easy to install, eliminating the need for expensive wiring or installation costs.</p>
+                    <p><strong>Cost-effective:</strong> The Codebell QR Video Intercom is a cost-effective solution
+                        compared to traditional intercom systems. No hardware,
+                        Nothing to install, No app download, Built on the cloud, Just a QR code reducing the cost of
+                        repair & wiring hassel. The
+                        system is also easy to install, eliminating the need for expensive wiring or installation costs.
+                    </p>
 
-                    <p><strong>Remote access:</strong> The Codebell QR Video Intercom can be accessed remotely, giving residents the flexibility and convenience to manage
-                    their property's security from anywhere. With an internet connection, residents can see and communicate with visitors in
-                    real-time, granting or denying access as required. This feature provides peace of mind, especially when residents are
-                    away from home.</p>
+                    <p><strong>Remote access:</strong> The Codebell QR Video Intercom can be accessed remotely, giving
+                        residents the flexibility and convenience to manage
+                        their property's security from anywhere. With an internet connection, residents can see and
+                        communicate with visitors in
+                        real-time, granting or denying access as required. This feature provides peace of mind,
+                        especially when residents are
+                        away from home.</p>
 
-                    <p><strong>Upgrade with other security systems:</strong> The Codebell QR Video Intercom can be upgrade with other security systems, such as alarm systems and CCTV cameras,
-                    providing a comprehensive security solution for residential properties. Additional benefits with current system. This
-                    feature ensures that residents have full control over their property's security.</p>
+                    <p><strong>Upgrade with other security systems:</strong> The Codebell QR Video Intercom can be
+                        upgrade with other security systems, such as alarm systems and CCTV cameras,
+                        providing a comprehensive security solution for residential properties. Additional benefits with
+                        current system. This
+                        feature ensures that residents have full control over their property's security.</p>
 
                 </div>
             </div>
@@ -246,7 +257,9 @@
     <script>
         const productCount = localStorage.getItem("orderList") ? JSON.parse(localStorage.getItem("orderList")).totalCount : 0
 
-        document.querySelector("#productCount").innerHTML = productCount;
+        productCount != 0 ? (document.getElementById("cart").style.display = "block") : (document.getElementById("cart").style.display = "none");
+
+        document.getElementById("productCount").innerHTML = productCount;
     </script>
 </body>
 
