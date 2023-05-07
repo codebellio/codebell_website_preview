@@ -22,7 +22,7 @@ const customerPhone = shippingDetailsElem.querySelector("#customerPhone");
 
 const customerOtp = otpForm.querySelector("#customerOtp");
 const verifyOtpBtn = otpForm.querySelector("#verifyOtpBtn");
-// const getOtpBtn = orderSummaryForm.querySelector("#getOtpBtn");
+const verifyOtpBtnVal = otpForm.querySelector("#verifyOtpBtn div");
 
 const resendBtn = otpForm.querySelector("#resendBtn");
 
@@ -357,16 +357,9 @@ function getCustomerOtp(bool) {
     if (formComplete) {
       setShippingDetails();
       console.log(orderObj.Mobile);
-      // phoneNumberForm.style.display = "none";
-      // otpForm.style.display = "flex";
-      // customerOtp.style.display = "block";
 
       verifyOtpBtn.disabled = false;
       customerOtp.disabled = false;
-      // resendBtn.style.display = "block";
-
-      // customerPhone.disabled = true;
-      // getOtpBtn.disabled = true;
 
       cutomerPhoneLabel.innerHTML = orderObj.Mobile;
     }
@@ -455,7 +448,7 @@ function verifyCustomerOtp(bool) {
 
       customerOtp.style.display = "none";
       resendBtn.style.display = "none";
-      verifyOtpBtn.innerHTML = "Verified ✅";
+      verifyOtpBtnVal.innerHTML = "Verified ✅";
       verifyOtpBtn.disabled = true;
 
       setTimeout(() => {
