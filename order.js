@@ -369,7 +369,7 @@ function getCustomerOtp(bool) {
 
     verifyOtpBtn.disabled = false;
     customerOtp.disabled = false;
-    resendBtn.style.display = "block";
+    // resendBtn.style.display = "block";
 
     // customerPhone.disabled = true;
     // getOtpBtn.disabled = true;
@@ -378,6 +378,10 @@ function getCustomerOtp(bool) {
   }
 
   url = window.location.href;
+
+  // setTimeout(1000, () => {
+  setShippingDetails();
+  // });
 
   console.log(orderObj);
 
@@ -402,7 +406,7 @@ function getCustomerOtp(bool) {
       });
     });
 
-    console.log(customerPhone.value.length);
+    // console.log(customerPhone.value.length);
   } else {
     verifyCustomerOtp(false);
   }
@@ -445,7 +449,7 @@ function verifyCustomerOtp(bool) {
       verifyOtpBtn.disabled = true;
 
       setTimeout(1000, () => {
-        setShippingDetails(), shippingDetails();
+        shippingDetails();
       });
 
       data.Result.Order.TotalVerified === true
