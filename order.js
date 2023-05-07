@@ -239,13 +239,15 @@ function Checkout(couponCode) {
         "linear-gradient(to right, #2F8AB2 0%, #2F8AB2 100%)";
       progressElem[2].classList.add("activeProgress");
 
-      const productCount = JSON.parse(
-        localStorage.getItem("orderList")
-      ).totalCount;
+      // const productCount = JSON.parse(
+      //   localStorage.getItem("orderList")
+      // ).totalCount;
 
-      document.querySelector("#productCount").innerHTML = productCount;
+      // document.querySelector("#productCount").innerHTML = productCount;
 
       localStorage.removeItem("orderList");
+
+      document.getElementById("productCount").innerHTML = 0;
     } else {
       Snackbar.show({
         pos: "top-right",
