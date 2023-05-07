@@ -7,10 +7,6 @@ const shippingDetailsSelect = shippingDetailsElem.querySelector("select");
 const orderSummaryForm = document.getElementById("orderSummary");
 
 const customerDetails = orderSummaryForm.querySelector("#customerDetails");
-// const customerNameElem = orderSummaryForm.querySelector("#customerName");
-// const customerAddressElem = orderSummaryForm.querySelector("#customerAddress");
-
-// const phoneNumberForm = orderSummaryForm.querySelector("#phoneNumberForm");
 const otpForm = document.querySelector("#otpForm");
 const cutomerPhoneLabel = otpForm.querySelector(
   "#cutomerPhoneLabel strong span"
@@ -34,7 +30,6 @@ const couponSummaryForm = couponCodeForm.querySelector("#couponSummary");
 const couponOfferMsgElem = couponSummaryForm.querySelector(
   "#couponOfferMsg span"
 );
-// const couponCodeBtn = couponCodeElem.querySelector("#couponCodeBtn");
 
 const appliedCouponElem = orderSummaryForm.querySelector("#appliedCoupon");
 const appliedCouponDetails = orderSummaryForm.querySelector(
@@ -145,10 +140,6 @@ function shippingDetails() {
       showAction: false,
       text: "Please Add Items to cart",
     });
-
-  // (orderList != "") & (orderObj.OtpCreatedOn > 0)
-  //   ? (checkoutBtn.style.display = "block")
-  //   : (checkoutBtn.style.display = "none");
 }
 
 function setShippingDetails() {
@@ -212,8 +203,6 @@ async function validateCheckout(couponCode, bool) {
     }),
   };
 
-  console.log(products);
-
   var api = "https://api.codebell.io/api/checkout";
   return await fetch(api, {
     method: "post",
@@ -224,7 +213,6 @@ async function validateCheckout(couponCode, bool) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       return data;
     })
     .catch((error) => {
@@ -241,12 +229,6 @@ function Checkout(couponCode) {
       progressBarElem.style.background =
         "linear-gradient(to right, #2F8AB2 0%, #2F8AB2 100%)";
       progressElem[2].classList.add("activeProgress");
-
-      // const productCount = JSON.parse(
-      //   localStorage.getItem("orderList")
-      // ).totalCount;
-
-      // document.querySelector("#productCount").innerHTML = productCount;
 
       localStorage.removeItem("orderList");
 
@@ -265,8 +247,6 @@ function paymentMehtod(paymentType) {
   orderObj["PaymentMethod"] = paymentType;
 
   fetchData().then((data) => {
-    console.log(data);
-
     if (
       (data.Result.Order.MobileVerified === true) &
       (data.Result.Order.TotalVerified === true)
@@ -282,7 +262,6 @@ function paymentMehtod(paymentType) {
         });
       }
       if (paymentType === "Cash On Delivery") {
-        console.log(data);
         const UUID = data.Result.Order.UUID;
         location.replace(`https://preview.codebell.io/purchase?id=${UUID}`);
       }
@@ -341,8 +320,6 @@ async function fetchData(bool) {
 
 orderObj.Mobile !== "" && getCustomerOtp();
 function getCustomerOtp(bool) {
-  console.log(customerPhone.value);
-
   formValidation();
 
   if (customerPhone.value.length === 10) {
@@ -356,7 +333,6 @@ function getCustomerOtp(bool) {
 
     if (formComplete) {
       setShippingDetails();
-      console.log(orderObj.Mobile);
 
       verifyOtpBtn.disabled = false;
       customerOtp.disabled = false;
@@ -365,7 +341,6 @@ function getCustomerOtp(bool) {
     }
   } else {
     if (bool == true) {
-      console.log("ops");
       const phoneErrorMsgElem =
         shippingDetailsElem.querySelector(".phoneErrorMessage");
 
@@ -381,16 +356,8 @@ function getCustomerOtp(bool) {
 
   url = window.location.href;
 
-  // setTimeout(1000, () => {
-  // formValidation();
-  // });
-
-  console.log(orderObj);
-
   if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
-    console.log("url not found");
     fetchData().then((data) => {
-      console.log(data);
       orderObj["UUID"] = `${data.Result.Order.UUID}`;
       localStorage.setItem("customerData", JSON.stringify(orderObj));
 
@@ -407,8 +374,6 @@ function getCustomerOtp(bool) {
         text: data.Message,
       });
     });
-
-    // console.log(customerPhone.value.length);
   } else {
     verifyCustomerOtp(false);
   }
@@ -437,10 +402,7 @@ function verifyCustomerOtp(bool) {
   verifyOtpBtn.disabled = true;
   customerOtp.disabled = true;
 
-  // findTotal();
   orderObj["OTP"] = `${customerOtp.value}`;
-
-  console.log(orderObj.OTP);
 
   fetchData().then((data) => {
     if (data.Result.Order.MobileVerified === true) {
@@ -453,8 +415,11 @@ function verifyCustomerOtp(bool) {
 
       setTimeout(() => {
         closeOtpForm();
-        shippingDetails();
       }, 1000);
+
+      setTimeout(() => {
+        shippingDetails();
+      }, 1500);
 
       data.Result.Order.TotalVerified === true
         ? ((checkoutBtn.style.display = "block"),
@@ -475,7 +440,6 @@ function verifyCustomerOtp(bool) {
   });
 }
 
-// sessionStorage.clear("orderObj")
 
 function findTotal(discountAmm) {
   const subtotal = orderList.reduce((accumulator, productDetail) => {
@@ -595,7 +559,6 @@ function setOrders(orderList) {
   });
 }
 
-console.log(orderObj.UUID);
 if (
   url.substring(url.lastIndexOf("?") + 4) == orderObj.UUID &&
   orderList == ""
@@ -612,8 +575,6 @@ if (
       "orderList",
       JSON.stringify({ orderList, totalCount })
     );
-
-    console.log(orderList);
 
     changeAddress(),
       setOrderSummaryForm(),
@@ -632,7 +593,6 @@ function verifyCouponCode(bool) {
   const couponCodeVal = couponCodeInput.value;
 
   if (bool == true && couponCodeVal == "") {
-    // couponCodeVal = couponCodeInput.value;
     couponCodeError.style.display = "block";
     couponCodeError.innerHTML = "Please enter a coupon code!";
 
@@ -644,16 +604,11 @@ function verifyCouponCode(bool) {
     getCouponDetails(couponCodeVal).then((data) => {
       if (data.Status === 2) {
         findTotal();
-        // data.Result.Coupon.PreApply &&
-        //   ();
         addCouponForm.style.display = "none";
         couponSummaryForm.style.display = "flex";
-        // data.Result.Coupon.Code;
+
         couponName = data.Result.Coupon.Name;
 
-        // couponCodeBtn.innerHTML = "Applied!";
-
-        // get discount from response.
         const discountType = data.Result.Coupon.Type;
 
         couponOfferMsgElem.innerHTML =
@@ -663,14 +618,10 @@ function verifyCouponCode(bool) {
 
         const subTotal = orderObj.Subtotal;
 
-        console.log(subTotal);
-
         discountAmm =
           discountType == "Percentage"
             ? subTotal * (data.Result.Coupon.Value / 100)
             : data.Result.Coupon.Value;
-
-        console.log(discountType);
 
         findTotal(discountAmm);
 
@@ -684,7 +635,6 @@ function verifyCouponCode(bool) {
         if (bool) {
           couponCodeError.style.display = "block";
           couponCodeError.innerHTML = "Invalid Coupon Code!";
-          // couponCodeError.innerHTML = data.Message;
 
           appliedCouponElem.style.display = "none";
           appliedCouponDetails.innerHTML = "";
@@ -720,7 +670,3 @@ function closeOtpForm() {
 
   customerPhone.disabled = false;
 }
-
-// localStorage.removeItem("orderList");
-
-// localStorage.clear("customerData")

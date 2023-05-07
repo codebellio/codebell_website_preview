@@ -126,5 +126,3 @@ function closePopUp() {
   orderPopUp.style.display = "none";
   document.querySelector("body").style.overflowY = "scroll";
 }
-
-// sessionStorage.clear("orderList")
