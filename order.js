@@ -435,6 +435,7 @@ function verifyCustomerOtp(bool) {
   verifyOtpBtn.disabled = true;
   customerOtp.disabled = true;
 
+  // findTotal();
   orderObj["OTP"] = `${customerOtp.value}`;
 
   console.log(orderObj.OTP);
@@ -694,7 +695,7 @@ function verifyCouponCode(bool) {
     });
   }
 }
-// verifyCouponCode(false);
+verifyCouponCode(false);
 
 function removeCoupon() {
   couponSummaryForm.style.display = "none";
