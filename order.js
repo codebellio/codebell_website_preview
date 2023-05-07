@@ -289,6 +289,10 @@ function changeAddress() {
   inputs[5].value = customerAddress.Pin;
   inputs[6].value = orderObj.Mobile;
 
+  customerAddress.AddressType == "Home"
+    ? ((inputs[7].checked = true), (inputs[8].checked = false))
+    : ((inputs[8].checked = true), (inputs[7].checked = false));
+
   formValidation();
 }
 
