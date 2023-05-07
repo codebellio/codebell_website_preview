@@ -73,10 +73,10 @@ Object.values(productsObj).map((products, index) => {
                                     style="will-change: transform; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(23deg) rotateY(-23deg) rotateZ(23deg) skew(0deg, 0deg); transform-style: preserve-3d;">
                                     <div class="app-focus---shadow"></div>
                                     <div class="app-focus---image"><img
-                                            src="https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct3.png"
+                                            src="${products.Photo}"
                                             loading="eager"
                                             sizes="(max-width: 479px) 40vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                            srcset="https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct3.png 500w, https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct3.png 504w"
+                                            
                                             alt="" class="image-app---focus-1">
                                     </div>
                                 </div>
