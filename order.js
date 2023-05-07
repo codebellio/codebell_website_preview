@@ -6,8 +6,9 @@ const shippingDetailInput = shippingDetailsElem.querySelectorAll("input");
 const shippingDetailsSelect = shippingDetailsElem.querySelector("select");
 const orderSummaryForm = document.getElementById("orderSummary");
 
-const customerNameElem = orderSummaryForm.querySelector("#customerName");
-const customerAddressElem = orderSummaryForm.querySelector("#customerAddress");
+const customerDetails = orderSummaryForm.querySelector("#customerDetails");
+// const customerNameElem = orderSummaryForm.querySelector("#customerName");
+// const customerAddressElem = orderSummaryForm.querySelector("#customerAddress");
 
 // const phoneNumberForm = orderSummaryForm.querySelector("#phoneNumberForm");
 const otpForm = document.querySelector("#otpForm");
@@ -173,10 +174,12 @@ function setShippingDetails() {
 }
 
 function setOrderSummaryForm() {
-  customerNameElem.innerHTML = customerAddress.Name;
-  customerAddressElem.innerHTML = `${customerAddress.Apt}, ${customerAddress.Address},
+  customerDetails.innerHTML = `
+    <p id="customerName">${customerAddress.Name} (${customerAddress.AddressType})</p>
+    <p id="customerPhone">+91${orderObj.Mobile}</p>
+    <p id="customerAddress">${customerAddress.Apt}, ${customerAddress.Address},
       ${customerAddress.City},
-      ${customerAddress.Pin}
+      ${customerAddress.Pin}</p>
   `;
 }
 
