@@ -41,6 +41,109 @@
             background-color: transparent !important;
             z-index: -1;
         }
+
+        @media (max-width:991px) {
+            .site-footer [class^=col-] {
+                margin-bottom: 30px
+            }
+        }
+
+        @media (max-width:767px) {
+            .site-footer {
+                padding-bottom: 0
+            }
+
+            .site-footer .copyright-text,
+            .site-footer .social-icons {
+                text-align: center
+            }
+        }
+
+        .social-icons {
+            padding-left: 0;
+            margin-bottom: 0;
+            list-style: none
+        }
+
+        .social-icons li {
+            display: inline-block;
+            margin-bottom: 4px
+        }
+
+        .social-icons li.title {
+            margin-right: 15px;
+            text-transform: uppercase;
+            color: #96a2b2;
+            font-weight: 700;
+            font-size: 13px
+        }
+
+        .social-icons a {
+            background-color: #eceeef;
+            color: #818a91;
+            font-size: 16px;
+            display: inline-block;
+            line-height: 44px;
+            width: 44px;
+            height: 44px;
+            text-align: center;
+            margin-right: 8px;
+            border-radius: 100%;
+            -webkit-transition: all .2s linear;
+            -o-transition: all .2s linear;
+            transition: all .2s linear
+        }
+
+        .social-icons a:active,
+        .social-icons a:focus,
+        .social-icons a:hover {
+            color: #fff;
+            background-color: #29aafe
+        }
+
+        .social-icons.size-sm a {
+            line-height: 34px;
+            height: 34px;
+            width: 34px;
+            font-size: 14px
+        }
+
+        .social-icons a.facebook:hover {
+            background-color: #3b5998
+        }
+
+        .social-icons a.twitter:hover {
+            background-color: #00aced
+        }
+
+        .social-icons a.linkedin:hover {
+            background-color: #007bb6
+        }
+
+        .social-icons a.dribbble:hover {
+            background-color: #ea4c89
+        }
+
+        .site-footer a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .site-footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width:767px) {
+            .social-icons li.title {
+                display: block;
+                margin-right: 0;
+                font-weight: 600
+            }
+
+            .site-footer {
+                padding: 0.5em !important;
+            }
+        }
     </style>
 </head>
 
@@ -451,6 +554,41 @@
         </div>
         <div data-w-id="ef2d27af-e28a-9c66-8e12-40322fccb395" style="opacity: 0;" class="gradient-footer">
             <div class="noise"></div>
+        </div>
+
+        <div class="site-footer" style="padding: 7em 7em 0 7em;">
+            <div style="display: flex; gap: 5em; margin-bottom: 5em; flex-wrap: wrap;">
+                <div style="flex: 1;">
+                    <img src="./assets/img/logo.svg" alt="">
+                    <p style="margin-left: 0.4em; margin-top: 1em;">Modern way of communication that is safe, secure,
+                        efficient, and scalable.</p>
+                </div>
+                <div style="display: flex; gap: 5em; flex: 2;">
+                    <div>
+                        <h5 style="margin-bottom: 0.5em;">Resources</h5>
+                        <p><a href="/features">Features</a></p>
+                        <p><a href="/products">Products</a></p>
+                        <p><a href="/blog">Blog</a></p>
+                        <p><a href="/support">Support</a></p>
+                    </div>
+                    <div>
+                        <h5 style="margin-bottom: 0.5em;">Legal</h5>
+                        <p><a href="/terms">Terms</a></p>
+                        <p><a href="/privacy">Privacy</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="width: 100%; display: flex;">
+                <p>© Codebell. All rights reserved.</p>
+
+                <div style="margin-left: auto; display: flex; gap: 2em;">
+                    <img src="./assets/img/twitter.svg" alt="">
+                    <img src="./assets/img/linkedin.svg" alt="">
+                <img src="./assets/img/facebook.svg" alt="">
+                </div>
+
+            </div>
         </div>
     </footer>
 
