@@ -5,22 +5,25 @@ const headingTopElem = document.querySelector(".heading-top");
 const shippingDetailInput = shippingDetailsElem.querySelectorAll("input");
 const shippingDetailsSelect = shippingDetailsElem.querySelector("select");
 const orderSummaryForm = document.getElementById("orderSummary");
+
 const customerNameElem = orderSummaryForm.querySelector("#customerName");
 const customerAddressElem = orderSummaryForm.querySelector("#customerAddress");
 
-const phoneNumberForm = orderSummaryForm.querySelector("#phoneNumberForm");
-const otpForm = orderSummaryForm.querySelector("#otpForm");
-const otpLabel = orderSummaryForm.querySelector("#otpLabel");
+// const phoneNumberForm = orderSummaryForm.querySelector("#phoneNumberForm");
+const otpForm = document.querySelector("#otpForm");
+const cutomerPhoneLabel = otpForm.querySelector(
+  "#cutomerPhoneLabel strong span"
+);
 
 const progressElem = document.getElementsByClassName("progress");
 const progressBarElem = document.getElementById("progressBar");
+const customerPhone = shippingDetailsElem.querySelector("#customerPhone");
 
-const customerPhone = orderSummaryForm.querySelector("#phoneNumber");
-const customerOtp = orderSummaryForm.querySelector("#customerOtp");
-const verifyOtpBtn = orderSummaryForm.querySelector("#verifyOtpBtn");
-const getOtpBtn = orderSummaryForm.querySelector("#getOtpBtn");
+const customerOtp = otpForm.querySelector("#customerOtp");
+const verifyOtpBtn = otpForm.querySelector("#verifyOtpBtn");
+// const getOtpBtn = orderSummaryForm.querySelector("#getOtpBtn");
 
-const resendBtn = orderSummaryForm.querySelector("#resendBtn");
+const resendBtn = otpForm.querySelector("#resendBtn");
 
 const couponCodeForm = orderSummaryForm.querySelector("#couponForm");
 const addCouponForm = couponCodeForm.querySelector("#addCouponForm");
@@ -332,13 +335,21 @@ async function fetchData(bool) {
 
 orderObj.Mobile !== "" && getCustomerOtp();
 function getCustomerOtp(bool) {
+  console.log(customerPhone.value);
+
   if (customerPhone.value.length === 10) {
     orderObj.Mobile = customerPhone.value;
     localStorage.setItem("customerData", JSON.stringify(orderObj));
+
+    document.querySelector("body").style.overflowY = "hidden";
+    otpForm.style.display = "flex";
+    customerOtp.disabled = "false";
+    verifyOtpBtn.disabled = "false";
   } else {
     if (bool == true) {
       console.log("ops");
-      const phoneErrorMsgElem = phoneNumberForm.querySelector(".errorMessage");
+      const phoneErrorMsgElem =
+        shippingDetailsElem.querySelector(".phoneErrorMessage");
 
       phoneErrorMsgElem.style.display = "block";
       phoneErrorMsgElem.innerHTML = "Please enter a valid phone number.";
@@ -352,49 +363,48 @@ function getCustomerOtp(bool) {
 
   if (orderObj.Mobile !== "") {
     console.log(orderObj.Mobile);
-    phoneNumberForm.style.display = "none";
-    otpForm.style.display = "block";
-    customerOtp.style.display = "block";
+    // phoneNumberForm.style.display = "none";
+    // otpForm.style.display = "flex";
+    // customerOtp.style.display = "block";
 
     verifyOtpBtn.disabled = false;
     customerOtp.disabled = false;
     resendBtn.style.display = "block";
 
-    customerPhone.disabled = true;
-    getOtpBtn.disabled = true;
+    // customerPhone.disabled = true;
+    // getOtpBtn.disabled = true;
 
-    otpLabel.innerHTML = `
-    Phone number - ${orderObj.Mobile} <button type="button" onclick="changePhoneNum()" style="background-color: transparent; width: max-content; border-radius: 1em; color: #2F8AB2;">Change</button>`;
+    cutomerPhoneLabel.innerHTML = orderObj.Mobile;
+  }
 
-    url = window.location.href;
+  url = window.location.href;
 
-    console.log(orderObj);
+  console.log(orderObj);
 
-    if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
-      console.log("url not found");
-      fetchData().then((data) => {
-        console.log(data);
-        orderObj["UUID"] = `${data.Result.Order.UUID}`;
-        localStorage.setItem("customerData", JSON.stringify(orderObj));
+  if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
+    console.log("url not found");
+    fetchData().then((data) => {
+      console.log(data);
+      orderObj["UUID"] = `${data.Result.Order.UUID}`;
+      localStorage.setItem("customerData", JSON.stringify(orderObj));
 
-        const UUID = orderObj.UUID;
-        history.pushState(
-          {},
-          "Codebell",
-          `https://preview.codebell.io/order?id=${UUID}`
-        );
+      const UUID = orderObj.UUID;
+      history.pushState(
+        {},
+        "Codebell",
+        `https://preview.codebell.io/order?id=${UUID}`
+      );
 
-        Snackbar.show({
-          pos: "top-right",
-          showAction: false,
-          text: data.Message,
-        });
+      Snackbar.show({
+        pos: "top-right",
+        showAction: false,
+        text: data.Message,
       });
+    });
 
-      console.log(customerPhone.value.length);
-    } else {
-      verifyCustomerOtp(false);
-    }
+    console.log(customerPhone.value.length);
+  } else {
+    verifyCustomerOtp(false);
   }
 }
 
@@ -423,6 +433,8 @@ function verifyCustomerOtp(bool) {
 
   orderObj["OTP"] = `${customerOtp.value}`;
 
+  console.log(orderObj.OTP);
+
   fetchData().then((data) => {
     if (data.Result.Order.MobileVerified === true) {
       orderObj["OTP"] = "";
@@ -431,6 +443,10 @@ function verifyCustomerOtp(bool) {
       resendBtn.style.display = "none";
       verifyOtpBtn.innerHTML = "Verified ✅";
       verifyOtpBtn.disabled = true;
+
+      setTimeout(1000, () => {
+        setShippingDetails(), shippingDetails();
+      });
 
       data.Result.Order.TotalVerified === true
         ? ((checkoutBtn.style.display = "block"),
@@ -674,7 +690,7 @@ function verifyCouponCode(bool) {
     });
   }
 }
-verifyCouponCode(false);
+// verifyCouponCode(false);
 
 function removeCoupon() {
   couponSummaryForm.style.display = "none";
@@ -685,6 +701,16 @@ function removeCoupon() {
 
   discountAmm = 0;
   findTotal(discountAmm);
+}
+
+function closeOtpForm() {
+  otpForm.style.display = "none";
+  customerOtp.disabled = "true";
+  verifyOtpBtn.disabled = "true";
+
+  document.querySelector("body").style.overflowY = "scroll";
+
+  customerPhone.disabled = false;
 }
 
 // localStorage.removeItem("orderList");

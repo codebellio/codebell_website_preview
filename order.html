@@ -71,7 +71,8 @@
             outline: 2x solid red;
         }
 
-        .errorMessage {
+        .errorMessage,
+        .phoneErrorMessage {
             color: #ff5c5c;
         }
 
@@ -288,13 +289,20 @@
                     </div>
 
                     <div style="display: flex; width: 100%; margin-top: 2em; flex-wrap: wrap; gap: 2em;">
-                        <div>
+                        <div style="flex: 1">
                             <label for="first name" style="color: #4a4a4a"> PIN code* </label>
                             <input id="pin" type="text"
                                 style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
                                 placeholder="562241">
                             <span class="errorMessage"></span>
+                        </div>
+                        <div style="flex: 2">
+                            <label for="first name" style="color: #4a4a4a"> Phone number* </label>
+                            <input id="customerPhone" type="tel"
+                                style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
+                                placeholder="Enter mobile number">
 
+                            <span class="phoneErrorMessage"></span>
                         </div>
                     </div>
 
@@ -319,11 +327,44 @@
                         </div>
                     </div>
 
-                    <button onclick="setShippingDetails(), shippingDetails()" type="submit"
-                        class="button w-inline-block" style="width: max-content;">
+                    <!-- setShippingDetails(), shippingDetails(), -->
+                    <button onclick=" getCustomerOtp(true)" type="submit" class="button w-inline-block"
+                        style="width: max-content;">
                         <div class="text-button white" style="padding: 0 1em;">Continue</div>
                     </button>
                 </form>
+
+                <!-- OTP FORM -->
+                <div id="otpForm"
+                    style="display: none; z-index: 9999; position: fixed; top: 0; bottom: 0; left: 0; width: 100%; margin: auto; background: #000000d6;">
+                    <form
+                        style="margin: auto; background-color: rgba(22, 22, 19, 0.648); backdrop-filter: blur(5px); width: max-content; padding: 4em 8em; border-radius: 1.63em; align-items: center; display: flex; flex-direction: column; position: relative;">
+
+                        <p id="cutomerPhoneLabel" style="margin-left: auto; width: 100%; text-align: center;"><strong
+                                style="color: #f8f8f8">OTP sent to
+                                <span>767868868</span></strong></p>
+
+                        <input id="customerOtp" type="tel" onfocus="this.style.outline = 'none'" maxlength="4"
+                            style="display: block; margin: 0.5em auto; border: none; padding: 0;width: 6ch; background: repeating-linear-gradient(90deg, dimgrey 0, dimgrey 1ch, transparent 0, transparent 1.5ch) 0 100%/5.5ch 2px no-repeat; font: 5ch droid sans mono, consolas, monospace; letter-spacing: 0.5ch; color: dimgrey;"
+                            autocomplete="off">
+
+                        <p id="resendBtn" style="margin-bottom: 1em;"> <a onclick="getCustomerOtp(true)"
+                                style="color: #2F8AB2; text-decoration: none;"
+                                onmouseover="this.style.textDecoration = 'underline'"
+                                onmouseleave="this.style.textDecoration = 'none'">Resend
+                                otp</a></p>
+
+                        <button id="verifyOtpBtn" onclick="verifyCustomerOtp()" type="submit"
+                            class="button w-inline-block" style="width: max-content;">
+                            <div class="text-button white" style="padding: 0 1em;">Continue</div>
+                        </button>
+
+                        <button style="background-color: transparent; position: absolute; right: 1.5em; top: 2em;"
+                            class="removeCouponBtn" onclick="closeOtpForm()" type="button"><img
+                                src="./assets/img/remove.png" alt="Remove Coupon Button"></button>
+                    </form>
+
+                </div>
 
                 <!-- Order Summary  -->
                 <form id="orderSummary" style="width: 90%; margin: auto; display: none; gap: 1.5em;">
@@ -360,11 +401,10 @@
                                             style="width: 100%; height: inherit;" onclick="getCustomerOtp()">
                                             Get Otp
                                         </button>
-
                                     </div>
                                 </div>
                             </div>
-
+                            <!-- 
                             <div id="otpForm" style="display: none;">
                                 <label for="otp" id="otpLabel" style="color: #4a4a4a"> OTP* </label>
                                 <div class="verificationForm" style="display: flex; flex-direction: column; gap: 1em;">
@@ -382,7 +422,7 @@
                                             Verify Otp</button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="features-bg" style="flex: 1;">
