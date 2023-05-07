@@ -271,7 +271,7 @@ function paymentMehtod(paymentType) {
       orderObj = data.Result.Order;
       localStorage.setItem("customerData", JSON.stringify(orderObj));
 
-      if (paymentType === "Online") {
+      if (paymentType === "Online Payment") {
         Snackbar.show({
           pos: "top-right",
           showAction: false,
@@ -301,10 +301,11 @@ function changeAddress() {
 
   inputs[0].value = name[0];
   inputs[1].value = name[1];
-  inputs[2].value = customerAddress["Address"];
-  inputs[3].value = customerAddress["Apt"];
-  inputs[4].value = customerAddress["City"];
-  inputs[5].value = customerAddress["Pin"];
+  inputs[2].value = customerAddress.Address;
+  inputs[3].value = customerAddress.Apt;
+  inputs[4].value = customerAddress.City;
+  inputs[5].value = customerAddress.Pin;
+  inputs[6].value = orderObj.Mobile;
 
   formValidation();
 }
