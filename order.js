@@ -337,6 +337,8 @@ orderObj.Mobile !== "" && getCustomerOtp();
 function getCustomerOtp(bool) {
   console.log(customerPhone.value);
 
+  formValidation();
+
   if (customerPhone.value.length === 10) {
     orderObj.Mobile = customerPhone.value;
     localStorage.setItem("customerData", JSON.stringify(orderObj));
@@ -345,6 +347,23 @@ function getCustomerOtp(bool) {
     otpForm.style.display = "flex";
     customerOtp.disabled = "false";
     verifyOtpBtn.disabled = "false";
+
+    if (formComplete) {
+      setShippingDetails();
+      console.log(orderObj.Mobile);
+      // phoneNumberForm.style.display = "none";
+      // otpForm.style.display = "flex";
+      // customerOtp.style.display = "block";
+
+      verifyOtpBtn.disabled = false;
+      customerOtp.disabled = false;
+      // resendBtn.style.display = "block";
+
+      // customerPhone.disabled = true;
+      // getOtpBtn.disabled = true;
+
+      cutomerPhoneLabel.innerHTML = orderObj.Mobile;
+    }
   } else {
     if (bool == true) {
       console.log("ops");
@@ -361,26 +380,10 @@ function getCustomerOtp(bool) {
     }
   }
 
-  if (orderObj.Mobile !== "") {
-    console.log(orderObj.Mobile);
-    // phoneNumberForm.style.display = "none";
-    // otpForm.style.display = "flex";
-    // customerOtp.style.display = "block";
-
-    verifyOtpBtn.disabled = false;
-    customerOtp.disabled = false;
-    // resendBtn.style.display = "block";
-
-    // customerPhone.disabled = true;
-    // getOtpBtn.disabled = true;
-
-    cutomerPhoneLabel.innerHTML = orderObj.Mobile;
-  }
-
   url = window.location.href;
 
   // setTimeout(1000, () => {
-  setShippingDetails();
+  // formValidation();
   // });
 
   console.log(orderObj);
@@ -679,7 +682,7 @@ function verifyCouponCode(bool) {
       } else {
         findTotal();
 
-        if (elem) {
+        if (bool) {
           couponCodeError.style.display = "block";
           couponCodeError.innerHTML = "Invalid Coupon Code!";
           // couponCodeError.innerHTML = data.Message;
