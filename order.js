@@ -37,6 +37,7 @@ const appliedCouponDetails = orderSummaryForm.querySelector(
 );
 
 const checkoutBtn = orderSummaryForm.querySelector(".checkout.button");
+const cartDetailsElem = orderSummaryForm.querySelector("#cartDetails");
 
 var url = window.location.href;
 
@@ -520,6 +521,11 @@ function findTotal(discountAmm) {
 
   const finalAmountElem = orderSummaryForm.querySelector(".finalAmount span");
   finalAmountElem.innerHTML = `₹${finalAmount}`;
+
+  finalAmount === 50 &&
+    (cartDetailsElem.innerHTML = `
+  <h5 style="padding: 1em;">No items in cart..</h5>
+  `);
 }
 
 const orderContainerElem = orderSummaryForm.querySelector(".orderContainer");
