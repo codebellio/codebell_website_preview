@@ -512,21 +512,21 @@ function findTotal(discountAmm) {
 
   orderObj.Subtotal = subtotal;
 
-  const subtotalElem = orderSummaryForm.querySelector(".subtotal span");
-  subtotalElem.innerHTML = `₹${subtotal}`;
+  if (orderObj.subTotal === 0) {
+    cartDetailsElem.innerHTML = `
+ <h5 style="padding: 1em;">No items in cart..</h5>
+ `;
+  } else {
+    const subtotalElem = orderSummaryForm.querySelector(".subtotal span");
+    subtotalElem.innerHTML = `₹${subtotal}`;
 
-  const finalAmount = subtotal - (discountAmm ? discountAmm : 0) + 50;
+    const finalAmount = subtotal - (discountAmm ? discountAmm : 0) + 50;
 
-  orderObj.Total = finalAmount;
+    orderObj.Total = finalAmount;
 
-  const finalAmountElem = orderSummaryForm.querySelector(".finalAmount span");
-  finalAmountElem.innerHTML = `₹${finalAmount}`;
-
-  finalAmount === 50
-    ? (cartDetailsElem.innerHTML = `
-  <h5 style="padding: 1em;">No items in cart..</h5>
-  `)
-    : (finalAmountElem.innerHTML = `₹${finalAmount}`);
+    const finalAmountElem = orderSummaryForm.querySelector(".finalAmount span");
+    finalAmountElem.innerHTML = `₹${finalAmount}`;
+  }
 }
 
 const orderContainerElem = orderSummaryForm.querySelector(".orderContainer");
