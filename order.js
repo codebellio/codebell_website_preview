@@ -180,7 +180,6 @@ function setOrders(orderList) {
   <h4>Your order</h4>
 
                         <div class="orderContainer">
-                        ${orderList.map()}
                         </div>
 
                         <div style="width: 95%; height: 1px; background-color: black; margin: 1.5em 0;"></div>
