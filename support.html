@@ -37,6 +37,25 @@
             z-index: -1;
         }
 
+        input {
+            height: auto !important;
+        }
+
+        ::placeholder {
+            line-height: 1.6em !important;
+            font-size: 1.125em !important;
+        }
+
+        :-ms-input-placeholder {
+            line-height: 1.6em !important;
+            font-size: 1.125em !important;
+        }
+
+        ::-ms-input-placeholder {
+            line-height: 1.6em !important;
+            font-size: 1.125em !important;
+        }
+
         .site-footer a {
             color: inherit;
             text-decoration: none;
@@ -452,11 +471,11 @@
                         class="form-block w-form">
                         <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form"
                             aria-label="Email Form"><input type="text" class="text-field w-input" maxlength="256"
-                                name="name" data-name="Name" placeholder="Your Name" id="name"><input type="email"
+                                name="name" data-name="Name" placeholder="Your Name" id="name" required><input type="email"
                                 class="text-field w-input" maxlength="256" name="email" data-name="Email"
-                                placeholder="Your Email" id="email" required=""><textarea
+                                placeholder="Your Email" id="email" required><textarea
                                 placeholder="Tell us how we can help" maxlength="5000" id="message" name="Message"
-                                data-name="field" class="textarea w-input"></textarea><input type="submit"
+                                data-name="field" class="textarea w-input" required></textarea><input type="submit"
                                 value="Submit" data-wait="Please wait..." class="submit-button w-button"></form>
                         <div class="success-message w-form-done" tabindex="-1" role="region"
                             aria-label="Email Form success">

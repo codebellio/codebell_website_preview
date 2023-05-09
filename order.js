@@ -393,7 +393,7 @@ function getCustomerOtp(bool) {
 
   if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
     fetchData().then((data) => {
-      if (data.Result.Order.MobileVerified === true) {
+      if (data.Result.Order.UUID != "") {
         orderObj["UUID"] = `${data.Result.Order.UUID}`;
         localStorage.setItem("customerData", JSON.stringify(orderObj));
 
