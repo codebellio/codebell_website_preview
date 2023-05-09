@@ -174,6 +174,37 @@ function setOrderSummaryForm() {
   `;
 }
 
+function setOrders(orderList) {
+  orderContainerElem.innerHTML = ``;
+  orderList.map((productDetail, index) => {
+    orderContainerElem.innerHTML += `
+  <div style="display: flex; align-items: center; gap: 1.5em; margin: 2em 0;" id="itemDetail-${index}">
+      <div style="min-width: 138px; width: 138px; height: 138px;">
+        <img src="${productDetail.Photo}" alt="${productDetail.Photo} image" style="width: 100%; height: 100%; object-fit: contain;">
+      </div>
+  
+      <div>
+          <h6>${productDetail.Title}</h6>
+
+          <div style="display: flex; margin-top: 1em; align-items: center; gap: 0.5em">
+
+            <button type="button" onclick="decItemCount(${index})" style="background: transparent">
+              <img src="./assets/img/minus.png" alt="" style="width: 28px; height: 28px;">
+            </button>
+
+            <p id="itemCount-${index}">${productDetail.Count} unit</p>
+
+            <button type="button" onclick="incItemCount(${index})" style="background: transparent">
+              <img src="./assets/img/add.png" alt="" style="width: 24px; height: 24px;">
+            </button>
+
+        </div>
+      </div>
+  </div>
+`;
+  });
+}
+
 async function getCouponDetails(couponCode) {
   couponObj = { coupon_code: couponCode };
 
@@ -362,29 +393,58 @@ function getCustomerOtp(bool) {
 
   if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
     fetchData().then((data) => {
-      orderObj["UUID"] = `${data.Result.Order.UUID}`;
-      localStorage.setItem("customerData", JSON.stringify(orderObj));
+      if (data.Result.Order.MobileVerified === true) {
+        orderObj["UUID"] = `${data.Result.Order.UUID}`;
+        localStorage.setItem("customerData", JSON.stringify(orderObj));
 
-      const UUID = orderObj.UUID;
-      history.pushState(
-        {},
-        "Codebell",
-        `https://preview.codebell.io/order?id=${UUID}`
-      );
+        const UUID = orderObj.UUID;
+        history.pushState(
+          {},
+          "Codebell",
+          `https://preview.codebell.io/order?id=${UUID}`
+        );
 
-      Snackbar.show({
-        pos: "top-right",
-        showAction: false,
-        text: data.Message,
-      });
+        Snackbar.show({
+          pos: "top-right",
+          showAction: false,
+          text: data.Message,
+        });
 
-      data.Result.Order.TotalVerified === true
-        ? ((checkoutBtn.style.display = "block"),
-          (checkoutBtn.disabled = false))
-        : (checkoutBtn.style.display = "none");
+        data.Result.Order.TotalVerified === true
+          ? ((checkoutBtn.style.display = "block"),
+            (checkoutBtn.disabled = false))
+          : (checkoutBtn.style.display = "none");
+      } else {
+        changeAddress();
+      }
+
+      customerAddress.Address !== "" &&
+        changeAddress() &&
+        orderList != "" &&
+        setOrderSummaryForm();
+      setOrders(orderList);
     });
   } else {
     verifyCustomerOtp(false);
+
+    validateCheckout({}, false).then((data) => {
+      orderList = data.Result.OrderProducts;
+
+      let totalCount = 0;
+      orderList.map((orders) => {
+        totalCount += orders.Count;
+      });
+
+      localStorage.setItem(
+        "orderList",
+        JSON.stringify({ orderList, totalCount })
+      );
+
+      changeAddress(),
+        setOrderSummaryForm(),
+        shippingDetails(),
+        setOrders(orderList);
+    });
   }
 }
 
@@ -531,65 +591,13 @@ function decItemCount(productIndex) {
   }
 }
 
-function setOrders(orderList) {
-  orderContainerElem.innerHTML = ``;
-  orderList.map((productDetail, index) => {
-    orderContainerElem.innerHTML += `
-  <div style="display: flex; align-items: center; gap: 1.5em; margin: 2em 0;" id="itemDetail-${index}">
-      <div style="min-width: 138px; width: 138px; height: 138px;">
-        <img src="${productDetail.Photo}" alt="${productDetail.Photo} image" style="width: 100%; height: 100%; object-fit: contain;">
-      </div>
-  
-      <div>
-          <h6>${productDetail.Title}</h6>
+// if (
+//   url.substring(url.lastIndexOf("?") + 4) == orderObj.UUID &&
+//   orderList == ""
+// ) {
+// } else {
 
-          <div style="display: flex; margin-top: 1em; align-items: center; gap: 0.5em">
-
-            <button type="button" onclick="decItemCount(${index})" style="background: transparent">
-              <img src="./assets/img/minus.png" alt="" style="width: 28px; height: 28px;">
-            </button>
-
-            <p id="itemCount-${index}">${productDetail.Count} unit</p>
-
-            <button type="button" onclick="incItemCount(${index})" style="background: transparent">
-              <img src="./assets/img/add.png" alt="" style="width: 24px; height: 24px;">
-            </button>
-
-        </div>
-      </div>
-  </div>
-`;
-  });
-}
-
-if (
-  url.substring(url.lastIndexOf("?") + 4) == orderObj.UUID &&
-  orderList == ""
-) {
-  validateCheckout({}, false).then((data) => {
-    orderList = data.Result.OrderProducts;
-
-    let totalCount = 0;
-    orderList.map((orders) => {
-      totalCount += orders.Count;
-    });
-
-    localStorage.setItem(
-      "orderList",
-      JSON.stringify({ orderList, totalCount })
-    );
-
-    changeAddress(),
-      setOrderSummaryForm(),
-      shippingDetails(),
-      setOrders(orderList);
-  });
-} else {
-  customerAddress.Address !== "" &&
-    (changeAddress(), orderList != "") &&
-    (setOrderSummaryForm(), shippingDetails());
-  setOrders(orderList);
-}
+// }
 
 let couponCode = "";
 function verifyCouponCode(bool) {
