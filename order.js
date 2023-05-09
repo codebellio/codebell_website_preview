@@ -333,9 +333,9 @@ let resendOtp = false;
 async function fetchData(bool) {
   const record = {
     record: orderObj,
+    ...(bool === true && { ResendOTP: true }),
   };
 
-  bool && (record["ResendOTP"] = true);
 
   var api = "https://api.codebell.io/api/update_order";
   return await fetch(api, {
