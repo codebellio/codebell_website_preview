@@ -36,21 +36,57 @@
             background-color: transparent !important;
             z-index: -1;
         }
+
+        .site-footer a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .site-footer a:hover {
+            text-decoration: underline;
+        }
+
+        #social-icons a {
+            transition: all 0.2s;
+        }
+
+        #social-icons a img {
+            width: 2.2em;
+        }
+
+        #social-icons a:hover {
+            transform: scale(1.1);
+            transition: all 0.2s;
+        }
+
+        @media (max-width:767px) {
+            .site-footer {
+                padding: 0.5em !important;
+            }
+
+            #social-icons {
+                margin: auto !important;
+            }
+
+            #footer-end p {
+                margin: auto;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
         role="banner" class="navbar w-nav">
-        <div class="nav-block"><a href="/" data-w-id="ad761d47-7853-493f-fa15-057342917d69" class="brand w-nav-brand"
-                aria-label="home"
+        <div class="nav-block"><a href="/" data-w-id="ad761d47-7853-493f-fa15-057342917d69" aria-current="page"
+                class="brand w-nav-brand w--current" aria-label="home"
                 style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"><img
                     src="/assets/img/codebell_blue.png" loading="eager" alt="" class="logo"></a>
             <div data-w-id="ad761d47-7853-493f-fa15-057342917d6b" class="nav"
                 style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
                 <nav role="navigation" class="nav-menu w-nav-menu">
-                    <a href="/" class="nav-link w-nav-link">Home<br></a>
-                    <a href="/features" aria-current="page" class="nav-link w-nav-link w--current">Features<br></a>
+                    <a href="/" class="nav-link w-nav-link w--current" aria-current="page">Home<br></a>
+                    <a href="/features" class="nav-link w-nav-link">Features<br></a>
                     <a href="/products" class="nav-link w-nav-link" aria-current="page">Products<br></a>
                     <a href="/blog" class="nav-link w-nav-link">Blog<br></a>
                     <a href="/support" class="nav-link w-nav-link">Support<br></a>
@@ -60,14 +96,14 @@
                         style="background-color: white; border-radius: 10em; display: none;">
 
                         <div class="text-button">
-                            <img src="./assets/img/cart.png" alt="" style="width: 32px; height: inherit;">
+                            <img src="../assets/img/cart.png" alt="" style="width: 32px; height: inherit;">
 
                             <span id="productCount" style="color: black">0</span>
                         </div>
                     </a>
                 </cart-view>
-                <a href="/get-the-app" class="nav-button w-inline-block"><img
-                        src="/spectrum_assets_files/6391742c49aaab268ec5c5c5_download_dark.svg" loading="eager" alt=""
+                <a href="/get-the-app" class="nav-button w-inline-block">
+                    <img src="/spectrum_assets_files/6391742c49aaab268ec5c5c5_download_dark.svg" loading="eager" alt=""
                         class="icon-button">
                     <div class="text-button">Get the App</div>
                 </a>
@@ -252,6 +288,42 @@
         </div>
         <div data-w-id="ef2d27af-e28a-9c66-8e12-40322fccb395" style="opacity: 1;" class="gradient-footer">
             <div class="noise"></div>
+        </div>
+        <div class="site-footer" style="padding: 7em 7em 0 7em;">
+            <div style="display: flex; gap: 5em; margin-bottom: 5em; flex-wrap: wrap;">
+                <div style="flex: 1;">
+                    <img src="./assets/img/logo.svg" alt="">
+                    <p style="max-width: 25em; margin-left: 0.4em; margin-top: 1em;">Modern way of communication that is
+                        safe, secure,
+                        efficient, and scalable.</p>
+                </div>
+                <div style="display: flex; gap: 5em; flex: 0;">
+                    <div>
+                        <h5 style="margin-bottom: 0.5em;">Resources</h5>
+                        <p><a href="/features">Features</a></p>
+                        <p><a href="/products">Products</a></p>
+                        <p><a href="/blog">Blog</a></p>
+                        <p><a href="/support">Support</a></p>
+                    </div>
+                    <div>
+                        <h5 style="margin-bottom: 0.5em;">Legal</h5>
+                        <p><a href="/t&c">Terms</a></p>
+                        <p><a href="/privacy_policy">Privacy</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="footer-end" style="width: 100%; display: flex; flex-wrap: wrap-reverse; gap: 2em;">
+                <p>© Codebell. All rights reserved.</p>
+
+                <div id="social-icons" style="margin: 0 0 0 auto; display: flex; gap: 2em;">
+                    <a href="#"><img src="./assets/img/twitter.svg" alt="twitter"></a>
+                    <a href="#"><img src="./assets/img/linkedin.svg" alt="linkedin"></a>
+                    <a href="#"><img src="./assets/img/facebook.svg" alt="facebook"></a>
+                    <a href="#"><img src="./assets/img/whastapp.svg" alt="whastapp"></a>
+                </div>
+
+            </div>
         </div>
     </footer>
 
