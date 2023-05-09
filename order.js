@@ -37,7 +37,7 @@ const appliedCouponDetails = orderSummaryForm.querySelector(
 );
 
 const checkoutBtn = orderSummaryForm.querySelector(".checkout.button");
-const cartDetailsElem = orderSummaryForm.querySelector("#cartDetails");
+const cartDetailsElem = document.querySelector("#cartDetails");
 
 var url = window.location.href;
 
