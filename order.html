@@ -118,6 +118,14 @@
             #footer-end p {
                 margin: auto;
             }
+
+            .block-button-footer {
+                width: 100%;
+            }
+
+            .block-button-footer a {
+                width: 100%;
+            }
         }
 
         @media screen and (max-width: 867px) {
@@ -331,7 +339,7 @@
                     <div style="display: flex; width: 100%; margin-top: 2em; flex-wrap: wrap; gap: 2em;">
                         <div style="flex: 1">
                             <label for="first name" style="color: #4a4a4a"> PIN code* </label>
-                            <input id="pin" type="text"
+                            <input id="pin" type="number" pattern="[0-9]*" inputmode="numeric"
                                 style="padding: 1em; width: 100%; min-width: 15em; border-radius: 1em; border: none; border: 2px solid #2F8AB2;"
                                 placeholder="562241">
                             <span class="errorMessage"></span>
