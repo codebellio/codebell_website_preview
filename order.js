@@ -444,13 +444,17 @@ function getCustomerOtp(bool) {
         changeAddress(), setOrderSummaryForm(), shippingDetails();
       });
     } else {
-      changeAddress();
-      setShippingDetails();
-      shippingDetails();
-      setOrderSummaryForm();
+      if (bool) {
+        setShippingDetails();
+        shippingDetails();
+        setOrderSummaryForm();
+      } else {
+        changeAddress();
+        setShippingDetails();
+        shippingDetails();
+        setOrderSummaryForm();
+      }
     }
-
-    // customerAddress.Address == "" && changeAddress();
 
     setOrders(orderList);
   }
