@@ -356,9 +356,19 @@ async function fetchData(bool) {
 
 orderObj.Mobile !== "" && getCustomerOtp();
 function getCustomerOtp(bool) {
-  formValidation();
-
   url = window.location.href;
+
+  if (
+    !(orderObj.UUID && url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID)
+  ) {
+    formValidation();
+  } else {
+    history.pushState(
+      {},
+      "Codebell",
+      `https://preview.codebell.io/order?id=${orderObj.UUID}`
+    );
+  }
 
   if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
     if (customerPhone.value.length === 10) {
