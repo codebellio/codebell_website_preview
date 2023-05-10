@@ -39,6 +39,8 @@ const appliedCouponDetails = orderSummaryForm.querySelector(
 const checkoutBtn = orderSummaryForm.querySelector(".checkout.button");
 const cartDetailsElem = orderSummaryForm.querySelector("#cartDetails");
 
+const orderContainerElem = orderSummaryForm.querySelector(".orderContainer");
+
 var url = window.location.href;
 
 let orderObj = JSON.parse(localStorage.getItem("customerData"))
@@ -434,24 +436,25 @@ function getCustomerOtp(bool) {
   } else {
     verifyCustomerOtp(false);
 
-    // validateCheckout({}, false).then((data) => {
-    //   orderList = data.Result.OrderProducts;
+    if (orderList == "") {
+      validateCheckout({}, false).then((data) => {
+        orderList = data.Result.OrderProducts;
+        let totalCount = 0;
+        orderList.map((orders) => {
+          totalCount += orders.Count;
+        });
 
-    //   let totalCount = 0;
-    //   orderList.map((orders) => {
-    //     totalCount += orders.Count;
-    //   });
+        localStorage.setItem(
+          "orderList",
+          JSON.stringify({ orderList, totalCount })
+        );
 
-    //   localStorage.setItem(
-    //     "orderList",
-    //     JSON.stringify({ orderList, totalCount })
-    //   );
-
-    //   changeAddress(),
-    //     setOrderSummaryForm(),
-    //     shippingDetails(),
-    //     setOrders(orderList);
-    // });
+        changeAddress(),
+          setOrderSummaryForm(),
+          shippingDetails(),
+          setOrders(orderList);
+      });
+    }
 
     customerAddress.Address !== "" &&
       changeAddress() &&
@@ -540,8 +543,6 @@ function findTotal(discountAmm) {
     finalAmountElem.innerHTML = `₹${finalAmount}`;
   }
 }
-
-const orderContainerElem = orderSummaryForm.querySelector(".orderContainer");
 
 function incItemCount(productIndex) {
   if (localStorage.getItem("orderList")) {
