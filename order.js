@@ -370,6 +370,8 @@ function getCustomerOtp(bool) {
     );
   }
 
+  url = window.location.href;
+
   if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
     if (customerPhone.value.length === 10) {
       if (formComplete) {
