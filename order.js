@@ -357,8 +357,6 @@ orderObj.Mobile !== "" && getCustomerOtp();
 function getCustomerOtp(bool) {
   formValidation();
 
-  console.log(formComplete);
-
   if (customerPhone.value.length === 10 && formComplete) {
     setShippingDetails();
 
@@ -372,7 +370,7 @@ function getCustomerOtp(bool) {
 
     cutomerPhoneLabel.innerHTML = orderObj.Mobile;
   } else {
-    if (bool == true) {
+    if (bool == true && formComplete) {
       const phoneErrorMsgElem =
         shippingDetailsElem.querySelector(".phoneErrorMessage");
 
