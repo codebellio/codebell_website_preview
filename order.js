@@ -357,20 +357,22 @@ orderObj.Mobile !== "" && getCustomerOtp();
 function getCustomerOtp(bool) {
   formValidation();
 
-  if (customerPhone.value.length === 10 && formComplete) {
-    setShippingDetails();
+  if (customerPhone.value.length === 10) {
+    if (formComplete) {
+      setShippingDetails();
 
-    orderObj.Mobile = customerPhone.value;
-    localStorage.setItem("customerData", JSON.stringify(orderObj));
+      orderObj.Mobile = customerPhone.value;
+      localStorage.setItem("customerData", JSON.stringify(orderObj));
 
-    otpForm.style.display = "flex";
-    verifyOtpBtn.disabled = false;
-    customerOtp.disabled = false;
-    document.querySelector("body").style.overflowY = "hidden";
+      otpForm.style.display = "flex";
+      verifyOtpBtn.disabled = false;
+      customerOtp.disabled = false;
+      document.querySelector("body").style.overflowY = "hidden";
 
-    cutomerPhoneLabel.innerHTML = orderObj.Mobile;
+      cutomerPhoneLabel.innerHTML = orderObj.Mobile;
+    }
   } else {
-    if (bool == true && formComplete) {
+    if (bool == true) {
       const phoneErrorMsgElem =
         shippingDetailsElem.querySelector(".phoneErrorMessage");
 
@@ -383,64 +385,66 @@ function getCustomerOtp(bool) {
       });
     }
   }
-}
 
-url = window.location.href;
+  if (formComplete) {
+    url = window.location.href;
 
-if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
-  fetchData().then((data) => {
-    if (data.Result.Order.UUID != "") {
-      orderObj["UUID"] = `${data.Result.Order.UUID}`;
-      localStorage.setItem("customerData", JSON.stringify(orderObj));
+    if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
+      fetchData().then((data) => {
+        if (data.Result.Order.UUID != "") {
+          orderObj["UUID"] = `${data.Result.Order.UUID}`;
+          localStorage.setItem("customerData", JSON.stringify(orderObj));
 
-      const UUID = orderObj.UUID;
-      history.pushState(
-        {},
-        "Codebell",
-        `https://preview.codebell.io/order?id=${UUID}`
-      );
+          const UUID = orderObj.UUID;
+          history.pushState(
+            {},
+            "Codebell",
+            `https://preview.codebell.io/order?id=${UUID}`
+          );
 
-      Snackbar.show({
-        pos: "top-right",
-        showAction: false,
-        text: data.Message,
+          Snackbar.show({
+            pos: "top-right",
+            showAction: false,
+            text: data.Message,
+          });
+
+          data.Result.Order.TotalVerified === true
+            ? ((checkoutBtn.style.display = "block"),
+              (checkoutBtn.disabled = false))
+            : (checkoutBtn.style.display = "none");
+        } else {
+          changeAddress();
+        }
+
+        customerAddress.Address !== "" &&
+          changeAddress() &&
+          orderList != "" &&
+          setOrderSummaryForm();
+        setOrders(orderList);
       });
-
-      data.Result.Order.TotalVerified === true
-        ? ((checkoutBtn.style.display = "block"),
-          (checkoutBtn.disabled = false))
-        : (checkoutBtn.style.display = "none");
     } else {
-      changeAddress();
+      verifyCustomerOtp(false);
+
+      validateCheckout({}, false).then((data) => {
+        orderList = data.Result.OrderProducts;
+
+        let totalCount = 0;
+        orderList.map((orders) => {
+          totalCount += orders.Count;
+        });
+
+        localStorage.setItem(
+          "orderList",
+          JSON.stringify({ orderList, totalCount })
+        );
+
+        changeAddress(),
+          setOrderSummaryForm(),
+          shippingDetails(),
+          setOrders(orderList);
+      });
     }
-
-    customerAddress.Address !== "" &&
-      changeAddress() &&
-      orderList != "" &&
-      setOrderSummaryForm();
-    setOrders(orderList);
-  });
-} else {
-  verifyCustomerOtp(false);
-
-  validateCheckout({}, false).then((data) => {
-    orderList = data.Result.OrderProducts;
-
-    let totalCount = 0;
-    orderList.map((orders) => {
-      totalCount += orders.Count;
-    });
-
-    localStorage.setItem(
-      "orderList",
-      JSON.stringify({ orderList, totalCount })
-    );
-
-    changeAddress(),
-      setOrderSummaryForm(),
-      shippingDetails(),
-      setOrders(orderList);
-  });
+  }
 }
 
 function changePhoneNum() {
