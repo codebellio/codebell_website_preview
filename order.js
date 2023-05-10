@@ -105,7 +105,7 @@ function formValidation() {
 
   formComplete = true;
   shippingDetailInput.forEach((input, index) => {
-    if (input.type == "text") {
+    if (input.type == "text" || input.type == "tel") {
       const inputValue = input.value.trim();
 
       if (!inputValue) {
@@ -357,26 +357,13 @@ orderObj.Mobile !== "" && getCustomerOtp();
 function getCustomerOtp(bool) {
   formValidation();
 
-  if (formComplete) {
+  console.log(formComplete);
+
+  if (customerPhone.value.length === 10 && formComplete) {
     setShippingDetails();
 
-    if (customerPhone.value.length === 10) {
-      orderObj.Mobile = customerPhone.value;
-      localStorage.setItem("customerData", JSON.stringify(orderObj));
-    } else {
-      if (bool == true) {
-        const phoneErrorMsgElem =
-          shippingDetailsElem.querySelector(".phoneErrorMessage");
-
-        phoneErrorMsgElem.style.display = "block";
-        phoneErrorMsgElem.innerHTML = "Please enter a valid phone number.";
-
-        customerPhone.addEventListener("input", () => {
-          phoneErrorMsgElem.innerHTML = "";
-          phoneErrorMsgElem.style.display = "none";
-        });
-      }
-    }
+    orderObj.Mobile = customerPhone.value;
+    localStorage.setItem("customerData", JSON.stringify(orderObj));
 
     otpForm.style.display = "flex";
     verifyOtpBtn.disabled = false;
@@ -384,6 +371,19 @@ function getCustomerOtp(bool) {
     document.querySelector("body").style.overflowY = "hidden";
 
     cutomerPhoneLabel.innerHTML = orderObj.Mobile;
+  } else {
+    if (bool == true) {
+      const phoneErrorMsgElem =
+        shippingDetailsElem.querySelector(".phoneErrorMessage");
+
+      phoneErrorMsgElem.style.display = "block";
+      phoneErrorMsgElem.innerHTML = "Please enter a valid phone number.";
+
+      customerPhone.addEventListener("input", () => {
+        phoneErrorMsgElem.innerHTML = "";
+        phoneErrorMsgElem.style.display = "none";
+      });
+    }
   }
 }
 
