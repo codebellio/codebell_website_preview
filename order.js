@@ -434,30 +434,30 @@ function getCustomerOtp(bool) {
   } else {
     verifyCustomerOtp(false);
 
-    validateCheckout({}, false).then((data) => {
-      orderList = data.Result.OrderProducts;
+    // validateCheckout({}, false).then((data) => {
+    //   orderList = data.Result.OrderProducts;
 
-      let totalCount = 0;
-      orderList.map((orders) => {
-        totalCount += orders.Count;
-      });
+    //   let totalCount = 0;
+    //   orderList.map((orders) => {
+    //     totalCount += orders.Count;
+    //   });
 
-      localStorage.setItem(
-        "orderList",
-        JSON.stringify({ orderList, totalCount })
-      );
+    //   localStorage.setItem(
+    //     "orderList",
+    //     JSON.stringify({ orderList, totalCount })
+    //   );
 
-      changeAddress(),
-        setOrderSummaryForm(),
-        shippingDetails(),
-        setOrders(orderList);
-    });
+    //   changeAddress(),
+    //     setOrderSummaryForm(),
+    //     shippingDetails(),
+    //     setOrders(orderList);
+    // });
 
-    // customerAddress.Address !== "" &&
-    //   changeAddress() &&
-    //   orderList != "" &&
-    //   setOrderSummaryForm();
-    // setOrders(orderList);
+    customerAddress.Address !== "" &&
+      changeAddress() &&
+      orderList != "" &&
+      setOrderSummaryForm();
+    setOrders(orderList);
   }
 }
 
