@@ -360,8 +360,8 @@ function getCustomerOtp(bool) {
   url = window.location.href;
 
   if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
-    if (formComplete) {
-      if (customerPhone.value.length === 10) {
+    if (customerPhone.value.length === 10) {
+      if (formComplete) {
         if (orderList != "") {
           setShippingDetails();
 
@@ -416,19 +416,19 @@ function getCustomerOtp(bool) {
             text: "Please Add Items to cart",
           });
         }
-      } else {
-        if (bool == true) {
-          const phoneErrorMsgElem =
-            shippingDetailsElem.querySelector(".phoneErrorMessage");
+      }
+    } else {
+      if (bool == true) {
+        const phoneErrorMsgElem =
+          shippingDetailsElem.querySelector(".phoneErrorMessage");
 
-          phoneErrorMsgElem.style.display = "block";
-          phoneErrorMsgElem.innerHTML = "Please enter a valid phone number.";
+        phoneErrorMsgElem.style.display = "block";
+        phoneErrorMsgElem.innerHTML = "Please enter a valid phone number.";
 
-          customerPhone.addEventListener("input", () => {
-            phoneErrorMsgElem.innerHTML = "";
-            phoneErrorMsgElem.style.display = "none";
-          });
-        }
+        customerPhone.addEventListener("input", () => {
+          phoneErrorMsgElem.innerHTML = "";
+          phoneErrorMsgElem.style.display = "none";
+        });
       }
     }
   } else {
