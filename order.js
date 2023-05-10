@@ -395,11 +395,6 @@ function getCustomerOtp(bool) {
                 showAction: false,
                 text: data.Message,
               });
-
-              data.Result.Order.TotalVerified === true
-                ? ((checkoutBtn.style.display = "block"),
-                  (checkoutBtn.disabled = false))
-                : (checkoutBtn.style.display = "none");
             } else {
               changeAddress();
             }
@@ -433,9 +428,7 @@ function getCustomerOtp(bool) {
       }
     }
   } else {
-    shippingDetails();
-
-    if (orderList == "") {
+    if (orderList == "" && !bool) {
       validateCheckout({}, false).then((data) => {
         orderList = data.Result.OrderProducts;
         let totalCount = 0;
@@ -448,13 +441,12 @@ function getCustomerOtp(bool) {
           JSON.stringify({ orderList, totalCount })
         );
 
-        changeAddress(),
-          setOrderSummaryForm(),
-          shippingDetails(),
-          setOrders(orderList);
+        changeAddress(), setOrderSummaryForm(), shippingDetails();
       });
     } else {
       changeAddress();
+      setShippingDetails();
+      shippingDetails();
       setOrderSummaryForm();
     }
 
