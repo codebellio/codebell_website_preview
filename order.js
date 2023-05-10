@@ -453,12 +453,12 @@ function getCustomerOtp(bool) {
           shippingDetails(),
           setOrders(orderList);
       });
+    } else {
+      setOrderSummaryForm();
     }
 
-    customerAddress.Address !== "" &&
-      changeAddress() &&
-      orderList != "" &&
-      setOrderSummaryForm();
+    customerAddress.Address == "" && changeAddress();
+
     setOrders(orderList);
   }
 }
@@ -497,13 +497,17 @@ function verifyCustomerOtp(bool) {
       verifyOtpBtnVal.innerHTML = "Verified ✅";
       verifyOtpBtn.disabled = true;
 
-      setTimeout(() => {
-        closeOtpForm();
-      }, 1000);
+      if (bool === true) {
+        setTimeout(() => {
+          closeOtpForm();
+        }, 1000);
 
-      setTimeout(() => {
+        setTimeout(() => {
+          shippingDetails();
+        }, 1500);
+      } else {
         shippingDetails();
-      }, 1500);
+      }
     } else {
       if (bool) {
         Snackbar.show({
@@ -513,6 +517,7 @@ function verifyCustomerOtp(bool) {
           text: data.Message,
         });
       }
+
       verifyOtpBtn.disabled = false;
       customerOtp.disabled = false;
     }
