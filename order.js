@@ -433,7 +433,7 @@ function getCustomerOtp(bool) {
       }
     }
   } else {
-    verifyCustomerOtp(false);
+    shippingDetails();
 
     if (orderList == "") {
       validateCheckout({}, false).then((data) => {
@@ -454,10 +454,11 @@ function getCustomerOtp(bool) {
           setOrders(orderList);
       });
     } else {
+      changeAddress();
       setOrderSummaryForm();
     }
 
-    customerAddress.Address == "" && changeAddress();
+    // customerAddress.Address == "" && changeAddress();
 
     setOrders(orderList);
   }
@@ -505,8 +506,6 @@ function verifyCustomerOtp(bool) {
         setTimeout(() => {
           shippingDetails();
         }, 1500);
-      } else {
-        shippingDetails();
       }
     } else {
       if (bool) {
