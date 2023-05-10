@@ -64,6 +64,15 @@
             transition: all 0.2s;
         }
 
+        #testimonial-carousel::-webkit-scrollbar {
+            display: none;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        #testimonial-carousel {
+            cursor: grab;  
+        }
+
         @media (max-width:767px) {
             .app-hero---wrapper {
                 width: 12em !important;
@@ -466,6 +475,61 @@
             </div>
         </div>
     </div>
+    <div class="section wf-section">
+        <div class="content">
+            <div id="w-node-f5c0af81-4013-be1e-5c3f-7e73946682be-379d5480"
+                data-w-id="f5c0af81-4013-be1e-5c3f-7e73946682be"
+                style=" display: flex; opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; position: relative;"
+                class="functions-large">
+                <div id="testimonial-carousel"
+                    style="height: 100%; min-width: 100%; display: flex; overflow: hidden; overflow-x: scroll; scroll-snap-type: x mandatory;">
+                    <div
+                        style="height: max-content; min-width: 100%; scroll-snap-align: start; display: flex; gap: 5em;">
+                        <img src="./assets/img/testimonial.png" alt="fsdfsd" style="width: 25em;">
+
+                        <div>
+                            <img src="./assets/img/quotes.svg" alt="fsdfsd" style="width: 3em; margin-bottom: 2em;">
+
+                            <p style="font-size: large;"><strong>"The most interesting Smart-Product this year...It's
+                                    safer, smarter, and the most
+                                    affordable solution around"</strong></p>
+                        </div>
+                    </div>
+                    <div
+                        style="height: max-content; min-width: 100%; scroll-snap-align: start; display: flex; gap: 5em;">
+                        <img src="./assets/img/testimonial.png" alt="fsdfsd" style="width: 25em;">
+
+                        <div>
+                            <img src="./assets/img/quotes.svg" alt="fsdfsd" style="width: 3em; margin-bottom: 2em;">
+
+                            <p style="font-size: large;"><strong>"An amazing solution to the problem of ensuring our
+                                    guests feel like we are
+                                    always available to help"</strong></p>
+                        </div>
+                    </div>
+                    <div
+                        style="height: max-content; min-width: 100%; scroll-snap-align: start; display: flex; gap: 5em;">
+                        <img src="./assets/img/testimonial.png" alt="fsdfsd" style="width: 25em;">
+
+                        <div>
+                            <img src="./assets/img/quotes.svg" alt="fsdfsd" style="width: 3em; margin-bottom: 2em;">
+
+                            <p style="font-size: large;"><strong>"Super easy to set up and get started with. We have
+                                    limited staff, and Codebell
+                                    makes a huge difference to reducing the
+                                    workload"</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <button id="slideRightBtn" onclick="slideRight()"
+                    style="background-color: transparent; position: absolute; right: 0.5em;"><img
+                        src="./assets/img/right-icon.png" alt="move-right" style="width: 3em; height: 3em;"></button>
+                <button id="slideLeftBtn" onclick="slideLeft()"
+                    style="background-color: transparent; position: absolute; left: 0.5em; display: none;"><img
+                        src="./assets/img/left-icon.png" alt="move-right" style="width: 3em; height: 3em;"></button>
+            </div>
+        </div>
+    </div>
 
     <footer class="section-footer wf-section">
         <div class="content">
@@ -552,6 +616,29 @@
         productCount != 0 ? (document.getElementById("cart").style.display = "block") : (document.getElementById("cart").style.display = "none");
 
         document.getElementById("productCount").innerHTML = productCount;
+
+        function slideRight() {
+            const slideLeftBtn = document.getElementById("slideLeftBtn");
+            const slideRightBtn = document.getElementById("slideRightBtn");
+
+            slideLeftBtn.style.display = "flex"
+            document.getElementById('testimonial-carousel').scrollLeft += 500;
+
+            if (Math.round(document.getElementById('testimonial-carousel').scrollWidth - document.getElementById('testimonial-carousel').scrollLeft) == Math.round(document.getElementById('testimonial-carousel').offsetWidth)) {
+                slideRightBtn.style.display = "none"
+            }
+        }
+
+        function slideLeft() {
+            document.getElementById('testimonial-carousel').scrollLeft -= 500;
+            slideRightBtn.style.display = "flex"
+
+            if (document.getElementById('testimonial-carousel').scrollLeft == 0) {
+                slideLeftBtn.style.display = "none"
+
+            }
+        }
+
     </script>
 
 </body>
