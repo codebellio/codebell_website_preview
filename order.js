@@ -357,95 +357,92 @@ orderObj.Mobile !== "" && getCustomerOtp();
 function getCustomerOtp(bool) {
   formValidation();
 
-  if (customerPhone.value.length === 10) {
-    orderObj.Mobile = customerPhone.value;
-    localStorage.setItem("customerData", JSON.stringify(orderObj));
+  if (formComplete) {
+    setShippingDetails();
 
-    document.querySelector("body").style.overflowY = "hidden";
-    otpForm.style.display = "flex";
-    customerOtp.disabled = "false";
-    verifyOtpBtn.disabled = "false";
+    if (customerPhone.value.length === 10) {
+      orderObj.Mobile = customerPhone.value;
+      localStorage.setItem("customerData", JSON.stringify(orderObj));
+    } else {
+      if (bool == true) {
+        const phoneErrorMsgElem =
+          shippingDetailsElem.querySelector(".phoneErrorMessage");
 
-    if (formComplete) {
-      setShippingDetails();
+        phoneErrorMsgElem.style.display = "block";
+        phoneErrorMsgElem.innerHTML = "Please enter a valid phone number.";
 
-      verifyOtpBtn.disabled = false;
-      customerOtp.disabled = false;
-
-      cutomerPhoneLabel.innerHTML = orderObj.Mobile;
-    }
-  } else {
-    if (bool == true) {
-      const phoneErrorMsgElem =
-        shippingDetailsElem.querySelector(".phoneErrorMessage");
-
-      phoneErrorMsgElem.style.display = "block";
-      phoneErrorMsgElem.innerHTML = "Please enter a valid phone number.";
-
-      customerPhone.addEventListener("input", () => {
-        phoneErrorMsgElem.innerHTML = "";
-        phoneErrorMsgElem.style.display = "none";
-      });
-    }
-  }
-
-  url = window.location.href;
-
-  if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
-    fetchData().then((data) => {
-      if (data.Result.Order.UUID != "") {
-        orderObj["UUID"] = `${data.Result.Order.UUID}`;
-        localStorage.setItem("customerData", JSON.stringify(orderObj));
-
-        const UUID = orderObj.UUID;
-        history.pushState(
-          {},
-          "Codebell",
-          `https://preview.codebell.io/order?id=${UUID}`
-        );
-
-        Snackbar.show({
-          pos: "top-right",
-          showAction: false,
-          text: data.Message,
+        customerPhone.addEventListener("input", () => {
+          phoneErrorMsgElem.innerHTML = "";
+          phoneErrorMsgElem.style.display = "none";
         });
-
-        data.Result.Order.TotalVerified === true
-          ? ((checkoutBtn.style.display = "block"),
-            (checkoutBtn.disabled = false))
-          : (checkoutBtn.style.display = "none");
-      } else {
-        changeAddress();
       }
+    }
 
-      customerAddress.Address !== "" &&
-        changeAddress() &&
-        orderList != "" &&
-        setOrderSummaryForm();
-      setOrders(orderList);
-    });
-  } else {
-    verifyCustomerOtp(false);
+    otpForm.style.display = "flex";
+    verifyOtpBtn.disabled = false;
+    customerOtp.disabled = false;
+    document.querySelector("body").style.overflowY = "hidden";
 
-    validateCheckout({}, false).then((data) => {
-      orderList = data.Result.OrderProducts;
+    cutomerPhoneLabel.innerHTML = orderObj.Mobile;
+  }
+}
 
-      let totalCount = 0;
-      orderList.map((orders) => {
-        totalCount += orders.Count;
-      });
+url = window.location.href;
 
-      localStorage.setItem(
-        "orderList",
-        JSON.stringify({ orderList, totalCount })
+if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
+  fetchData().then((data) => {
+    if (data.Result.Order.UUID != "") {
+      orderObj["UUID"] = `${data.Result.Order.UUID}`;
+      localStorage.setItem("customerData", JSON.stringify(orderObj));
+
+      const UUID = orderObj.UUID;
+      history.pushState(
+        {},
+        "Codebell",
+        `https://preview.codebell.io/order?id=${UUID}`
       );
 
-      changeAddress(),
-        setOrderSummaryForm(),
-        shippingDetails(),
-        setOrders(orderList);
+      Snackbar.show({
+        pos: "top-right",
+        showAction: false,
+        text: data.Message,
+      });
+
+      data.Result.Order.TotalVerified === true
+        ? ((checkoutBtn.style.display = "block"),
+          (checkoutBtn.disabled = false))
+        : (checkoutBtn.style.display = "none");
+    } else {
+      changeAddress();
+    }
+
+    customerAddress.Address !== "" &&
+      changeAddress() &&
+      orderList != "" &&
+      setOrderSummaryForm();
+    setOrders(orderList);
+  });
+} else {
+  verifyCustomerOtp(false);
+
+  validateCheckout({}, false).then((data) => {
+    orderList = data.Result.OrderProducts;
+
+    let totalCount = 0;
+    orderList.map((orders) => {
+      totalCount += orders.Count;
     });
-  }
+
+    localStorage.setItem(
+      "orderList",
+      JSON.stringify({ orderList, totalCount })
+    );
+
+    changeAddress(),
+      setOrderSummaryForm(),
+      shippingDetails(),
+      setOrders(orderList);
+  });
 }
 
 function changePhoneNum() {
