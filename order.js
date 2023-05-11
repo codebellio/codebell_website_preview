@@ -468,15 +468,13 @@ function getCustomerOtp(bool) {
         if (!bool) {
           changeAddress();
         } else {
-          setShippingDetails();
-
           if (data.Result.MobileVerified == false) {
             delete orderObj.UUID;
             getCustomerOtp(false);
           } else {
-            changeAddress();
-            setShippingDetails();
+            // changeAddress();
             shippingDetails();
+            setShippingDetails();
           }
         }
       });
