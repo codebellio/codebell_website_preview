@@ -378,11 +378,13 @@ function getCustomerOtp(bool) {
   console.log(url);
   url = window.location.href;
   console.log(url);
+  console.log(orderObj.UUID);
 
   if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
     if (customerPhone.value.length === 10) {
       if (formComplete) {
         if (orderList != "") {
+          console.log("yaha bhai");
           setShippingDetails();
 
           orderObj.Mobile = customerPhone.value;
@@ -485,7 +487,6 @@ function getCustomerOtp(bool) {
         }
       });
     }
-
     setOrders(orderList);
   }
 }
