@@ -359,12 +359,16 @@ orderObj.Mobile !== "" && getCustomerOtp();
 function getCustomerOtp(bool) {
   url = window.location.href;
 
+  console.log(url);
+  console.log(orderObj.UUID);
+
   if (
     !(
       orderObj.UUID &
       (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID)
     )
   ) {
+    // changeAddress();
     formValidation();
   } else {
     history.pushState(
@@ -374,7 +378,9 @@ function getCustomerOtp(bool) {
     );
   }
 
+  console.log(url);
   url = window.location.href;
+  console.log(url);
 
   if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
     if (customerPhone.value.length === 10) {
@@ -470,8 +476,9 @@ function getCustomerOtp(bool) {
           shippingDetails();
           setShippingDetails();
         } else {
-          if (data.Result.MobileVerified == false) {
+          if (data.Result.Order.MobileVerified == false) {
             delete orderObj.UUID;
+            console.log(orderObj);
             getCustomerOtp(false);
           } else {
             // changeAddress();
