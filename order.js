@@ -42,6 +42,8 @@ const orderContainerElem = orderSummaryForm.querySelector(".orderContainer");
 
 var url = window.location.href;
 
+var discountAmm = 0;
+
 let orderObj = JSON.parse(localStorage.getItem("customerData"))
   ? JSON.parse(localStorage.getItem("customerData"))
   : {
@@ -734,7 +736,6 @@ function removeCoupon() {
   appliedCouponElem.style.display = "none";
   appliedCouponDetails.innerHTML = "";
 
-  discountAmm = 0;
   findTotal(discountAmm);
 }
 
