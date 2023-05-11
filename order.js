@@ -157,6 +157,7 @@ function setShippingDetails() {
   orderObj.Apt = inputs[3].value;
   orderObj.City = inputs[4].value;
   orderObj.Pin = inputs[5].value;
+  orderObj.Mobile = inputs[6].value;
   orderObj.AddressType = addressType;
   orderObj.Country = shippingDetailsSelect.value;
 
@@ -456,6 +457,8 @@ function getCustomerOtp(bool) {
         changeAddress(), setOrderSummaryForm(), shippingDetails();
       });
     } else {
+      verifyCustomerOtp(false);
+
       if (bool) {
         setShippingDetails();
         shippingDetails();
