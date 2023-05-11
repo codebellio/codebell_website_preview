@@ -387,7 +387,11 @@ function getCustomerOtp(bool) {
 
           otpForm.style.display = "flex";
           verifyOtpBtn.disabled = false;
+          customerOtp.style.display = "block";
           customerOtp.disabled = false;
+          resendBtn.style.display = "block";
+          verifyOtpBtnVal.innerHTML = "Continue";
+
           document.querySelector("body").style.overflowY = "hidden";
 
           cutomerPhoneLabel.innerHTML = orderObj.Mobile;
@@ -461,18 +465,19 @@ function getCustomerOtp(bool) {
       });
     } else {
       fetchData().then((data) => {
-        if (data.Result.MobileVerified == false) {
-          delete orderObj.UUID;
-          getCustomerOtp();
-          customerOtp.style.display = "block";
-          resendBtn.style.display = "block";
-          verifyOtpBtnVal.innerHTML = "Continue";
-          verifyOtpBtn.disabled = false;
-        } else {
+        if (!bool) {
           changeAddress();
+        } else {
           setShippingDetails();
-          shippingDetails();
-          setOrderSummaryForm();
+
+          if (data.Result.MobileVerified == false) {
+            delete orderObj.UUID;
+            getCustomerOtp(false);
+          } else {
+            changeAddress();
+            setShippingDetails();
+            shippingDetails();
+          }
         }
       });
     }
