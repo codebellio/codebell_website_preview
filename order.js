@@ -460,8 +460,8 @@ function getCustomerOtp(bool) {
         changeAddress(), setOrderSummaryForm(), shippingDetails();
       });
     } else {
-      if (bool) {
-        if (orderObj.Mobile != customerPhone.value) {
+      fetchData().then((data) => {
+        if (data.Result.MobileVerified == false) {
           delete orderObj.UUID;
           getCustomerOtp();
           customerOtp.style.display = "block";
@@ -469,16 +469,12 @@ function getCustomerOtp(bool) {
           verifyOtpBtnVal.innerHTML = "Continue";
           verifyOtpBtn.disabled = false;
         } else {
+          changeAddress();
           setShippingDetails();
           shippingDetails();
           setOrderSummaryForm();
         }
-      } else {
-        changeAddress();
-        setShippingDetails();
-        shippingDetails();
-        setOrderSummaryForm();
-      }
+      });
     }
 
     setOrders(orderList);
