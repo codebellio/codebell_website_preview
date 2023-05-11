@@ -355,7 +355,7 @@ async function fetchData(bool) {
     });
 }
 
-orderObj.Mobile !== "" && getCustomerOtp();
+orderObj.Mobile !== "" && getCustomerOtp(false);
 function getCustomerOtp(bool) {
   url = window.location.href;
 
@@ -471,6 +471,12 @@ function getCustomerOtp(bool) {
       });
     } else {
       console.log("aree yaha re");
+
+      if (!bool) {
+        setShippingDetails();
+      }
+
+      console.log(orderObj);
 
       fetchData().then((data) => {
         if (!bool) {
