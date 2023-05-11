@@ -364,7 +364,10 @@ function getCustomerOtp(bool) {
   url = window.location.href;
 
   if (
-    !(orderObj.UUID && url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID)
+    !(
+      orderObj.UUID &
+      (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID)
+    )
   ) {
     formValidation();
   } else {
@@ -461,8 +464,6 @@ function getCustomerOtp(bool) {
         changeAddress(), setOrderSummaryForm(), shippingDetails();
       });
     } else {
-      verifyCustomerOtp(false);
-
       if (bool) {
         setShippingDetails();
         shippingDetails();
