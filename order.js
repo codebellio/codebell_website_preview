@@ -357,6 +357,10 @@ async function fetchData(bool) {
 
 orderObj.Mobile !== "" && getCustomerOtp();
 function getCustomerOtp(bool) {
+  if (orderObj.Mobile != customerPhone.value) {
+    delete orderObj.UUID;
+  }
+
   url = window.location.href;
 
   if (
