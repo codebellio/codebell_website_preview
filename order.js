@@ -357,25 +357,21 @@ async function fetchData(bool) {
 
 orderObj.Mobile !== "" && getCustomerOtp();
 function getCustomerOtp(bool) {
-  if (orderObj.Mobile != customerPhone.value) {
-    delete orderObj.UUID;
-  } else {
-    url = window.location.href;
+  url = window.location.href;
 
-    if (
-      !(
-        orderObj.UUID &
-        (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID)
-      )
-    ) {
-      formValidation();
-    } else {
-      history.pushState(
-        {},
-        "Codebell",
-        `https://preview.codebell.io/order?id=${orderObj.UUID}`
-      );
-    }
+  if (
+    !(
+      orderObj.UUID &
+      (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID)
+    )
+  ) {
+    formValidation();
+  } else {
+    history.pushState(
+      {},
+      "Codebell",
+      `https://preview.codebell.io/order?id=${orderObj.UUID}`
+    );
   }
 
   url = window.location.href;
@@ -465,9 +461,14 @@ function getCustomerOtp(bool) {
       });
     } else {
       if (bool) {
-        setShippingDetails();
-        shippingDetails();
-        setOrderSummaryForm();
+        if (orderObj.Mobile != customerPhone.value) {
+          delete orderObj.UUID;
+          getCustomerOtp();
+        } else {
+          setShippingDetails();
+          shippingDetails();
+          setOrderSummaryForm();
+        }
       } else {
         changeAddress();
         setShippingDetails();
