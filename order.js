@@ -454,6 +454,7 @@ function getCustomerOtp(bool) {
     }
   } else {
     if (orderList == "" && !bool) {
+      console.log("yaha hu re");
       validateCheckout({}, false).then((data) => {
         orderList = data.Result.OrderProducts;
         let totalCount = 0;
@@ -469,17 +470,26 @@ function getCustomerOtp(bool) {
         changeAddress(), setOrderSummaryForm(), shippingDetails();
       });
     } else {
+      console.log("aree yaha re");
+
       fetchData().then((data) => {
         if (!bool) {
+          console.log("dekh na bhai");
+
           changeAddress();
           shippingDetails();
           setShippingDetails();
         } else {
+          console.log("please");
           if (data.Result.Order.MobileVerified == false) {
+            console.log("nai?");
+
             delete orderObj.UUID;
             console.log(orderObj);
             getCustomerOtp(false);
           } else {
+            console.log("pakka");
+
             // changeAddress();
             shippingDetails();
             setShippingDetails();
