@@ -472,7 +472,7 @@ function getCustomerOtp(bool) {
     } else {
       console.log("aree yaha re");
 
-      if (!bool) {
+      if (bool) {
         setShippingDetails();
       }
 
