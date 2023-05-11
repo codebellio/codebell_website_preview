@@ -363,10 +363,7 @@ function getCustomerOtp(bool) {
   console.log(orderObj.UUID);
 
   if (
-    !(
-      orderObj.UUID &
-      (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID)
-    )
+    !(orderObj.UUID && url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID)
   ) {
     // changeAddress();
     formValidation();
