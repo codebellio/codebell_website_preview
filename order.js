@@ -467,6 +467,8 @@ function getCustomerOtp(bool) {
       fetchData().then((data) => {
         if (!bool) {
           changeAddress();
+          shippingDetails();
+          setShippingDetails();
         } else {
           if (data.Result.MobileVerified == false) {
             delete orderObj.UUID;
