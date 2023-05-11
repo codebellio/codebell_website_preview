@@ -359,23 +359,23 @@ orderObj.Mobile !== "" && getCustomerOtp();
 function getCustomerOtp(bool) {
   if (orderObj.Mobile != customerPhone.value) {
     delete orderObj.UUID;
-  }
-
-  url = window.location.href;
-
-  if (
-    !(
-      orderObj.UUID &
-      (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID)
-    )
-  ) {
-    formValidation();
   } else {
-    history.pushState(
-      {},
-      "Codebell",
-      `https://preview.codebell.io/order?id=${orderObj.UUID}`
-    );
+    url = window.location.href;
+
+    if (
+      !(
+        orderObj.UUID &
+        (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID)
+      )
+    ) {
+      formValidation();
+    } else {
+      history.pushState(
+        {},
+        "Codebell",
+        `https://preview.codebell.io/order?id=${orderObj.UUID}`
+      );
+    }
   }
 
   url = window.location.href;
