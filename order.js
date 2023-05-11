@@ -464,6 +464,10 @@ function getCustomerOtp(bool) {
         if (orderObj.Mobile != customerPhone.value) {
           delete orderObj.UUID;
           getCustomerOtp();
+          customerOtp.style.display = "block";
+          resendBtn.style.display = "block";
+          verifyOtpBtnVal.innerHTML = "Continue";
+          verifyOtpBtn.disabled = false;
         } else {
           setShippingDetails();
           shippingDetails();
