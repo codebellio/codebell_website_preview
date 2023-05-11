@@ -6,7 +6,7 @@ const productsObj = {
       "https://s3.ap-south-1.amazonaws.com/device.codebell.io/products/cproduct1.png",
     Summary:
       "Upon scanning Codebell, a screenshot of visitor is stored in your app. Keep track of all visitors for extra safety.",
-    Price: 50,
+    Price: 365,
     Plan: 365,
     Count: 1,
     Locked: true,
