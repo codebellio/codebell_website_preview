@@ -42,6 +42,31 @@
             z-index: -1;
         }
 
+        .navbar {
+            position: fixed;
+        }
+
+        .navbar.active {
+            background-color: rgba(240, 240, 240, 0.6);
+            backdrop-filter: blur(15px);
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            height: 5em;
+            padding-top: 1.5em;
+            animation: headerAnim 0.5s;
+        }
+
+        @keyframes headerAnim {
+            0% {
+                opacity: 0;
+                height: 6rem;
+            }
+
+            100% {
+                opacity: 1;
+                height: 5em;
+            }
+        }
+
         .site-footer a {
             color: inherit;
             text-decoration: none;
@@ -81,6 +106,14 @@
 
             .app-focus---wrapper {
                 width: 12em !important;
+            }
+
+            .testimonial-card {
+                flex-wrap: wrap;
+            }
+
+            .testimonial-card:nth-child(odd) {
+                margin: 0 2em;
             }
 
             #slideRightBtn {
@@ -497,42 +530,69 @@
                 style=" display: flex; opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; position: relative;"
                 class="functions-large">
                 <div id="testimonial-carousel"
-                    style="height: 100%; min-width: 100%; display: flex; overflow: hidden; overflow-x: scroll; scroll-snap-type: x mandatory;">
-                    <div
-                        style="height: max-content; min-width: 100%; scroll-snap-align: start; display: flex; flex-wrap: wrap; gap: 5em;">
-                        <img src="./assets/img/testimonial.png" alt="fsdfsd" style="width: 25em;">
+                    style="height: 100%; min-width: 100%; display: flex; overflow: hidden; overflow-x: scroll; scroll-snap-type: x mandatory; scroll-behavior: smooth;">
+                    <div class="testimonial-card"
+                        style="height: max-content; min-width: 100%; scroll-snap-align: start; display: flex; gap: 5em;">
+                        <embed src="./assets/img/testimonial.svg" alt="fsdfsd">
 
-                        <div>
-                            <img src="./assets/img/quotes.svg" alt="fsdfsd" style="width: 3em; margin-bottom: 2em;">
+                        <div style="padding: 0em;">
+                            <embed src="./assets/img/quotes.svg" alt="fsdfsd" style="width: 3em; margin-bottom: 2em;">
 
-                            <p style="font-size: large;"><strong>"The most interesting Smart-Product this year...It's
-                                    safer, smarter, and the most
-                                    affordable solution around"</strong></p>
+                            <p>"The most interesting Smart-Product this year...It's
+                                safer, smarter, and the most
+                                affordable solution around"</p>
+
+                            <div class="testimonials-info" style="margin-top: 10em;"><img
+                                    src="https://assets.website-files.com/638ff800599a0427a59d547f/63952e38a822332162adc17a_avatar_3.jpg"
+                                    loading="eager" alt="" class="avatar">
+                                <div class="block-testimonials-info">
+                                    <h6 class="testimonials-name">Cody Fisher</h6>
+                                    <div class="testimonials-subtitle">@fisher</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div
-                        style="height: max-content; min-width: 100%; scroll-snap-align: start; display: flex; flex-wrap: wrap; gap: 5em;">
-                        <img src="./assets/img/testimonial.png" alt="fsdfsd" style="width: 25em;">
+                    <div class="testimonial-card"
+                        style="height: max-content; min-width: 100%; scroll-snap-align: start; display: flex; gap: 5em;">
+                        <embed src="./assets/img/testimonial.svg" alt="fsdfsd">
 
                         <div>
-                            <img src="./assets/img/quotes.svg" alt="fsdfsd" style="width: 3em; margin-bottom: 2em;">
+                            <embed src="./assets/img/quotes.svg" alt="fsdfsd" style="width: 3em; margin-bottom: 2em;">
 
-                            <p style="font-size: large;"><strong>"An amazing solution to the problem of ensuring our
-                                    guests feel like we are
-                                    always available to help"</strong></p>
+                            <p>"An amazing solution to the problem of ensuring our
+                                guests feel like we are
+                                always available to help"</p>
+
+                            <div class="testimonials-info" style="margin-top: 10em;"><img
+                                    src="https://assets.website-files.com/638ff800599a0427a59d547f/63952e38a822332162adc17a_avatar_3.jpg"
+                                    loading="eager" alt="" class="avatar">
+                                <div class="block-testimonials-info">
+                                    <h6 class="testimonials-name">Cody Fisher</h6>
+                                    <div class="testimonials-subtitle">@fisher</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div
-                        style="height: max-content; min-width: 100%; scroll-snap-align: start; display: flex;  flex-wrap: wrap; gap: 5em;">
-                        <img src="./assets/img/testimonial.png" alt="fsdfsd" style="width: 25em;">
+                    <div class="testimonial-card"
+                        style="height: max-content; min-width: 100%; scroll-snap-align: start; display: flex; gap: 5em;">
+                        <embed src="./assets/img/testimonial.svg" alt="fsdfsd">
 
                         <div>
-                            <img src="./assets/img/quotes.svg" alt="fsdfsd" style="width: 3em; margin-bottom: 2em;">
+                            <embed src="./assets/img/quotes.svg" alt="fsdfsd" style="width: 3em; margin-bottom: 2em;">
 
-                            <p style="font-size: large;"><strong>"Super easy to set up and get started with. We have
-                                    limited staff, and Codebell
-                                    makes a huge difference to reducing the
-                                    workload"</strong></p>
+                            <p>"Super easy to set up and get started with. We have
+                                limited staff, and Codebell
+                                makes a huge difference to reducing the
+                                workload"</p>
+
+                            <div class="testimonials-info" style="margin-top: 10em;"><img
+                                    src="https://assets.website-files.com/638ff800599a0427a59d547f/63952e38a822332162adc17a_avatar_3.jpg"
+                                    loading="eager" alt="" class="avatar">
+                                <div class="block-testimonials-info">
+                                    <h6 class="testimonials-name">Cody Fisher</h6>
+                                    <div class="testimonials-subtitle">@fisher</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -555,7 +615,7 @@
                         The Codebell mobile app is <span class="text-transparent">now available</span></h2>
                     <p data-w-id="17a85c95-fa82-5746-71bf-c8af53109a79" class="paragraph"
                         style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
-                        Introducing the future of communication with Codebell's QR video intercom – a seamless
+                        Introducing the future of communication with Codebell's QR video intercom - a seamless
                         solution for staying connected while prioritizing your privacy.</p>
                     <p data-w-id="17a85c95-fa82-5746-71bf-c8af53109a79" class="paragraph"
                         style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
@@ -639,21 +699,38 @@
             slideLeftBtn.style.display = "flex"
             document.getElementById('testimonial-carousel').scrollLeft += 500;
 
-            if (Math.round(document.getElementById('testimonial-carousel').scrollWidth - document.getElementById('testimonial-carousel').scrollLeft) == Math.round(document.getElementById('testimonial-carousel').offsetWidth)) {
+            console.log();
+
+
+            if (Math.round(document.getElementById('testimonial-carousel').scrollWidth - document.getElementById('testimonial-carousel').scrollLeft) - 2 * Math.round(document.getElementById('testimonial-carousel').offsetWidth) <= 1) {
                 slideRightBtn.style.display = "none"
+                console.log("gaya");
             }
         }
 
         function slideLeft() {
             document.getElementById('testimonial-carousel').scrollLeft -= 500;
-            slideRightBtn.style.display = "flex"
+            slideRightBtn.style.display = "flex";
 
-            if (document.getElementById('testimonial-carousel').scrollLeft == 0) {
+            if (Math.round(document.getElementById('testimonial-carousel').scrollLeft) - (document.getElementById('testimonial-carousel').offsetWidth) <= 0) {
                 slideLeftBtn.style.display = "none"
 
             }
         }
 
+        const navbar = document.querySelector(".navbar")
+        const headerAnim = () => {
+            const offsetY = window.scrollY;
+
+            console.log(offsetY);
+
+            navbar.classList.contains("active")
+                ? offsetY < 50 && navbar.classList.remove("active")
+                : offsetY > 100 && navbar.classList.add("active");
+        };
+
+        headerAnim();
+        window.addEventListener("scroll", headerAnim);
     </script>
 
 </body>

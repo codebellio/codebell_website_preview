@@ -46,6 +46,49 @@
             z-index: -1;
         }
 
+        .navbar {
+            position: fixed;
+        }
+
+        .navbar.active {
+            background-color: rgba(240, 240, 240, 0.6);
+            backdrop-filter: blur(15px);
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            height: 5em;
+            padding-top: 1.5em;
+            animation: headerAnim 0.5s;
+        }
+
+        .paragraph a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes headerAnim {
+            0% {
+                opacity: 0;
+                height: 6rem;
+            }
+
+            100% {
+                opacity: 1;
+                height: 5em;
+            }
+        }
+
+        @media screen and (max-width:767px) {
+            .no_sm_mt {
+                margin-top: 2.5em;
+            }
+
+            .block-button-footer {
+                width: 100%;
+            }
+
+            .block-button-footer a {
+                width: 100%;
+            }
+        }
+
         a {
             text-decoration: none;
             color: inherit
@@ -88,22 +131,6 @@
         }
     </style>
 </head>
-
-<style>
-    @media screen and (max-width:767px) {
-        .no_sm_mt {
-            margin-top: 2.5em;
-        }
-
-        .block-button-footer {
-            width: 100%;
-        }
-
-        .block-button-footer a {
-            width: 100%;
-        }
-    }
-</style>
 
 <body>
 
@@ -408,6 +435,20 @@
 
                 document.getElementById("productCount").innerHTML = productCount;
             }; setProductCount();
+
+            const navbar = document.querySelector(".navbar")
+            const headerAnim = () => {
+                const offsetY = window.scrollY;
+
+                console.log(offsetY);
+
+                navbar.classList.contains("active")
+                    ? offsetY < 50 && navbar.classList.remove("active")
+                    : offsetY > 100 && navbar.classList.add("active");
+            };
+
+            headerAnim();
+            window.addEventListener("scroll", headerAnim);
         </script>
 
     </body>

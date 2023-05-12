@@ -6,6 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        .navbar.active {
+            background-color: rgba(180, 180, 180, 0.6);
+            backdrop-filter: blur(10px);
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            height: 5em;
+            padding-top: 1.5em;
+            animation: headerAnim 0.5s;
+        }
+
+        @keyframes headerAnim {
+            0% {
+                opacity: 0;
+                height: 6rem;
+            }
+
+            100% {
+                opacity: 1;
+                height: 5em;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -1103,6 +1126,22 @@
             </ol>
         </li>
     </div>
+
+    <script>
+        const navbar = document.querySelector(".navbar")
+        const headerAnim = () => {
+            const offsetY = window.scrollY;
+
+            console.log(offsetY);
+
+            navbar.classList.contains("active")
+                ? offsetY < 50 && navbar.classList.remove("active")
+                : offsetY > 100 && navbar.classList.add("active");
+        };
+
+        headerAnim();
+        window.addEventListener("scroll", headerAnim);
+    </script>
 </body>
 
 </html>

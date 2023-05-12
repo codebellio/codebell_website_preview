@@ -37,6 +37,31 @@
             z-index: -1;
         }
 
+        .navbar {
+            position: fixed;
+        }
+
+        .navbar.active {
+            background-color: rgba(240, 240, 240, 0.6);
+            backdrop-filter: blur(15px);
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            height: 5em;
+            padding-top: 1.5em;
+            animation: headerAnim 0.5s;
+        }
+
+        @keyframes headerAnim {
+            0% {
+                opacity: 0;
+                height: 6rem;
+            }
+
+            100% {
+                opacity: 1;
+                height: 5em;
+            }
+        }
+
         a {
             text-decoration: none;
             color: inherit
@@ -245,6 +270,22 @@
     <script src="./spectrum_assets_files/webflow.js" type="text/javascript"></script>
 
     <script src="purchase.js"></script>
+
+    <script>
+        const navbar = document.querySelector(".navbar")
+        const headerAnim = () => {
+            const offsetY = window.scrollY;
+
+            console.log(offsetY);
+
+            navbar.classList.contains("active")
+                ? offsetY < 50 && navbar.classList.remove("active")
+                : offsetY > 100 && navbar.classList.add("active");
+        };
+
+        headerAnim();
+        window.addEventListener("scroll", headerAnim);
+    </script>
 </body>
 
 </html>

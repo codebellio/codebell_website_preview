@@ -37,6 +37,31 @@
             z-index: -1;
         }
 
+        .navbar {
+            position: fixed;
+        }
+
+        .navbar.active {
+            background-color: rgba(240, 240, 240, 0.6);
+            backdrop-filter: blur(15px);
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            height: 5em;
+            padding-top: 1.5em;
+            animation: headerAnim 0.5s;
+        }
+
+        @keyframes headerAnim {
+            0% {
+                opacity: 0;
+                height: 6rem;
+            }
+
+            100% {
+                opacity: 1;
+                height: 5em;
+            }
+        }
+
         input {
             height: auto !important;
         }
@@ -150,8 +175,7 @@
                     class="heading-top">Support</h1>
                 <p data-w-id="ffdcda00-f98a-29d7-d9e8-be2111505b41"
                     style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                    class="paragraph-top">Dui et dolor pellentesque ullamcorper eu ac aliquet. Tristique turpis neque
-                    quisque placerat.</p>
+                    class="paragraph-top">Find answers and assistance for all your codebell-related questions.</p>
             </div>
         </div>
         <div data-w-id="c053d444-8ab2-b840-959e-829994c34843" style="opacity: 1;" class="gradient-top-c">
@@ -467,13 +491,9 @@
                         </div>
                         <h2 data-w-id="40106df1-1392-b19c-cb46-baa9f6421c70"
                             style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                            class="heading">We’ll try to deliver the answers <span class="text-transparent">you’re
+                            class="heading">We'll try to deliver the answers <span class="text-transparent">you're
                                 hungry for.</span></h2>
                     </div>
-                    <p data-w-id="73624845-ca4f-c933-ea97-b733a9bef527"
-                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                        class="paragraph">Venenatis eget parturient eget suspendisse volutpat dignissim pulvinar est.
-                    </p>
                     <div data-w-id="cbbe77a8-ee71-e167-3dbb-df354790f42a"
                         style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
                         class="form-block w-form">
@@ -583,6 +603,20 @@
         productCount != 0 ? (document.getElementById("cart").style.display = "block") : (document.getElementById("cart").style.display = "none");
 
         document.getElementById("productCount").innerHTML = productCount;
+
+        const navbar = document.querySelector(".navbar")
+        const headerAnim = () => {
+            const offsetY = window.scrollY;
+
+            console.log(offsetY);
+
+            navbar.classList.contains("active")
+                ? offsetY < 50 && navbar.classList.remove("active")
+                : offsetY > 100 && navbar.classList.add("active");
+        };
+
+        headerAnim();
+        window.addEventListener("scroll", headerAnim);
     </script>
 </body>
 

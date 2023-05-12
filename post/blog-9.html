@@ -37,6 +37,31 @@
             z-index: -1;
         }
 
+        .navbar {
+            position: fixed;
+        }
+
+        .navbar.active {
+            background-color: rgba(180, 180, 180, 0.6);
+            backdrop-filter: blur(10px);
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            height: 5em;
+            padding-top: 1.5em;
+            animation: headerAnim 0.5s;
+        }
+
+        @keyframes headerAnim {
+            0% {
+                opacity: 0;
+                height: 6rem;
+            }
+
+            100% {
+                opacity: 1;
+                height: 5em;
+            }
+        }
+
         blockquote {
             font-size: 1.125em;
             line-height: 1.6em;
@@ -340,6 +365,20 @@
         productCount != 0 ? (document.getElementById("cart").style.display = "block") : (document.getElementById("cart").style.display = "none");
 
         document.getElementById("productCount").innerHTML = productCount;
+
+        const navbar = document.querySelector(".navbar")
+        const headerAnim = () => {
+            const offsetY = window.scrollY;
+
+            console.log(offsetY);
+
+            navbar.classList.contains("active")
+                ? offsetY < 50 && navbar.classList.remove("active")
+                : offsetY > 100 && navbar.classList.add("active");
+        };
+
+        headerAnim();
+        window.addEventListener("scroll", headerAnim);
     </script>
 </body>
 
