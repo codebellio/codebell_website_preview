@@ -43,7 +43,7 @@ const productsObj = {
 const productWrapperElem = document.querySelector("#productWrapper");
 Object.values(productsObj).map((products, index) => {
   productWrapperElem.innerHTML += `
-              <div class="section wf-section product-${index}">
+              <div class="section wf-section product ${index}">
                 <div class="content">
                     <div class="w-layout-grid grid-focus-left">
                         <div class="focus-separate">
@@ -58,20 +58,21 @@ Object.values(productsObj).map((products, index) => {
                                 </div>
                             </div>
                             <p class="paragraph">${products.Summary} 
-                              <a href="/codebell-products/${
-                                products.Keyword
-                              }" style="color: #2F8AB2">Learn more </a>
                             </p>
                             <div style="display: flex; gap: 1em; color: white;">
-                                <a href="/order"> <button onclick="order(${
-                                  index + 1
-                                })" class="button"> Order Now </button></a>
+                            <div class="circle-button"><a href="/codebell-products/${
+                              products.Keyword
+                            }" class="link-circle-button w-inline-block"><img
+                                    src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
+                                    loading="eager" alt="" class="icon-button"></a>
+                            <div class="text-button">Learn more</div>
+                        </div>
 
-                                <button onclick="order(${
+                                <button class="button" onclick="order(${
                                   index + 1
                                 }, 'addToCart'), setProductCount()" class="button w-inline-block"
-                                    style="width: max-content; margin: auto 0 0 auto; background-color: transparent; border: 2px solid #161613;">
-                                    <div class="text-button" style="color:#161613;">Add to Cart</div>
+                                    style="width: max-content; margin: auto 0 0 auto;">
+                                    <div class="text-button" style="color: #f8f8f8">Add to Cart</div>
                                 </button>
                             </div>
                         </div>
