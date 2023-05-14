@@ -101,10 +101,9 @@ let orderList = localStorage.getItem("orderList")
   ? JSON.parse(localStorage.getItem("orderList"))
   : [];
 
-const orderPopUp = document.querySelector("#orderPopUp");
-
 function order(productIndex, triggerer) {
   if (triggerer == "addToCart") {
+    orderPopUp = document.querySelector("#orderPopUp");
     orderPopUp.style.display = "flex";
     document.querySelector("body").style.overflowY = "hidden";
   }
