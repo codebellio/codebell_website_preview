@@ -77,7 +77,7 @@ let customerAddress = localStorage.getItem("customerAddress")
       AddressType: "",
     };
 
-if (customerAddress) {
+if (customerAddress.Name != "") {
   orderObj.Name = customerAddress.Name;
   orderObj.Address = customerAddress.Address;
   orderObj.Apt = customerAddress.Apt;
