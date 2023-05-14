@@ -299,6 +299,8 @@ function paymentMehtod(paymentType) {
       }
       if (paymentType === "Cash On Delivery") {
         const UUID = data.Result.Order.UUID;
+        localStorage.setItem("orderUUID", JSON.stringify(UUID));
+        
         location.replace(`https://preview.codebell.io/purchase?id=${UUID}`);
       }
     }
