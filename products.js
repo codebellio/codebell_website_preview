@@ -60,7 +60,7 @@ Object.values(productsObj).map((products, index) => {
                             <p class="paragraph">${products.Summary} 
                             </p>
                             <div style="display: flex; gap: 1em; color: white;">
-                            <div class="circle-button"><a href="/codebell-products/${
+                            <div class="circle-button"><a href="/${
                               products.Keyword
                             }" class="link-circle-button w-inline-block"><img
                                     src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
