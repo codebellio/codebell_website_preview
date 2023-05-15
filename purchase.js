@@ -74,18 +74,22 @@ validateCheckout().then((data) => {
   // Generate HTML markup for the price summary
   priceSummary.innerHTML = `
       <b>
-        <p class="subtotal" style="width: 80%;"> Order Id <span style="float: right;">${
-          orderDetails.UUID
-        }</span></p>
+        <div style="display: flex; width: 100%;">
+            <p class="subtotal" style="width:50%; "> Order Id: </p>
+            <div>${orderDetails.UUID}</div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <p class="subtotal" style="width:50%; "> Order date: </p>
+            <div>${orderDetails.UpdatedAt.slice(0, 10)}</div>
 
-        <p class="deliveryCharges" style="width: 80%;"> Order date <span style="float: right;">₹${orderDetails.UpdatedAt.slice(
-          0,
-          10
-        )}</span></p>
-        <p class="deliveryCharges" style="width: 80%;"> Amount to be paid <span style="float: right;">₹${
-          orderDetails.Total
-        }</span></p>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <p class="subtotal" style="width:50%; "> Ammount to be paid: </p>
+            <div>₹${orderDetails.Total}</div>
+        </div>
       </b>
+
+
   `;
 });
 

@@ -40,44 +40,44 @@ const checkoutBtn = orderSummaryForm.querySelector(".checkout.button");
 const cartDetailsElem = orderSummaryForm.querySelector("#cartDetails");
 const orderContainerElem = orderSummaryForm.querySelector(".orderContainer");
 
+// Get the current URL
 var url = window.location.href;
 
+// Initialize discount amount
 var discountAmm = 0;
 
-let orderObj = JSON.parse(localStorage.getItem("customerData"))
-  ? JSON.parse(localStorage.getItem("customerData"))
-  : {
-      Name: "",
-      Mobile: "",
-      MobileVerified: false,
-      OtpCreatedOn: 0,
-      Address: "",
-      Apt: "",
-      City: "",
-      Country: "",
-      Pin: "",
-      AddressType: "",
-      Subtotal: "",
-      Total: "",
-    };
+// Retrieve customer data from local storage or initialize with default values
+var orderObj = JSON.parse(localStorage.getItem("customerData")) || {
+  Name: "",
+  Mobile: "",
+  MobileVerified: false,
+  OtpCreatedOn: 0,
+  Address: "",
+  Apt: "",
+  City: "",
+  Country: "",
+  Pin: "",
+  AddressType: "",
+  Subtotal: "",
+  Total: "",
+};
 
-orderList = localStorage.getItem("orderList")
-  ? JSON.parse(localStorage.getItem("orderList")).orderList
-  : [];
+// Retrieve order list from local storage or initialize with an empty array
+var orderList = JSON.parse(localStorage.getItem("orderList"))?.orderList || [];
 
-let customerAddress = localStorage.getItem("customerAddress")
-  ? JSON.parse(localStorage.getItem("customerAddress"))
-  : {
-      Name: "",
-      Address: "",
-      Apt: "",
-      City: "",
-      Country: "",
-      Pin: "",
-      AddressType: "",
-    };
+// Retrieve customer address from local storage or initialize with default values
+var customerAddress = JSON.parse(localStorage.getItem("customerAddress")) || {
+  Name: "",
+  Address: "",
+  Apt: "",
+  City: "",
+  Country: "",
+  Pin: "",
+  AddressType: "",
+};
 
-if (customerAddress.Name != "") {
+// Update order object with customer address if available
+if (customerAddress.Name !== "") {
   orderObj.Name = customerAddress.Name;
   orderObj.Address = customerAddress.Address;
   orderObj.Apt = customerAddress.Apt;
@@ -86,6 +86,7 @@ if (customerAddress.Name != "") {
   orderObj.AddressType = customerAddress.AddressType;
   orderObj.Country = customerAddress.Country;
 
+  // Call changeAddress function
   changeAddress();
 }
 
