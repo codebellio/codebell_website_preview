@@ -1,6 +1,6 @@
 const url = window.location.href;
 orderObj = localStorage.getItem("customerData")
-  ? JSON.parse(localStorage.getItem("customerData").Result.Order)
+  ? JSON.parse(localStorage.getItem("customerData")).Result.Order
   : {};
 
 const UUID = JSON.parse(localStorage.getItem("orderUUID"));
@@ -30,10 +30,6 @@ async function validateCheckout() {
 validateCheckout().then((data) => {
   orderDetails = data.Result.Order;
   orderList = data.Result.OrderProducts;
-
-  const orderId = orderDetails.UUID;
-  const orderDate = orderDetails.UpdatedAt.slice(0, 10);
-  const total = orderDetails.Total;
 
   const orderContainer = document.querySelector(".orderContainer");
   orderContainer.innerHTML = ``;
