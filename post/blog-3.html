@@ -94,7 +94,11 @@
 
         @media (max-width:767px) {
             .site-footer {
-                padding: 0.5em !important;
+                padding: 2em !important;
+            }
+
+            #footer-end {
+                padding: 2em !important;
             }
 
             #social-icons {
@@ -137,7 +141,7 @@
                         style="background-color: white; border-radius: 10em; display: none;">
 
                         <div class="text-button">
-                            <img src="../assets/img/cart.png" alt="" style="width: 32px; height: inherit;">
+                            <img src="../assets/img/shopping_cart.svg" alt="" style="width: 22px; height: inherit;">
 
                             <span id="productCount" style="color: black">0</span>
                         </div>
@@ -174,9 +178,9 @@
                     blog, we will guide you on how to use Codebell to secure your home and protect your family.</p>
             </div>
         </div>
-        <div data-w-id="fc0d34a5-3ea5-3271-0cbb-2e68d8723e83" style="opacity:0" class="gradient-blog-posts">
+        <!-- <div data-w-id="fc0d34a5-3ea5-3271-0cbb-2e68d8723e83" style="opacity:0" class="gradient-blog-posts">
             <div class="noise"></div>
-        </div>
+        </div> -->
     </div>
     <div class="section post wf-section">
         <div class="content-wide"><img loading="lazy"
@@ -368,7 +372,7 @@
 
     <footer class="section-footer wf-section">
         <div class="content">
-            <div class="w-layout-grid grid-footer">
+            <div class="w-layout-grid grid-footer" style="padding: 4em 5em;">
                 <div id="w-node-_17a85c95-fa82-5746-71bf-c8af53109a74-53109a73" class="footer-left">
                     <h2 data-w-id="17a85c95-fa82-5746-71bf-c8af53109a75" class="heading-footer"
                         style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
@@ -401,44 +405,56 @@
 
             </div>
         </div>
-        <div data-w-id="ef2d27af-e28a-9c66-8e12-40322fccb395" style="opacity: 1;" class="gradient-footer">
+        <!-- <div data-w-id="ef2d27af-e28a-9c66-8e12-40322fccb395" style="opacity: 1;" class="gradient-footer">
             <div class="noise"></div>
-        </div>
-        <div class="site-footer" style="padding: 7em 7em 0 7em;">
+        </div> -->
+        <div class="site-footer"
+            style="padding: 7em 7em 2em 7em; background-color: #161613; backdrop-filter: blur(5px); color: #f8f8f8;">
             <div style="display: flex; gap: 5em; margin-bottom: 5em; flex-wrap: wrap;">
                 <div style="flex: 1;">
-                    <img src="../assets/img/logo.svg" alt="">
-                    <p style="max-width: 25em; margin-left: 0.4em; margin-top: 1em;">Modern way of communication that is
+                    <img src="./assets/img/logo.svg" alt="">
+                    <p style="max-width: 25em; margin-left: 0.4em; margin-top: 1em;">Modern way of communication
+                        that is
                         safe, secure,
-                        efficient, and scalable.</p>
+                        efficient, and scalable.</p> <br>
                 </div>
                 <div style="display: flex; gap: 5em; flex: 0;">
-                    <div>
-                        <h5 style="margin-bottom: 0.5em;">Resources</h5>
+                    <div style="min-width: max-content">
+                        <p style="margin-bottom: 0.5em; color: #98A2B3">Resources</p>
                         <p><a href="/features">Features</a></p>
                         <p><a href="/products">Products</a></p>
                         <p><a href="/blog">Blog</a></p>
                         <p><a href="/support">Support</a></p>
                     </div>
-                    <div>
-                        <h5 style="margin-bottom: 0.5em;">Legal</h5>
+                    <div style="min-width: max-content">
+                        <p style="margin-bottom: 0.5em; color: #98A2B3;">Legal</p>
+                        <p><a href="/about-us">About us</a></p>
                         <p><a href="/t&c">Terms</a></p>
                         <p><a href="/privacy_policy">Privacy</a></p>
                     </div>
                 </div>
             </div>
 
-            <div id="footer-end" style="width: 100%; display: flex; flex-wrap: wrap-reverse; gap: 2em;">
-                <p>© Codebell. All rights reserved.</p>
+        </div>
+        <div id="footer-end"
+            style="width: 100%; display: flex; flex-wrap: wrap-reverse; gap: 2em; padding: 2em 7em 2em 7em; background-color: #0A5B75; color: #98A2B3;">
+            <p>© Codebell. All rights reserved.</p> <br>
 
-                <div id="social-icons" style="margin: 0 0 0 auto; display: flex; gap: 2em;">
-                    <a href="#"><img src="../assets/img/twitter.svg" alt="twitter"></a>
-                    <a href="#"><img src="../assets/img/linkedin.svg" alt="linkedin"></a>
-                    <a href="#"><img src="../assets/img/facebook.svg" alt="facebook"></a>
-                    <a href="#"><img src="../assets/img/whastapp.svg" alt="whastapp"></a>
-                </div>
-
+            <div id="social-icons" style="margin: 0 0 0 auto; display: flex; gap: 2em;">
+                <a href="#"><img src="../assets/img/twitter.svg"
+                        style="filter: invert(71%) sepia(12%) saturate(407%) hue-rotate(179deg) brightness(91%) contrast(83%);"
+                        alt="twitter"></a>
+                <a href="#"><img src="../assets/img/linkedin.svg"
+                        style="filter: invert(71%) sepia(12%) saturate(407%) hue-rotate(179deg) brightness(91%) contrast(83%);"
+                        alt="linkedin"></a>
+                <a href="#"><img src="../assets/img/facebook.svg"
+                        style="filter: invert(71%) sepia(12%) saturate(407%) hue-rotate(179deg) brightness(91%) contrast(83%);"
+                        alt="facebook"></a>
+                <a href="#"><img src="../assets/img/whastapp.svg"
+                        style="filter: invert(71%) sepia(12%) saturate(407%) hue-rotate(179deg) brightness(91%) contrast(83%);"
+                        alt="whastapp"></a>
             </div>
+
         </div>
     </footer>
 

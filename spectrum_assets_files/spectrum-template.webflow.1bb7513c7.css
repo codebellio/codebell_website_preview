@@ -3462,7 +3462,7 @@ figcaption {
 .section-footer {
   position: relative;
   margin-top: auto;
-  padding: 5.5em 2em 2.5em;
+  padding: 0;
 }
 
 .grid-footer {

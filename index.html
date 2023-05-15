@@ -125,6 +125,7 @@
 
             #testimonial-carousel .functions {
                 min-width: 100% !important;
+                padding: 0;
             }
 
             #slideRightBtn {
@@ -141,6 +142,7 @@
             }
 
             .content.plans .functions {
+                min-width: 100% !important;
                 padding: 3em 1em;
             }
 
@@ -153,7 +155,11 @@
             }
 
             .site-footer {
-                padding: 0.5em !important;
+                padding: 2em !important;
+            }
+
+            #footer-end {
+                padding: 2em !important;
             }
 
             #social-icons {
@@ -202,7 +208,7 @@
                         style="background-color: white; border-radius: 10em; display: none;">
 
                         <div class="text-button">
-                            <img src="./assets/img/cart.png" alt="" style="width: 32px; height: inherit;">
+                            <img src="./assets/img/shopping_cart.svg" alt="" style="width: 22px; height: inherit;">
 
                             <span id="productCount" style="color: black">0</span>
                         </div>
@@ -221,9 +227,9 @@
         </div>
         <div class="w-nav-overlay" data-wf-ignore="" id="w-nav-overlay-0"></div>
     </div>
-    <div data-w-id="1eca2369-89bd-f1c6-fa62-6c2cf67beff7" style="opacity: 1;" class="gradient-hero">
+    <!-- <div data-w-id="1eca2369-89bd-f1c6-fa62-6c2cf67beff7" style="opacity: 1;" class="gradient-hero">
         <div class="noise"></div>
-    </div>
+    </div> -->
     <div data-w-id="c636bd80-a8e8-7ca5-e24f-032b659a852f" class="section-hero wf-section" style="min-height: 100vh;">
         <div class="content">
             <div class="w-layout-grid grid-hero">
@@ -250,11 +256,15 @@
                                 loading="eager" alt="" class="icon-button">
                             <div class="text-button white">Get the App</div>
                         </a>
-                        <div class="circle-button"><a href="/features" class="link-circle-button w-inline-block"><img
-                                    src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
-                                    loading="eager" alt="" class="icon-button"></a>
-                            <div class="text-button">Try Codebell</div>
-                        </div>
+                        <a href="/products" style="text-decoration: none;">
+                            <div class="circle-button">
+                                <span class="link-circle-button w-inline-block">
+                                    <img src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
+                                        loading="eager" alt="" class="icon-button">
+                                </span>
+                                <div class="text-button">Try Codebell</div>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <div id="w-node-fb81bcce-4d37-85e0-208e-77cf7c1ffc2c-379d5480"
@@ -386,14 +396,18 @@
                             Say goodbye to bulky hardware and visitor wait times. With Codebell's QR video intercom,
                             simply place your QR code anywhere for effortless communication
                         </p>
-                        <div data-w-id="8c53bd04-7308-a7ae-433a-7f4553973cfa"
-                            style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                            class="circle-button"><a href="/features" class="link-circle-button w-inline-block"><img
-                                    src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
-                                    loading="eager" alt="" class="icon-button"></a>
+
+                        <a href="/features" data-w-id="8c53bd04-7308-a7ae-433a-7f4553973cfa"
+                            style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; text-decoration: none;"
+                            class="circle-button">
+                            <span class="link-circle-button w-inline-block">
+                                <img src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
+                                    loading="eager" alt="" class="icon-button">
+                            </span>
                             <div class="text-button">More Features</div>
-                        </div>
-                    </div><img src="./new_assets/functions_1.png" loading="eager"
+                        </a>
+                    </div>
+                    <img src="./new_assets/functions_1.png" loading="eager"
                         style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
                         data-w-id="9add7cc6-083d-3e0e-657c-6f5ee39a131c"
                         srcset="./new_assets/functions_1.png 500w, ./new_assets/functions_1.png 800w, ./new_assets/functions_1.png 1104w"
@@ -448,9 +462,9 @@
                 </div>
             </div>
         </div>
-        <div data-w-id="88c26a7d-3953-e420-b7d0-81c8acd3651e" style="opacity: 0;" class="gradient">
+        <!-- <div data-w-id="88c26a7d-3953-e420-b7d0-81c8acd3651e" style="opacity: 0;" class="gradient">
             <div class="noise"></div>
-        </div>
+        </div> -->
     </div>
 
     <div class="section wf-section">
@@ -539,7 +553,7 @@
 
             <div id="w-node-f5c0af81-4013-be1e-5c3f-7e73946682be-379d5480"
                 data-w-id="f5c0af81-4013-be1e-5c3f-7e73946682be"
-                style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; min-width: max-content; max-width: 50%;  margin-top: 3em; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start;"
+                style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; min-width: max-content; max-width: 50%; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; margin: 3em auto;"
                 class="functions">
 
                 <h3 data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4" style="opacity: 0;" class="heading-functions">With
@@ -697,7 +711,7 @@
 
     <footer class="section-footer wf-section">
         <div class="content">
-            <div class="w-layout-grid grid-footer">
+            <div class="w-layout-grid grid-footer" style="padding: 4em 5em;">
                 <div id="w-node-_17a85c95-fa82-5746-71bf-c8af53109a74-53109a73" class="footer-left">
                     <h2 data-w-id="17a85c95-fa82-5746-71bf-c8af53109a75" class="heading-footer"
                         style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
@@ -728,45 +742,57 @@
                 </div>
             </div>
         </div>
-        <div data-w-id="ef2d27af-e28a-9c66-8e12-40322fccb395" style="opacity: 0;" class="gradient-footer">
+        <!-- <div data-w-id="ef2d27af-e28a-9c66-8e12-40322fccb395" style="opacity: 0;" class="gradient-footer">
             <div class="noise"></div>
-        </div>
+        </div> -->
 
-        <div class="site-footer" style="padding: 7em 7em 0 7em;">
+        <div class="site-footer"
+            style="padding: 7em 7em 2em 7em; background-color: #161613; backdrop-filter: blur(5px); color: #f8f8f8;">
             <div style="display: flex; gap: 5em; margin-bottom: 5em; flex-wrap: wrap;">
                 <div style="flex: 1;">
                     <img src="./assets/img/logo.svg" alt="">
-                    <p style="max-width: 25em; margin-left: 0.4em; margin-top: 1em;">Modern way of communication that is
+                    <p style="max-width: 25em; margin-left: 0.4em; margin-top: 1em;">Modern way of communication
+                        that is
                         safe, secure,
-                        efficient, and scalable.</p>
+                        efficient, and scalable.</p> <br>
                 </div>
                 <div style="display: flex; gap: 5em; flex: 0;">
-                    <div>
-                        <h5 style="margin-bottom: 0.5em;">Resources</h5>
+                    <div style="min-width: max-content">
+                        <p style="margin-bottom: 0.5em; color: #98A2B3">Resources</p>
                         <p><a href="/features">Features</a></p>
                         <p><a href="/products">Products</a></p>
                         <p><a href="/blog">Blog</a></p>
                         <p><a href="/support">Support</a></p>
                     </div>
-                    <div>
-                        <h5 style="margin-bottom: 0.5em;">Legal</h5>
+                    <div style="min-width: max-content">
+                        <p style="margin-bottom: 0.5em; color: #98A2B3;">Legal</p>
+                        <p><a href="/about-us">About us</a></p>
                         <p><a href="/t&c">Terms</a></p>
                         <p><a href="/privacy_policy">Privacy</a></p>
                     </div>
                 </div>
             </div>
 
-            <div id="footer-end" style="width: 100%; display: flex; flex-wrap: wrap-reverse; gap: 2em;">
-                <p>© Codebell. All rights reserved.</p>
+        </div>
+        <div id="footer-end"
+            style="width: 100%; display: flex; flex-wrap: wrap-reverse; gap: 2em; padding: 2em 7em 2em 7em; background-color: #0A5B75; color: #98A2B3;">
+            <p>© Codebell. All rights reserved.</p> <br>
 
-                <div id="social-icons" style="margin: 0 0 0 auto; display: flex; gap: 2em;">
-                    <a href="#"><img src="./assets/img/twitter.svg" alt="twitter"></a>
-                    <a href="#"><img src="./assets/img/linkedin.svg" alt="linkedin"></a>
-                    <a href="#"><img src="./assets/img/facebook.svg" alt="facebook"></a>
-                    <a href="#"><img src="./assets/img/whastapp.svg" alt="whastapp"></a>
-                </div>
-
+            <div id="social-icons" style="margin: 0 0 0 auto; display: flex; gap: 2em;">
+                <a href="#"><img src="./assets/img/twitter.svg"
+                        style="filter: invert(71%) sepia(12%) saturate(407%) hue-rotate(179deg) brightness(91%) contrast(83%);"
+                        alt="twitter"></a>
+                <a href="#"><img src="./assets/img/linkedin.svg"
+                        style="filter: invert(71%) sepia(12%) saturate(407%) hue-rotate(179deg) brightness(91%) contrast(83%);"
+                        alt="linkedin"></a>
+                <a href="#"><img src="./assets/img/facebook.svg"
+                        style="filter: invert(71%) sepia(12%) saturate(407%) hue-rotate(179deg) brightness(91%) contrast(83%);"
+                        alt="facebook"></a>
+                <a href="#"><img src="./assets/img/whastapp.svg"
+                        style="filter: invert(71%) sepia(12%) saturate(407%) hue-rotate(179deg) brightness(91%) contrast(83%);"
+                        alt="whastapp"></a>
             </div>
+
         </div>
     </footer>
 
