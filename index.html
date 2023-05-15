@@ -96,7 +96,7 @@
         }
 
         #testimonial-carousel {
-            cursor: grab;
+            /* cursor: grab; */
         }
 
         @media (max-width:767px) {
@@ -108,12 +108,23 @@
                 width: 12em !important;
             }
 
-            .testimonial-card {
-                flex-wrap: wrap;
+            .corousel-large {
+                -webkit-flex-direction: row !important;
+                -ms-flex-direction: row !important;
+                flex-direction: row !important;
+                padding: 0;
             }
 
-            .testimonial-card:nth-child(odd) {
+            .testimonial-card {
+                /* flex-wrap: wrap; */
+            }
+
+            /* .testimonial-card:nth-child(odd) {
                 margin: 0 2em;
+            } */
+
+            #testimonial-carousel .functions {
+                min-width: 100% !important;
             }
 
             #slideRightBtn {
@@ -122,6 +133,23 @@
 
             #slideLeftBtn {
                 display: none;
+            }
+
+            .content.plans {
+                width: 100% !important;
+                margin: 0 !important;
+            }
+
+            .content.plans .functions {
+                padding: 3em 1em;
+            }
+
+            .content.plans .functions div {
+                padding: 0 1.5em;
+            }
+
+            .content.plans h2 {
+                max-width: 100% !important;
             }
 
             .site-footer {
@@ -196,7 +224,7 @@
     <div data-w-id="1eca2369-89bd-f1c6-fa62-6c2cf67beff7" style="opacity: 1;" class="gradient-hero">
         <div class="noise"></div>
     </div>
-    <div data-w-id="c636bd80-a8e8-7ca5-e24f-032b659a852f" class="section-hero wf-section">
+    <div data-w-id="c636bd80-a8e8-7ca5-e24f-032b659a852f" class="section-hero wf-section" style="min-height: 100vh;">
         <div class="content">
             <div class="w-layout-grid grid-hero">
                 <div id="w-node-_3bce429c-06f2-53cc-882e-3e390d408fec-379d5480" class="block-hero">
@@ -211,10 +239,10 @@
                         your personal details!
                     </p>
 
-                    <div style="display: flex; gap: 2em; align-items: center; max-width: 75%;">
+                    <!-- <div style="display: flex; gap: 2em; align-items: center; max-width: 75%;">
                         <img src="./assets/img/qr.svg" alt="">
                         <h3 style="color: #0A5B75;">Scan to see how it works!</h3>
-                    </div>
+                    </div> -->
                     <div data-w-id="0407c09b-5da1-c573-6f18-f9acb82b7d4c"
                         style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
                         class="block-button"><a href="/get-the-app" class="button w-inline-block"><img
@@ -265,100 +293,74 @@
         </div>
     </div>
     <div class="section wf-section sm-nooverflow">
-        <div class="content">
-            <div class="w-layout-grid grid-focus">
-                <div id="w-node-_921e641a-4364-ff47-fb5c-6dcbde77594e-379d5480"
-                    data-w-id="921e641a-4364-ff47-fb5c-6dcbde77594e"
-                    style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                    class="app-focus">
-                    <div class="app-focus---sticky">
-                        <div class="app-focus---wrapper"
-                            style="will-change: transform; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(3.11556deg) rotateY(-2.0986deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
-                            <div class="app-focus---content"
-                                style="will-change: transform; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(23deg) rotateY(-23deg) rotateZ(23deg) skew(0deg, 0deg); transform-style: preserve-3d;">
-                                <div class="app-focus---shadow"></div>
-                                <div class="app-focus---image"><img src="./new_assets/app_1.jpg" loading="eager"
-                                        sizes="(max-width: 479px) 50vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                        srcset="./new_assets/app_1.jpg 500w, ./new_assets/app_1.jpg 504w" alt=""
-                                        class="image-app---focus-1"
-                                        style="will-change: transform, filter; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; filter: blur(0px);"><img
-                                        src="./new_assets/app_2.jpg" loading="eager"
-                                        sizes="(max-width: 479px) 68vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                        srcset="./new_assets/app_2.jpg 500w, ./new_assets/app_2.jpg 504w" alt=""
-                                        class="image-app---focus-2"
-                                        style="will-change: transform, filter; transform: translate3d(0px, -100%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; filter: blur(0px);"><img
-                                        src="./new_assets/app_3.jpg" loading="eager"
-                                        sizes="(max-width: 479px) 63vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                        srcset="./new_assets/app_3.jpg 500w, ./new_assets/app_3.jpg 505w" alt=""
-                                        class="image-app---focus-3"
-                                        style="will-change: transform; transform: translate3d(0px, -100%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
-                                </div>
-                            </div>
-                        </div>
+        <div class="content" style="min-width: 80%;">
+
+            <div id="w-node-f5c0af81-4013-be1e-5c3f-7e73946682be-379d5480"
+                data-w-id="f5c0af81-4013-be1e-5c3f-7e73946682be"
+                style=" display: flex; opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; position: relative; background-color: transparent; backdrop-filter: none; height: max-content;"
+                class="functions-large corousel-large">
+
+                <div id="testimonial-carousel"
+                    style="min-height: max-content; min-width: 100%; display: flex; overflow: hidden; overflow-x: scroll; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 3em;">
+
+                    <div style="min-height: max-content; margin-bottom: 1em; min-width: max-content; scroll-snap-align: start;"
+                        class="functions">
+
+                        <img src="./assets/img/virtual-doorbell.png" loading="eager"
+                            style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; width: 15em; margin: auto;"
+                            alt="" class="image-functions">
+                        <h3 style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                            class="heading-functions">Virtual <span class="text-transparent">Doorbell</span></h3>
+                        <p style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                            class="paragraph">Say goodbye to expensive doorbells & intercoms. Answer your door and
+                            connect with
+                            your visitors securely, wherever you
+                            are.</p>
                     </div>
-                </div>
-                <div id="w-node-_08be711c-a843-4fc0-e4ee-60f7d1119405-379d5480" class="focus">
-                    <div class="block-heading">
-                        <div data-w-id="f9864493-856f-116e-6930-cefa188abe50"
-                            style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                            class="subtitle"><img src="./new_assets/icon_subtitle_1.svg" loading="eager" alt=""
-                                class="icon-subtitle">
-                            <div class="text-subtitle">Scan</div>
-                        </div>
-                        <h2 data-w-id="07760b71-66fa-e758-ae4e-9be5fb13e2a0"
-                            style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                            class="heading"> Scan our <span class="text-transparent">Device</span></h2>
+
+                    <div style=" min-width: max-content; margin-bottom: 1em; scroll-snap-align: start;"
+                        class="functions">
+
+                        <img src="./assets/img/vehicle.png" loading="eager"
+                            style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; width: 15em; margin: auto;"
+                            alt="" class="image-functions">
+                        <h3 style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                            class="heading-functions">Vehicle <span class="text-transparent">Safety Tag</span></h3>
+                        <p style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                            class="paragraph">Instantly get notified if your vehicle requires attention. Codebell helps
+                            people to connect with you in case of wrong
+                            parking, accident, or roadside assistance.</p>
                     </div>
-                    <p data-w-id="9a85c6be-5cc1-b13b-8ff3-83555a5638dc"
-                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                        class="paragraph">Scan the Codebell QR using a smartphone camera/Codebell App</p>
-                    <p data-w-id="9a85c6be-5cc1-b13b-8ff3-83555a5638dc"
-                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                        class="paragraph">Initiate a Video Call Session with Codebell Device Owner</p>
-                </div>
-                <div id="w-node-_993b666c-85f8-1653-1ef3-a82122c49510-379d5480" class="focus">
-                    <div class="block-heading">
-                        <div data-w-id="993b666c-85f8-1653-1ef3-a82122c49512"
-                            style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                            class="subtitle"><img src="./new_assets/icon_subtitle_2.svg" loading="eager" alt=""
-                                class="icon-subtitle">
-                            <div class="text-subtitle">Ring</div>
-                        </div>
-                        <h2 data-w-id="993b666c-85f8-1653-1ef3-a82122c49516"
-                            style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                            class="heading">Get a <span class="text-transparent">Video alert</span></h2>
+
+                    <div style=" min-width: max-content; scroll-snap-align: start;" class="functions">
+
+                        <img src="" loading="eager"
+                            style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; width: 15em; margin: auto;"
+                            alt="" class="image-functions">
+                        <h3 style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                            class="heading-functions">Office <span class="text-transparent">Assistance</span></h3>
+                        <p style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                            class="paragraph">Say goodbye to expensive doorbells & intercoms. Answer your door and
+                            connect with your visitors securely, wherever you
+                            are.</p>
                     </div>
-                    <p data-w-id="993b666c-85f8-1653-1ef3-a82122c4951a"
-                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                        class="paragraph">Codebell Device owner receive an incoming video call notification
-                        On Codebell Mobile App
-                    </p>
-                    <p data-w-id="993b666c-85f8-1653-1ef3-a82122c4951a"
-                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                        class="paragraph">Stay connected with video alerts on the CodeBell app, no matter wherever
-                        the owner’s current location is.
-                    </p>
-                </div>
-                <div id="w-node-_4a90023a-9e8e-5ca0-356d-053b7a73f5c7-379d5480" class="focus">
-                    <div class="block-heading">
-                        <div data-w-id="4a90023a-9e8e-5ca0-356d-053b7a73f5c9"
-                            style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                            class="subtitle"><img src="./new_assets/icon_subtitle_3.svg" loading="eager" alt=""
-                                class="icon-subtitle">
-                            <div class="text-subtitle">Connect</div>
-                        </div>
-                        <h2 data-w-id="4a90023a-9e8e-5ca0-356d-053b7a73f5cd"
-                            style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                            class="heading">Connect with the <span class="text-transparent">Visitor</span>
-                        </h2>
+
+                    <div style="min-width: max-content; scroll-snap-align: start;" class="functions">
+                        <img src="./assets/img/luggage-tag.png" loading="eager" style=" width: 15em; margin: auto;"
+                            alt="" class="image-functions">
+                        <h3 class="heading-functions">Smart <span class="text-transparent">Luggage Tag</span></h3>
+                        <p class="paragraph">Instantly get notified if your vehicle requires attention. Codebell helps
+                            people to connect with you in case of wrong
+                            parking, accident, or roadside assistance</p>
                     </div>
-                    <p data-w-id="4a90023a-9e8e-5ca0-356d-053b7a73f5d1"
-                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                        class="paragraph">Communicate with visitors over a video call On the Codebell App</p>
-                    <p data-w-id="4a90023a-9e8e-5ca0-356d-053b7a73f5d1"
-                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                        class="paragraph">Talk to them and let them know you are unavailable</p>
+
                 </div>
+                <button id="slideRightBtn" onclick="slideRight()"
+                    style="background-color: transparent; position: absolute; right: 0.5em;"><img
+                        src="./assets/img/right-icon.png" alt="move-right" style="width: 3em; height: 3em;"></button>
+                <button id="slideLeftBtn" onclick="slideLeft()"
+                    style="background-color: transparent; position: absolute; left: 0.5em; display: none;"><img
+                        src="./assets/img/left-icon.png" alt="move-right" style="width: 3em; height: 3em;"></button>
             </div>
         </div>
     </div>
@@ -398,6 +400,7 @@
                         sizes="(max-width: 479px) 71vw, (max-width: 767px) 74vw, (max-width: 991px) 40vw, (max-width: 1439px) 41vw, (max-width: 1919px) 490.5px, 523.1875px"
                         alt="" class="image-functions-large">
                 </div>
+
                 <div id="w-node-_31aca3be-6c53-1b18-94f2-0ee9f7584b1b-379d5480"
                     data-w-id="31aca3be-6c53-1b18-94f2-0ee9f7584b1b"
                     style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
@@ -449,6 +452,7 @@
             <div class="noise"></div>
         </div>
     </div>
+
     <div class="section wf-section">
         <div class="content">
             <h2 data-w-id="9a2dfb51-1c08-f11b-cf75-ece1757f0eb3"
@@ -528,8 +532,89 @@
         </div>
     </div>
     <div class="section wf-section">
-        <div class="content">
+        <div class="content plans">
+            <h2 data-w-id="17a85c95-fa82-5746-71bf-c8af53109a75" class="heading-footer"
+                style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; max-width: 60%;">
+                Get any of our Product and service for <span class="text-transparent">just 1 Re/ Day!</span></h2>
+
             <div id="w-node-f5c0af81-4013-be1e-5c3f-7e73946682be-379d5480"
+                data-w-id="f5c0af81-4013-be1e-5c3f-7e73946682be"
+                style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; min-width: max-content; max-width: 50%;  margin-top: 3em; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start;"
+                class="functions">
+
+                <h3 data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4" style="opacity: 0;" class="heading-functions">With
+                    each device you get:</h3>
+
+                <div style="display: flex; gap: 1em; align-items: center;">
+                    <img src="./assets/img/tick.svg" alt="" style="width: 1.5em;">
+                    <p data-w-id="213a3136-58b5-88ff-5f8a-0fdeb92a462d"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        class="">Video alert</p>
+                </div>
+                <div style="display: flex; gap: 1em; align-items: center;">
+                    <img src="./assets/img/tick.svg" alt="" style="width: 1.5em;">
+                    <p data-w-id="213a3136-58b5-88ff-5f8a-0fdeb92a462d"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        class="">Live preview</p>
+                </div>
+                <div style="display: flex; gap: 1em; align-items: center;">
+                    <img src="./assets/img/tick.svg" alt="" style="width: 1.5em;">
+                    <p data-w-id="213a3136-58b5-88ff-5f8a-0fdeb92a462d"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        class="">Real-time chats</p>
+                </div>
+                <div style="display: flex; gap: 1em; align-items: center;">
+                    <img src="./assets/img/tick.svg" alt="" style="width: 1.5em;">
+                    <p data-w-id="213a3136-58b5-88ff-5f8a-0fdeb92a462d"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        class="">Call recordings</p>
+                </div>
+                <div style="display: flex; gap: 1em; align-items: center;">
+                    <img src="./assets/img/tick.svg" alt="" style="width: 1.5em;">
+                    <p data-w-id="213a3136-58b5-88ff-5f8a-0fdeb92a462d"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        class="">Visitor logs</p>
+                </div>
+                <div style="display: flex; gap: 1em; align-items: center;">
+                    <img src="./assets/img/tick.svg" alt="" style="width: 1.5em;">
+                    <p data-w-id="213a3136-58b5-88ff-5f8a-0fdeb92a462d"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        class="">Geofencing</p>
+                </div>
+                <div style="display: flex; gap: 1em; align-items: center;">
+                    <img src="./assets/img/tick.svg" alt="" style="width: 1.5em;">
+                    <p data-w-id="213a3136-58b5-88ff-5f8a-0fdeb92a462d"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        class="">Call-forwarding</p>
+                </div>
+                <div style="display: flex; gap: 1em; align-items: center;">
+                    <img src="./assets/img/tick.svg" alt="" style="width: 1.5em;">
+                    <p data-w-id="213a3136-58b5-88ff-5f8a-0fdeb92a462d"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        class="">Call back missed visitors</p>
+                </div>
+                <div style="display: flex; gap: 1em; align-items: center;">
+                    <img src="./assets/img/tick.svg" alt="" style="width: 1.5em;">
+                    <p data-w-id="213a3136-58b5-88ff-5f8a-0fdeb92a462d"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        class="">Manage multiple codebell</p>
+                </div>
+
+
+                <div style="margin: auto; margin-top: 2em;">
+                    <h2 data-w-id="17a85c95-fa82-5746-71bf-c8af53109a75" class="heading-footer"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                        ₹1 <span class="text-transparent" style="font-size: small; ">/ day</span>
+                    </h2>
+                </div>
+
+                <button class="button" class="button w-inline-block" style="width: max-content; margin: auto">
+                    <a href="/products" style="text-decoration: none;">
+                        <div class="text-button" style="color: #f8f8f8">View Products</div>
+                    </a>
+                </button>
+            </div>
+            <!-- <div id="w-node-f5c0af81-4013-be1e-5c3f-7e73946682be-379d5480"
                 data-w-id="f5c0af81-4013-be1e-5c3f-7e73946682be"
                 style=" display: flex; opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; position: relative;"
                 class="functions-large">
@@ -606,7 +691,7 @@
                 <button id="slideLeftBtn" onclick="slideLeft()"
                     style="background-color: transparent; position: absolute; left: 0.5em; display: none;"><img
                         src="./assets/img/left-icon.png" alt="move-right" style="width: 3em; height: 3em;"></button>
-            </div>
+            </div> -->
         </div>
     </div>
 
