@@ -127,6 +127,11 @@
             .block-button-footer a {
                 width: 100%;
             }
+
+            .faq-wrapper {
+                /* max-width: 100% !important; */
+                min-width: 100% !important;
+            }
         }
     </style>
 </head>
@@ -150,10 +155,10 @@
                 <cart-view>
                     <a href="/order" id="cart" class="nav-link nav-button"
                         style="background-color: white; border-radius: 10em; display: none;">
-                
+
                         <div class="text-button">
                             <img src="./assets/img/shopping_cart.svg" alt="" style="width: 22px; height: inherit;">
-                
+
                             <span id="productCount" style="color: black">0</span>
                         </div>
                     </a>
@@ -188,12 +193,16 @@
     </div>
     <div class="section wf-section">
         <div class="content-wide">
-            <div class="w-layout-grid grid-support">
-                <div id="w-node-_4b03d09f-92fd-bfcb-36c1-03b1877a3a87-eebb5893" class="w-layout-grid grid-faq">
+            <div id="w-node-_4b03d09f-92fd-bfcb-36c1-03b1877a3a87-eebb5893" class="grid-faq"
+                style="display: flex; flex-wrap: wrap; min-width: 100%;">
+
+                <div class="faq-wrapper"
+                    style="display: flex; flex-direction: column; gap: 1em; max-width: 45%; width: 45%;">
                     <div id="w-node-_0fb78434-6fbe-94b0-7bc6-2659db5b73ff-eebb5893"
                         data-w-id="0fb78434-6fbe-94b0-7bc6-2659db5b73ff"
                         style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
                         class="accordion-item">
+
                         <div class="accordion-header">
                             <div class="icon-accordion"><img
                                     src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
@@ -400,6 +409,10 @@
                             <p class="paragraph-accordion">You can order a codebell from our website or app</p>
                         </div>
                     </div>
+                </div>
+
+                <div class="faq-wrapper"
+                    style="display: flex; flex-direction: column; gap: 1em; max-width: 45%; width: 45%;">
                     <div id="w-node-_8dfe5630-3d6c-4537-c04d-f68910df6faf-eebb5893"
                         data-w-id="8dfe5630-3d6c-4537-c04d-f68910df6faf"
                         style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
@@ -480,10 +493,130 @@
                             <p class="paragraph-accordion">NO! Geofencing only works for Home, Office and Shops.</p>
                         </div>
                     </div>
+                    <div id="w-node-_8dfe5630-3d6c-4537-c04d-f68910df6faf-eebb5893"
+                        data-w-id="8dfe5630-3d6c-4537-c04d-f68910df6faf"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        class="accordion-item">
+                        <div class="accordion-header">
+                            <div class="icon-accordion"><img
+                                    src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
+                                    loading="eager" alt="" class="icon-arrow"></div>
+                            <h6 class="heading-accordion">Do I have to pay for codebell scanner device?</h6>
+                        </div>
+                        <div class="accordion-content" style="height: 0px; display: none;">
+                            <p class="paragraph-accordion">No, There is no extra cost for scanner device, It’s included
+                                in Yearly subscription</p>
+                        </div>
+                    </div>
+                    <div id="w-node-_8dfe5630-3d6c-4537-c04d-f68910df6faf-eebb5893"
+                        data-w-id="8dfe5630-3d6c-4537-c04d-f68910df6faf"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        class="accordion-item">
+                        <div class="accordion-header">
+                            <div class="icon-accordion"><img
+                                    src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
+                                    loading="eager" alt="" class="icon-arrow"></div>
+                            <h6 class="heading-accordion">How can I order a codebell for my self?</h6>
+                        </div>
+                        <div class="accordion-content" style="height: 0px; display: none;">
+                            <p class="paragraph-accordion">You can order a codebell from our website or app</p>
+                        </div>
+                    </div>
+                    <div id="w-node-_8dfe5630-3d6c-4537-c04d-f68910df6faf-eebb5893"
+                        data-w-id="8dfe5630-3d6c-4537-c04d-f68910df6faf"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        class="accordion-item">
+                        <div class="accordion-header">
+                            <div class="icon-accordion"><img
+                                    src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
+                                    loading="eager" alt="" class="icon-arrow"></div>
+                            <h6 class="heading-accordion">How codebell helps for home security?</h6>
+                        </div>
+                        <div class="accordion-content" style="height: 0px; display: none;">
+                            <p class="paragraph-accordion">You can keep track of who visited your propery & when, also
+                                you can ignore
+                                unwanted visitors.</p>
+                        </div>
+                    </div>
+                    <div id="w-node-_8dfe5630-3d6c-4537-c04d-f68910df6faf-eebb5893"
+                        data-w-id="8dfe5630-3d6c-4537-c04d-f68910df6faf"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        class="accordion-item">
+                        <div class="accordion-header">
+                            <div class="icon-accordion"><img
+                                    src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
+                                    loading="eager" alt="" class="icon-arrow"></div>
+                            <h6 class="heading-accordion">Can codebell be installed in office spaces & shops</h6>
+                        </div>
+                        <div class="accordion-content" style="height: 0px; display: none;">
+                            <p class="paragraph-accordion">Yes! Codebell can be installed in any premises, a seamless
+                                solution for
+                                staying connected while prioritizing your privacy.</p>
+                        </div>
+                    </div>
+                    <div id="w-node-_8dfe5630-3d6c-4537-c04d-f68910df6faf-eebb5893"
+                        data-w-id="8dfe5630-3d6c-4537-c04d-f68910df6faf"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        class="accordion-item">
+                        <div class="accordion-header">
+                            <div class="icon-accordion"><img
+                                    src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
+                                    loading="eager" alt="" class="icon-arrow"></div>
+                            <h6 class="heading-accordion">Is my data is secured with codebell</h6>
+                        </div>
+                        <div class="accordion-content" style="height: 0px; display: none;">
+                            <p class="paragraph-accordion">Yes! Securely connect with CodeBell owners without sharing
+                                phone
+                                numbers/personal details - end-to-end encryption ensures third-party cannot
+                                access communication.</p>
+                        </div>
+                    </div>
+                    <div id="w-node-_8dfe5630-3d6c-4537-c04d-f68910df6faf-eebb5893"
+                        data-w-id="8dfe5630-3d6c-4537-c04d-f68910df6faf"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        class="accordion-item">
+                        <div class="accordion-header">
+                            <div class="icon-accordion"><img
+                                    src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
+                                    loading="eager" alt="" class="icon-arrow"></div>
+                            <h6 class="heading-accordion">Can a I buy multiple codebell</h6>
+                        </div>
+                        <div class="accordion-content" style="height: 0px; display: none;">
+                            <p class="paragraph-accordion">Yes! You can connect multiple codebell from one account.
+                                Easily manage
+                                multiple CodeBells using just one account - streamline your work and improve
+                                productivity.</p>
+                        </div>
+                    </div>
+                    <div id="w-node-_8dfe5630-3d6c-4537-c04d-f68910df6faf-eebb5893"
+                        data-w-id="8dfe5630-3d6c-4537-c04d-f68910df6faf"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        class="accordion-item">
+                        <div class="accordion-header">
+                            <div class="icon-accordion"><img
+                                    src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
+                                    loading="eager" alt="" class="icon-arrow"></div>
+                            <h6 class="heading-accordion">Does Geofencing works for Cars & Bike</h6>
+                        </div>
+                        <div class="accordion-content" style="height: 0px; display: none;">
+                            <p class="paragraph-accordion">NO! Geofencing only works for Home, Office and Shops.</p>
+                        </div>
+                    </div>
+
                 </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="section wf-section">
+        <div class="content-wide">
+            <div id="w-node-_4b03d09f-92fd-bfcb-36c1-03b1877a3a87-eebb5893" class="grid-faq"
+                style="display: flex; min-width: 100%;">
                 <div id="w-node-_85c176f1-5ebb-265d-9be4-07496d5f2012-eebb5893"
                     data-w-id="85c176f1-5ebb-265d-9be4-07496d5f2012"
-                    style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                    style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; margin: auto;"
                     class="contact">
                     <div class="block-heading">
                         <div data-w-id="40106df1-1392-b19c-cb46-baa9f6421c6c"
@@ -523,6 +656,7 @@
         </div>
     </div>
 
+
     <footer class="section-footer wf-section">
         <div class="content">
             <div class="w-layout-grid grid-footer" style="padding: 4em 5em;">
@@ -536,7 +670,8 @@
                         solution for staying connected while prioritizing your privacy.</p>
                     <p data-w-id="17a85c95-fa82-5746-71bf-c8af53109a79" class="paragraph"
                         style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
-                        Explore the freedom of privacy with us. Order your Codebell today and experience the future
+                        Explore the freedom of privacy with us. Order your Codebell today and experience the
+                        future
                         at just <strong>Re. 1</strong> per day.</p>
                 </div>
                 <div id="w-node-_17a85c95-fa82-5746-71bf-c8af53109a7b-53109a73"
