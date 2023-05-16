@@ -25,11 +25,6 @@
             n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch")
         }(window, document);
     </script>
-
-    <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/node-snackbar@latest/src/js/snackbar.min.js"></script>
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/npm/node-snackbar@latest/dist/snackbar.min.css" />
     <script src="/assets/js/helper.js"></script>
 
     <style>
@@ -103,6 +98,14 @@
         }
 
         @media (max-width:767px) {
+            .no_sm_mt.mobile {
+                display: block !important;
+            }
+
+            .no_sm_mt.desktop {
+                display: none !important;
+            }
+
             .site-footer {
                 padding: 2em !important;
             }
@@ -157,10 +160,10 @@
                 <cart-view>
                     <a href="/order" id="cart" class="nav-link nav-button"
                         style="background-color: white; border-radius: 10em; display: none;">
-                
+
                         <div class="text-button">
                             <img src="./assets/img/shopping_cart.svg" alt="" style="width: 22px; height: inherit;">
-                
+
                             <span id="productCount" style="color: black">0</span>
                         </div>
                     </a>
@@ -184,11 +187,11 @@
     <div class="section-top wf-section">
         <div class="content">
             <div class="block-top">
-                <h1 data-w-id="e17dd2ae-f4db-b317-a316-0508a45a344a"
-                    style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                <h1 data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                    style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
                     class="heading-top">Products</h1>
-                <p data-w-id="ffdcda00-f98a-29d7-d9e8-be2111505b41"
-                    style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                <p data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                    style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
                     class="paragraph-top">Codebell is a QR- based Video Intercom System with real time messaging
                     that enables secure and private communication . It is suitable for both residential and
                     commercial settings, providing a versatile solution for individuals and businesses that value
@@ -204,124 +207,212 @@
     </div>
 
     <div id="productWrapper">
-        <!-- <div class="section wf-section">
-                <div class="content">
-                    <div class="w-layout-grid grid-focus-left">
-                        <div class="focus-separate">
-                            <div class="block-heading">
-                                <h2 class="heading">Codebell with proximity light</span></h2>
-                                <div class="subtitle">
-                                    <div class="text-subtitle">₹200</div>
+        <div class="section wf-section product" data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+            style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+            <div class="content">
+                <div class="w-layout-grid grid-focus-left">
+                    <div class="focus-separate">
+                        <div class="block-heading">
+                            <h2 class="heading" data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                                style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                                Codebell for Home</span></h2>
+                            <div class="subtitle" data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                                style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                                <div class="text-subtitle">₹365
                                 </div>
                             </div>
-                            <p class="paragraph">In dark if some one come nearby proximity sensor will light the
-                                codebell so
-                                visitor can find it easily</p>
-                            <div style="display: flex; gap: 1em; color: white;">
-                                <a href="/order"> <button onclick="order(1)" class="button"> Order Now </button></a>
-
-                                <button onclick="order(1), setProductCount()" class="button w-inline-block"
-                                    style="width: max-content; margin: auto 0 0 auto; background-color: transparent; border: 2px solid #161613;">
-                                    <div class="text-button" style="color:#161613;">Add to Cart</div>
-                                </button>
-                            </div>
                         </div>
-                        <div class="app-focus-separate no_sm_mt">
+                        <p class="paragraph" data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                            style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                            Upon scanning Codebell, a screenshot of visitor is stored in your app. Keep
+                            track of all visitors for extra safety.
+                        </p>
+
+                        <div class="app-focus-separate no_sm_mt mobile" data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                            style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; margin-bottom: 2em; display: none;">
                             <div class="app-focus---wrapper">
                                 <div class="app-focus---content"
                                     style="will-change: transform; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(23deg) rotateY(-23deg) rotateZ(23deg) skew(0deg, 0deg); transform-style: preserve-3d;">
                                     <div class="app-focus---shadow"></div>
-                                    <div class="app-focus---image"><img
-                                            src="https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct3.png"
-                                            loading="eager"
-                                            sizes="(max-width: 479px) 40vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                            srcset="https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct3.png 500w, https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct3.png 504w"
+                                    <div class="app-focus---image"><img src="./assets/img/3.5x5.png" loading="eager"
                                             alt="" class="image-app---focus-1">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div> -->
 
-        <!-- <div class="section wf-section">
-                <div class="content">
-                    <div class="w-layout-grid grid-focus-left">
-                        <div class="focus-separate">
-                            <div class="block-heading">
-                                <h2 class="heading">Car</span></h2>
-                                <div class="subtitle">
-                                    <div class="text-subtitle">₹350</div>
+                        <div data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                            style="display: flex; gap: 1em; color: white; opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+
+                            <a href="/home">
+                                <div class="circle-button">
+                                    <span class="link-circle-button w-inline-block">
+                                        <img src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
+                                            loading="eager" alt="" class="icon-button">
+                                    </span>
+                                    <div class="text-button">Learn more</div>
+                                </div>
+                            </a>
+
+                            <button class="button" onclick="order(1, 'addToCart'), setProductCount()"
+                                class="button w-inline-block" style="margin: auto 0 0 auto;">
+                                <div class="text-button" style="color: #f8f8f8; ">Add to Cart</div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="app-focus-separate no_sm_mt desktop" data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                        <div class="app-focus---wrapper">
+                            <div class="app-focus---content"
+                                style="will-change: transform; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(23deg) rotateY(-23deg) rotateZ(23deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                                <div class="app-focus---shadow"></div>
+                                <div class="app-focus---image"><img src="./assets/img/3.5x5.png" loading="eager" alt=""
+                                        class="image-app---focus-1">
                                 </div>
                             </div>
-                            <p class="paragraph">Car codebell</p>
-                            <div style="display: flex; gap: 1em; color: white;">
-                                <a href="order"><button class="button" onclick="order(2)"> Order Now </button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                                <button onclick="order(2), setProductCount()" class="button w-inline-block"
-                                    style="width: max-content; margin: auto 0 0 auto; background-color: transparent; border: 2px solid #161613;">
-                                    <div class="text-button" style="color:#161613;">Add to Cart</div>
-                                </button>
+        <div class="section wf-section product" data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+            style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+            <div class="content">
+                <div class="w-layout-grid grid-focus-left">
+                    <div class="focus-separate">
+                        <div class="block-heading">
+                            <h2 data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                                style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                                class="heading">Codebell for your Vehicle</span></h2>
+                            <div class="subtitle" data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                                style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                                <div class="text-subtitle">₹365</div>
                             </div>
                         </div>
-                        <div class="app-focus-separate no_sm_mt">
+                        <p class="paragraph" data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                            style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                            Get LIVE preview when anyone scans the CodeBell. Talk to them or let them
+                            know if you are away.
+                        </p>
+
+                        <div class="app-focus-separate no_sm_mt mobile" data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                            style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; margin-bottom: 2em;">
                             <div class="app-focus---wrapper">
                                 <div class="app-focus---content"
                                     style="will-change: transform; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(23deg) rotateY(-23deg) rotateZ(23deg) skew(0deg, 0deg); transform-style: preserve-3d;">
                                     <div class="app-focus---shadow"></div>
-                                    <div class="app-focus---image"><img
-                                            src="https://s3.ap-south-1.amazonaws.com/device.localhost/products/product5.png"
-                                            loading="eager"
-                                            sizes="(max-width: 479px) 40vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                            srcset="https://s3.ap-south-1.amazonaws.com/device.localhost/products/product5.png 500w, https://s3.ap-south-1.amazonaws.com/device.localhost/products/product5.png 504w"
-                                            alt="" class="image-app---focus-1">
+                                    <div class="app-focus---image"><img src="./assets/img/cccproduct2.png"
+                                            loading="eager" alt="" class="image-app---focus-1">
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                            style="display: flex; gap: 1em; color: white; opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+
+                            <a href="/vehicle">
+                                <div class="circle-button">
+                                    <span class="link-circle-button w-inline-block">
+                                        <img src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
+                                            loading="eager" alt="" class="icon-button">
+                                    </span>
+                                    <div class="text-button">Learn more</div>
+                                </div>
+                            </a>
+
+                            <button class="button" onclick="order(2, 'addToCart'), setProductCount()"
+                                class="button w-inline-block" style="width: max-content; margin: auto 0 0 auto;">
+                                <div class="text-button" style="color: #f8f8f8">Add to Cart</div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="app-focus-separate no_sm_mt desktop" data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                        <div class="app-focus---wrapper">
+                            <div class="app-focus---content"
+                                style="will-change: transform; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(23deg) rotateY(-23deg) rotateZ(23deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                                <div class="app-focus---shadow"></div>
+                                <div class="app-focus---image"><img src="./assets/img/cccproduct2.png" loading="eager"
+                                        alt="" class="image-app---focus-1">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
+        </div>
 
-        <!-- <div class="section wf-section">
-                <div class="content">
-                    <div class="w-layout-grid grid-focus-left">
-                        <div class="focus-separate">
-                            <div class="block-heading">
-                                <h2 class="heading">Free Codebell</span></h2>
-                                <div class="subtitle">
-                                    <div class="text-subtitle">₹15</div>
-                                </div>
-                            </div>
-                            <p class="paragraph">New Product 1</p>
-                            <div style="display: flex; gap: 1em; color: white;">
-                                <a href="order"><button class="button" onclick="order(3)"> Order Now </button></a>
-
-                                <button onclick="order(3), setProductCount()" class="button w-inline-block"
-                                    style="width: max-content; margin: auto 0 0 auto; background-color: transparent; border: 2px solid #161613;">
-                                    <div class="text-button" style="color:#161613;">Add to Cart</div>
-                                </button>
+        <div class="section wf-section product" data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+            style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+            <div class="content">
+                <div class="w-layout-grid grid-focus-left">
+                    <div class="focus-separate">
+                        <div class="block-heading">
+                            <h2 data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                                style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                                class="heading">Codebell Office</span></h2>
+                            <div class="subtitle">
+                                <div class="text-subtitle">₹400</div>
                             </div>
                         </div>
-                        <div class="app-focus-separate no_sm_mt">
+                        <p class="paragraph" data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                            style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                            Codebell Shop Connect is a QR code-based scanner that allows customers to
+                            connect with shop owners even when the shop is
+                            closed or the owner is unavailable. This innovative tool ensures that businesses can remain
+                            connected with their
+                            customers 24/7 without the need for physical presence.
+                        </p>
+
+                        <div class="app-focus-separate no_sm_mt mobile" data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                            style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; margin-bottom: 2em;">
                             <div class="app-focus---wrapper">
                                 <div class="app-focus---content"
                                     style="will-change: transform; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(23deg) rotateY(-23deg) rotateZ(23deg) skew(0deg, 0deg); transform-style: preserve-3d;">
                                     <div class="app-focus---shadow"></div>
-                                    <div class="app-focus---image"><img
-                                            src="https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct1.png"
-                                            loading="eager"
-                                            sizes="(max-width: 479px) 40vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                            srcset="https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct1.png 500w, https://s3.ap-south-1.amazonaws.com/device.localhost/products/cproduct1.png 504w"
-                                            alt="" class="image-app---focus-1">
+                                    <div class="app-focus---image"><img src="./assets/img/v1.png" loading="eager" alt=""
+                                            class="image-app---focus-1">
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                            style="display: flex; gap: 1em; color: white; opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+
+                            <a href="/office">
+                                <div class="circle-button">
+                                    <span class="link-circle-button w-inline-block">
+                                        <img src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
+                                            loading="eager" alt="" class="icon-button">
+                                    </span>
+                                    <div class="text-button">Learn more</div>
+                                </div>
+                            </a>
+
+                            <button class="button" onclick="order(3, 'addToCart'), setProductCount()"
+                                class="button w-inline-block" style="width: max-content; margin: auto 0 0 auto;">
+                                <div class="text-button" style="color: #f8f8f8">Add to Cart</div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="app-focus-separate no_sm_mt desktop" data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
+                        style="opacity: 0; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                        <div class="app-focus---wrapper">
+                            <div class="app-focus---content"
+                                style="will-change: transform; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(23deg) rotateY(-23deg) rotateZ(23deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                                <div class="app-focus---shadow"></div>
+                                <div class="app-focus---image"><img src="./assets/img/v1.png" loading="eager" alt=""
+                                        class="image-app---focus-1">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
+        </div>
     </div>
 
     <div id="orderPopUp"

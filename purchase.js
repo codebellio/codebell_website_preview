@@ -76,16 +76,18 @@ validateCheckout().then((data) => {
       <b>
         <div style="display: flex; width: 100%;">
             <p class="subtotal" style="width:50%; "> Order Id: </p>
-            <div>${orderDetails.UUID}</div>
+            <div style="width: 50%; word-break: break-all;">${
+              orderDetails.UUID
+            }</div>
         </div>
         <div style="display: flex; width: 100%;">
             <p class="subtotal" style="width:50%; "> Order date: </p>
-            <div>${orderDetails.UpdatedAt.slice(0, 10)}</div>
+            <div style="width: 50%">${orderDetails.UpdatedAt.slice(0, 10)}</div>
 
         </div>
         <div style="display: flex; width: 100%;">
             <p class="subtotal" style="width:50%; "> Ammount to be paid: </p>
-            <div>₹${orderDetails.Total}</div>
+            <div style="width: 50%">₹${orderDetails.Total}</div>
         </div>
       </b>
 

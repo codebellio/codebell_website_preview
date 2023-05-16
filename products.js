@@ -40,63 +40,9 @@ const productsObj = {
 const productWrapperElem = document.querySelector("#productWrapper");
 if (productWrapperElem) {
   Object.values(productsObj).map((products, index) => {
-    productWrapperElem.innerHTML += `
-                <div class="section wf-section product ${index}">
-                  <div class="content">
-                      <div class="w-layout-grid grid-focus-left">
-                          <div class="focus-separate">
-                              <div class="block-heading">
-                                  <h2 class="heading">${
-                                    products.Title
-                                  }</span></h2>
-                                  <div class="subtitle">
-                                      <div class="text-subtitle">₹${
-                                        products.Price
-                                      }</div>
-                                  </div>
-                              </div>
-                              <p class="paragraph">${products.Summary} 
-                              </p>
-                              <div style="display: flex; gap: 1em; color: white;">
-
-                              <a href="/${products.Keyword}">
-                              <div class="circle-button">
-                                <span class="link-circle-button w-inline-block">
-                                  <img
-                                      src="./spectrum_assets_files/6392a552e9d57182f30245c9_arrow_dark.svg"
-                                      loading="eager" alt="" class="icon-button">
-                                </span>
-                                <div class="text-button">Learn more</div>
-                              </div>
-                              </a>
-  
-                                  <button class="button" onclick="order(${
-                                    index + 1
-                                  }, 'addToCart'), setProductCount()" class="button w-inline-block"
-                                      style="width: max-content; margin: auto 0 0 auto;">
-                                      <div class="text-button" style="color: #f8f8f8">Add to Cart</div>
-                                  </button>
-                              </div>
-                          </div>
-                          <div class="app-focus-separate no_sm_mt">
-                              <div class="app-focus---wrapper">
-                                  <div class="app-focus---content"
-                                      style="will-change: transform; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(23deg) rotateY(-23deg) rotateZ(23deg) skew(0deg, 0deg); transform-style: preserve-3d;">
-                                      <div class="app-focus---shadow"></div>
-                                      <div class="app-focus---image"><img
-                                              src="${products.Photo}"
-                                              loading="eager"
-                                              sizes="(max-width: 479px) 40vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                              
-                                              alt="" class="image-app---focus-1">
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-    `;
+    // productWrapperElem.innerHTML += `
+                
+    // `;
   });
 }
 
