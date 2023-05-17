@@ -73,7 +73,6 @@ validateCheckout().then((data) => {
 
   // Generate HTML markup for the price summary
   priceSummary.innerHTML = `
-      <b>
         <div style="display: flex; width: 100%;">
             <p class="subtotal" style="width:50%; "> Order Id: </p>
             <div style="width: 50%; word-break: break-all;">${
@@ -89,7 +88,6 @@ validateCheckout().then((data) => {
             <p class="subtotal" style="width:50%; "> Ammount to be paid: </p>
             <div style="width: 50%">₹${orderDetails.Total}</div>
         </div>
-      </b>
 
 
   `;
