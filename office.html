@@ -104,6 +104,15 @@
         }
 
         @media (max-width:767px) {
+            .btn-div>* {
+                margin: auto;
+            }
+
+            #orderPopUp>div {
+                width: 90% !important;
+                padding: 4em !important;
+            }
+
             .site-footer.mobile {
                 display: block !important;
                 padding: 3em 2em !important;
@@ -217,9 +226,24 @@
                             class="paragraph">
                             **Renewal after 1 year at just ₹365**
                         </p>
-                        <a href="/order" style="text-decoration: none;">
-                            <button onclick="order(3)" class="button" style="color: #f8f8f8; padding: 1em 3em;"> Buy Now
-                            </button></a>
+                        <div class="btn-div" style="display: flex; flex-wrap: wrap; gap: 1em;">
+
+                            <a href="/order" style="text-decoration: none;">
+                                <button onclick="order(3)" class="button" style="color: #f8f8f8; padding: 1em 3.8em;">
+                                    Buy Now
+                                </button>
+                            </a>
+
+                            <button onclick="order(3, 'addToCart'), setProductCount()"
+                                class="button w-inline-block text-button"
+                                style="background-color: transparent; border: 2px solid black; padding: 0.8em 1.5em;">
+                                <img src="./assets/img/shopping_cart_checkout.svg" loading="eager" alt=""
+                                    style="width: 1.5em; margin-right: 0.5em;">
+                                <span style="margin: auto; line-height: normal;">
+                                    Add to cart
+                                </span>
+                            </button>
+                        </div>
                     </div>
                     <div class="imgContainer" style="margin-left: auto;">
                         <img src="../assets/img/office-codebell.jpg"
@@ -301,7 +325,7 @@
                         <div class="icon-features-bg"><img src="../new_assets/features_6.svg" loading="eager" alt=""
                                 class="icon-features"></div>
                         <h5 class="heading-features">Call forward</h5>
-                        <p class="paragraph-features">Can’t attend the alert?
+                        <p class="paragraph-features">Can't attend the alert?
                             Forward calls to your trusted one who can respond.
                         </p>
                     </div>
@@ -309,6 +333,30 @@
             </div>
         </div>
     </div>
+
+    <div id="orderPopUp"
+        style="display: none; z-index: 9999; position: fixed; top: 0; bottom: 0; left: 0; width: 100%; margin: auto; background: #000000d6;">
+        <div
+            style="width: 35em; margin: auto; background-color: rgba(22, 22, 19, 0.648); backdrop-filter: blur(5px); padding: 4em 8em; border-radius: 1.63em; align-items: center; display: flex; flex-direction: column; position: relative;">
+
+            <img src="./assets/img/success.png" alt="success icon" style="margin-bottom: 1em;">
+
+            <p id="cutomerPhoneLabel" style="margin: auto; margin-bottom: 0.5em; width: 100%; text-align: center;">
+                <strong style="color: #f8f8f8">Item added to the cart!</strong>
+            </p>
+
+            <a href="/order" class="button w-inline-block"
+                style="width: 100%; margin: 1em auto; background-color: #2F8AB2; padding: 1em;">
+                <div class="text-button white" style="padding: 0 1em;">Go to Cart</div>
+            </a>
+
+            <button onclick="closePopUp()" class="button w-inline-block"
+                style="width: 100%; margin: auto 0 0 auto; background-color: transparent;padding: 1em; border: 1px solid #f8f8f8;">
+                <div class="text-button" style="color: #f8f8f8;">Continue Shopping</div>
+            </button>
+        </div>
+    </div>
+
     <div style="width: 100%; height: 1px; background-color: #B6B6B6;"></div>
     <footer class="section-footer wf-section">
         <div class="content">
@@ -433,11 +481,13 @@
     <script src="products.js"></script>
 
     <script>
-        const productCount = localStorage.getItem("orderList") ? JSON.parse(localStorage.getItem("orderList")).totalCount : 0
+        function setProductCount(params) {
+            const productCount = localStorage.getItem("orderList") ? JSON.parse(localStorage.getItem("orderList")).totalCount : 0
 
-        productCount != 0 ? (document.getElementById("cart").style.display = "block") : (document.getElementById("cart").style.display = "none");
+            productCount != 0 ? (document.getElementById("cart").style.display = "block") : (document.getElementById("cart").style.display = "none");
 
-        document.getElementById("productCount").innerHTML = productCount;
+            document.getElementById("productCount").innerHTML = productCount;
+        }; setProductCount();
 
         const navbar = document.querySelector(".navbar")
         const headerAnim = () => {

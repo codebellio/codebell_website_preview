@@ -88,8 +88,6 @@ validateCheckout().then((data) => {
             <p class="subtotal" style="width:50%; "> Ammount to be paid: </p>
             <div style="width: 50%">₹${orderDetails.Total}</div>
         </div>
-
-
   `;
 });
 
