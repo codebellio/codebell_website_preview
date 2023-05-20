@@ -486,7 +486,7 @@ function getCustomerOtp(bool) {
       console.log(orderObj);
 
       fetchData().then((data) => {
-        if (!bool) {
+        if (!bool && data.Result.Order.MobileVerified ) {
           console.log("dekh na bhai");
 
           changeAddress();
