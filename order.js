@@ -366,9 +366,6 @@ orderObj.Mobile !== "" && getCustomerOtp(false);
 function getCustomerOtp(bool) {
   url = window.location.href;
 
-  console.log(url);
-  console.log(orderObj.UUID);
-
   if (
     !(orderObj.UUID && url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID)
   ) {
@@ -382,16 +379,12 @@ function getCustomerOtp(bool) {
     );
   }
 
-  console.log(url);
   url = window.location.href;
-  console.log(url);
-  console.log(orderObj.UUID);
 
   if (url.substring(url.lastIndexOf("?") + 4) != orderObj.UUID) {
     if (customerPhone.value.length === 10) {
       if (formComplete) {
         if (orderList != "") {
-          console.log("yaha bhai");
           setShippingDetails();
 
           orderObj.Mobile = customerPhone.value;
@@ -407,8 +400,6 @@ function getCustomerOtp(bool) {
           document.querySelector("body").style.overflowY = "hidden";
 
           cutomerPhoneLabel.innerHTML = orderObj.Mobile;
-
-          url = window.location.href;
 
           fetchData().then((data) => {
             if (data.Result.Order.UUID != "") {
@@ -461,7 +452,6 @@ function getCustomerOtp(bool) {
     }
   } else {
     if (orderList == "" && !bool) {
-      console.log("yaha hu re");
       validateCheckout({}, false).then((data) => {
         orderList = data.Result.OrderProducts;
         let totalCount = 0;
@@ -477,33 +467,20 @@ function getCustomerOtp(bool) {
         changeAddress(), setOrderSummaryForm(), shippingDetails();
       });
     } else {
-      console.log("aree yaha re");
-
       if (bool) {
         setShippingDetails();
       }
 
-      console.log(orderObj);
-
       fetchData().then((data) => {
         if (!bool & (data.Result.Order.MobileVerified == true)) {
-          console.log("dekh na bhai");
-
           changeAddress();
           shippingDetails();
           setShippingDetails();
         } else {
-          console.log("please");
           if (data.Result.Order.MobileVerified == false) {
-            console.log("nai?");
-
             delete orderObj.UUID;
-            console.log(orderObj);
             getCustomerOtp(false);
           } else {
-            console.log("pakka");
-
-            // changeAddress();
             shippingDetails();
             setShippingDetails();
           }
