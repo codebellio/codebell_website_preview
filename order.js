@@ -355,31 +355,6 @@ async function fetchData(bool) {
   })
     .then((response) => response.json())
     .then((data) => {
-      if (bool === true) {
-        const previousTime = JSON.parse(localStorage.getItem("previousTime"));
-
-        // Store the previous time
-        let currentTime = new Date();
-
-        // Add 5 minutes to the previous time
-        // previousTime.setMinutes(previousTime.getMinutes() + 5);
-
-        // Calculate the difference between current and previous times in milliseconds
-        const timeDifference = currentTime.getTime() - previousTime.getTime();
-
-        // Check if the time difference is greater than 5 minutes (300,000 milliseconds)
-        if (
-          timeDifference > 300000 ||
-          currentTime.getDate() !== previousTime.getDate()
-        ) {
-          console.log(
-            "The difference is greater than 5 minutes or the day has changed. Perform your action."
-          );
-        } else {
-          console.log("The difference is not greater than 5 minutes.");
-        }
-      }
-
       return data;
     })
     .catch((error) => {
@@ -434,11 +409,6 @@ function getCustomerOtp(bool) {
           cutomerPhoneLabel.innerHTML = orderObj.Mobile;
 
           url = window.location.href;
-
-          // Get the current time
-          let previousTime = new Date();
-
-          localStorage.setItem("previousTime ", JSON.stringify(previousTime));
 
           fetchData().then((data) => {
             if (data.Result.Order.UUID != "") {
@@ -516,7 +486,7 @@ function getCustomerOtp(bool) {
       console.log(orderObj);
 
       fetchData().then((data) => {
-        if (!bool && data.Result.Order.MobileVerified == true) {
+        if (!bool & (data.Result.Order.MobileVerified == true)) {
           console.log("dekh na bhai");
 
           changeAddress();
@@ -529,13 +499,7 @@ function getCustomerOtp(bool) {
 
             delete orderObj.UUID;
             console.log(orderObj);
-
-            Snackbar.show({
-              backgroundColor: "#dc2626",
-              pos: "top-right",
-              showAction: false,
-              text: "Mobile number not verified!",
-            });
+            getCustomerOtp(false);
           } else {
             console.log("pakka");
 
