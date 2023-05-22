@@ -100,6 +100,14 @@
                 width: 12em !important;
             }
 
+            .app-hero---wrapper.desktop {
+                display: none;
+            }
+
+            .app-hero---wrapper.mobile {
+                display: block !important;
+            }
+
             .app-focus---wrapper {
                 width: 12em !important;
             }
@@ -210,8 +218,9 @@
                         class="icon-button">
                     <div class="text-button">Get the App</div>
                 </a>
-                <div class="menu-button w-nav-button" style="-webkit-user-select: text; user-select: text;" aria-label="menu" role="button"
-                    tabindex="0" aria-controls="w-nav-overlay-0" aria-haspopup="menu" aria-expanded="false">
+                <div class="menu-button w-nav-button" style="-webkit-user-select: text; user-select: text;"
+                    aria-label="menu" role="button" tabindex="0" aria-controls="w-nav-overlay-0" aria-haspopup="menu"
+                    aria-expanded="false">
                     <div class="icon-menu w-icon-nav-menu"></div>
                 </div>
             </div>
@@ -264,9 +273,9 @@
                 </div>
                 <div id="w-node-fb81bcce-4d37-85e0-208e-77cf7c1ffc2c-379d5480"
                     data-w-id="fb81bcce-4d37-85e0-208e-77cf7c1ffc2c"
-                    style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                    style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; display: block; min-width: 100%;"
                     class="app-hero">
-                    <div class="app-hero---wrapper"
+                    <div class="app-hero---wrapper desktop"
                         style="will-change: transform; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(3.11556deg) rotateY(-2.0986deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
                         <div class="app-hero---content-1"
                             style="will-change: transform; transform: translate3d(0px, -0.8994em, -200px) scale3d(1, 1, 1) rotateX(23deg) rotateY(-23deg) rotateZ(23deg) skew(0deg, 0deg); transform-style: preserve-3d;">
@@ -292,6 +301,13 @@
                                 class="image-app---hero">
                             <div class="app-hero---shadow"></div>
                         </div>
+                    </div>
+                    <div class="app-hero---wrapper mobile" style="display: none; min-width: 100%;">
+
+                        <div style="min-width: 100%; display: flex;">
+                            <img src="./assets/img/hero-ill.png" loading="eager" alt="" class="image-app---hero" style="min-width: 18em; margin: auto;">
+                        </div>
+
                     </div>
                 </div>
             </div>
