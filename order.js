@@ -355,6 +355,13 @@ async function fetchData(bool) {
   })
     .then((response) => response.json())
     .then((data) => {
+      bool === true &&
+        Snackbar.show({
+          pos: "top-right",
+          showAction: false,
+          text: "Please wait for someitme.",
+        });
+
       return data;
     })
     .catch((error) => {
