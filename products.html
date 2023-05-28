@@ -167,6 +167,10 @@
 <body>
     <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
         role="banner" class="navbar w-nav">
+        <script src="/assets/snack_bar/snackbar.js"></script>
+        <script src="./webcomponents/cod_bell_element.js" ></script>
+        <script src="./webcomponents/loading_view.js" ></script>
+        <script src="./webcomponents/app.js" ></script>
         <div class="nav-block"><a href="/" data-w-id="ad761d47-7853-493f-fa15-057342917d69" aria-current="page"
                 class="brand w-nav-brand w--current" aria-label="home"
                 style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
@@ -348,6 +352,11 @@
                                         loading="eager" alt="" class="icon-button">
                                 </div>
                             </a>
+
+                            <button class="button" onclick="buyNow(1)"
+                                class="button w-inline-block" style="width: max-content;; width: 13em;">
+                                <div class="text-button" style="color: #f8f8f8">Buy Now</div>
+                            </button>
 
                             <button class="button" onclick="order(2, 'addToCart'), setProductCount()"
                                 class="button w-inline-block" style="width: max-content;; width: 13em;">
@@ -544,7 +553,7 @@
         headerAnim();
         window.addEventListener("scroll", headerAnim);
     </script>
-
+    <app-div></app-div>
 </body>
 
 </html>
