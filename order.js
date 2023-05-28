@@ -479,7 +479,7 @@ function getCustomerOtp(bool) {
       }
 
       fetchData().then((data) => {
-        if (!bool & (data.Result.Order.MobileVerified == true)) {
+        if (!bool & (data.Result.Order.MobileVerified ? (data.Result.Order.MobileVerified == true) : false)) {
           changeAddress();
           shippingDetails();
           setShippingDetails();
