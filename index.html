@@ -134,11 +134,30 @@
             }
 
             #slideRightBtn {
-                display: none;
+                /* display: none; */
+                right: -0.5em !important;
+                background-color: black !important;
+                border-radius: 100%;
             }
 
+            #slideRightBtn img {
+                width: 2em !important;
+                height: 2.8em !important;
+                filter: invert(100%) sepia(5%) saturate(100%) hue-rotate(253deg) brightness(115%) contrast(95%);
+            }
+
+
             #slideLeftBtn {
-                display: none;
+                /* display: none; */
+                left: -0.5em !important;
+                background-color: black !important;
+                border-radius: 100%;
+            }
+
+            #slideLeftBtn img {
+                width: 2em !important;
+                height: 2.8em !important;
+                filter: invert(100%) sepia(5%) saturate(100%) hue-rotate(253deg) brightness(115%) contrast(95%);
             }
 
             .content.plans {
@@ -313,12 +332,12 @@
                 class="functions-large corousel-large">
 
                 <div id="testimonial-carousel"
-                    style="min-height: max-content; min-width: 100%; display: flex; overflow: hidden; overflow-x: scroll; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 1.8em;">
+                    style="min-height: max-content; min-width: 100%; display: flex; overflow: hidden; overflow-x: scroll; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 1.8em">
 
                     <div style="min-height: max-content; min-width: max-content; scroll-snap-align: start; padding: 1em 4em 3em 4em;"
                         class="functions">
 
-                        <img src="./assets/img/virtual-doorbell.png" loading="eager"
+                        <img src="./assets/img/codebell-home.svg" loading="eager"
                             style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; aspect-ratio: 2/1.2; margin: 0 auto;"
                             alt="" class="image-functions">
                         <h3 style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
@@ -333,8 +352,8 @@
                     <div style=" min-width: max-content; scroll-snap-align: start; padding: 1em 4em 3em 4em;"
                         class="functions">
 
-                        <img src="./assets/img/vehicle.png" loading="eager"
-                            style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; aspect-ratio: 2/1.2; margin: 0 auto;"
+                        <img src="./assets/img/cccproduct2.png" loading="eager"
+                            style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; aspect-ratio: 2/0.8; margin: 2.5em auto;"
                             alt="" class="image-functions">
                         <h3 style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
                             class="heading-functions">Vehicle <span class="text-transparent">Safety Tag</span></h3>
@@ -348,8 +367,8 @@
                     <div style=" min-width: max-content; scroll-snap-align: start; padding: 1em 4em 3em 4em;"
                         class="functions">
 
-                        <img src="./assets/img/office-assistance.png" loading="eager"
-                            style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; aspect-ratio: 2/1.2; margin: 0 auto;"
+                        <img src="./assets/img/office.svg" loading="eager"
+                            style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; aspect-ratio: 2/0.8; margin: 2.5em auto;"
                             alt="" class="image-functions">
                         <h3 style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
                             class="heading-functions">Virtual <span class="text-transparent">Receptionist</span></h3>
@@ -361,7 +380,7 @@
                     <div style=" min-width: max-content; scroll-snap-align: start; padding: 1em 4em 3em 4em;"
                         class="functions">
 
-                        <img src="./assets/img/luggage-tag.png" loading="eager"
+                        <img src="./assets/img/Frame 1000003856.svg" loading="eager"
                             style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; aspect-ratio: 2/1.2; margin: 0 auto;"
                             alt="" class="image-functions">
                         <h3 style="opacity: 1; transform: translate3d(0px, 15px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
@@ -374,11 +393,13 @@
                     </div>
                 </div>
                 <button id="slideRightBtn" onclick="slideRight()"
-                    style="background-color: transparent; position: absolute; right: -3em;"><img
-                        src="./assets/img/right-icon.png" alt="move-right" style="width: 3em; height: 3em;"></button>
+                    style="background-color: transparent; position: absolute; right: -2.5em;"><img
+                        src="./assets/img/reshot-icon-arrow-chevron-right-WDGHUKQ634.svg" alt="move-right"
+                        style="width: 3em; height: 3em;"></button>
                 <button id="slideLeftBtn" onclick="slideLeft()"
-                    style="background-color: transparent; position: absolute; left: -4em; display: none;"><img
-                        src="./assets/img/left-icon.png" alt="move-right" style="width: 3em; height: 3em;"></button>
+                    style="background-color: transparent; position: absolute; left: -3em; display: none;"><img
+                        src="./assets/img/reshot-icon-arrow-chevron-left-975UQXVKZF.svg" alt="move-right"
+                        style="width: 3em; height: 3em;"></button>
             </div>
         </div>
     </div>
@@ -790,7 +811,9 @@
             slideLeftBtn.style.display = "flex"
             scrollableElement.scrollLeft += scrollableElement.scrollWidth / 4;
 
-            var isEndReached = scrollableElement.scrollLeft + scrollableElement.clientWidth + (scrollableElement.scrollWidth / 4) + 5 >= scrollableElement.scrollWidth;
+            var isEndReached = scrollableElement.scrollLeft + scrollableElement.clientWidth + (scrollableElement.scrollWidth / 4) + 10 >= scrollableElement.scrollWidth;
+
+            console.log(scrollableElement.scrollLeft + scrollableElement.clientWidth + (scrollableElement.scrollWidth / 4) + 5, scrollableElement.scrollWidth);
 
 
             if (isEndReached) {
