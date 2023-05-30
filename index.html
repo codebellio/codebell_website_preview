@@ -50,6 +50,7 @@
         .navbar.active {
             background-color: rgba(240, 240, 240, 0.6);
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
             height: 5em;
             padding-top: 1.5em;
@@ -97,6 +98,10 @@
         }
 
         @media (max-width:767px) {
+            .grid-hero.hero {
+                grid-gap: 0 !important;
+            }
+
             .app-hero---wrapper {
                 width: 12em !important;
             }
@@ -135,29 +140,22 @@
 
             #slideRightBtn {
                 /* display: none; */
+                width: 3em;
+                height: 3em;
                 right: -0.5em !important;
-                background-color: black !important;
+                background-color: #f8f8f8 !important;
                 border-radius: 100%;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
             }
-
-            #slideRightBtn img {
-                width: 2em !important;
-                height: 2.8em !important;
-                filter: invert(100%) sepia(5%) saturate(100%) hue-rotate(253deg) brightness(115%) contrast(95%);
-            }
-
 
             #slideLeftBtn {
                 /* display: none; */
+                width: 3em;
+                height: 3em;
                 left: -0.5em !important;
-                background-color: black !important;
+                background-color: #f8f8f8 !important;
                 border-radius: 100%;
-            }
-
-            #slideLeftBtn img {
-                width: 2em !important;
-                height: 2.8em !important;
-                filter: invert(100%) sepia(5%) saturate(100%) hue-rotate(253deg) brightness(115%) contrast(95%);
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
             }
 
             .content.plans {
@@ -256,13 +254,17 @@
     </div> -->
     <div data-w-id="c636bd80-a8e8-7ca5-e24f-032b659a852f" class="section-hero wf-section" style="min-height: 100vh;">
         <div class="content">
-            <div class="w-layout-grid grid-hero" style="grid-gap: 0;">
+            <div class="w-layout-grid grid-hero hero" style="grid-gap: 5em;">
                 <div id="w-node-_3bce429c-06f2-53cc-882e-3e390d408fec-379d5480" class="block-hero"
                     style="min-width: 100%;">
                     <h1 data-w-id="9ca6e8f7-a4c2-0a56-88da-c5d695c5b1be"
-                        style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                        class="heading-hero"> <span style="color: #0A5B75;">
-                            Connection, reimagined. </span></h1>
+                        style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; color: #0A5B75; font-size: 2.8rem;"
+                        class="heading-hero">
+                        Revolutionize Communication
+                        <p style="font-size: 1.2rem; color: #565656;">
+                            with QR Code Calling Solutions.
+                        </p>
+                    </h1>
                     <p data-w-id="399786d8-9b63-0c6f-2d2a-350f4a978791"
                         style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
                         class="paragraph-hero">
