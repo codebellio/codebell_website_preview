@@ -8,6 +8,11 @@ window.call_api = (api, request_data) => {
         api = "test"
     }
     var url = "/api/" + api
+    if (location.hostname == "localhost") {
+        url = "http://api.localhost/api/" + api
+    } else {
+        url = "https://api.codebell.io/api/" + api
+    }
     console.log(url);
     return fetch(url, {
         method: 'post',
